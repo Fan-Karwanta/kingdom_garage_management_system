@@ -2059,7 +2059,7 @@ return [
     'An error occurred while processing the payment.' => 'Hitilafu imetokea wakati wa kushughulikia malipo.',
     'Payment failed. Please try again.' => 'Malipo yameshindikana. Tafadhali jaribu tena.',
     'Payment was cancelled.' => 'Malipo yameghairiwa.',
-    'Powered By GarageMaster' => 'Inaendeshwa na GarageMaster',
+    'Powered By GarageMaster' => 'Inaendeshwa na KingDom MS',
     'In the Role column, You can add Number for following roles' => 'Katika safu ya Jukumu, unaweza kuongeza Namba kwa majukumu yafuatayo',
     'Import Users from CSV' => 'Ingiza Watumiaji kutoka CSV',
     'Download Sample CSV' => 'Pakua CSV ya Mfano',

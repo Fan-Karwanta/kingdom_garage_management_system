@@ -243,9 +243,9 @@ ul.bar_tabs>li.active {
 } */
 
 .checkbox-success {
-	background-color: #FFEFE6;
+	background-color: #E6F4FA;
 	padding: 13px 0px;
-	color: #ea6b00;
+	color: #2596BE;
 	font-size: 15px;
 	border-left: 5px solid !important;
 	border-radius: unset;
@@ -575,7 +575,7 @@ img.dashboard_background {
 	min-width: 280px;
 	/* background-color:rgba(96, 125, 139, 0.3); border-radius: 10px; */
 	border-radius: 0px 0px 45px 45px;
-	background-color: #EA6B00;
+	background-color: #2596BE;
 	/* width: 966px; */
 	height: auto;
 }
@@ -1246,7 +1246,7 @@ td.fc-daygrid-day.fc-day.fc-day-today {
 
 .fc .fc-col-header-cell-cushion,
 .fc .fc-toolbar-title {
-	color: #FF7930 !important;
+	color: #2596BE !important;
 }
 
 .fc table {
@@ -1304,7 +1304,7 @@ td.fc-daygrid-day.fc-day.fc-day-today {
 	box-shadow: 0px 4px 10px rgb(0 0 0 / 10%);
 	float: left;
 	width: 130px;
-	background-color: #FF7930;
+	background-color: #2596BE;
 
 }
 
@@ -1316,7 +1316,7 @@ td.fc-daygrid-day.fc-day.fc-day-today {
 	box-shadow: 0px 4px 10px rgb(0 0 0 / 10%);
 	float: left;
 	width: 130px;
-	background-color: #FF7930;
+	background-color: #2596BE;
 	position: absolute;
 	top: 180px;
 }
@@ -1346,8 +1346,8 @@ img.view_user_edit_btn_profileimg {
 
 .nav-tabs>li.active>a,
 .nav-tabs>li.active>a:focus {
-	color: #FF7930 !important;
-	border-bottom-color: #FF7930 !important;
+	color: #2596BE !important;
+	border-bottom-color: #2596BE !important;
 	border-bottom: 3px solid !important;
 	text-transform: uppercase;
 	padding: 13px 15px 12px !important;
@@ -1389,7 +1389,7 @@ img.view_user_edit_btn_profileimg {
 		box-shadow: 0px 4px 10px rgb(0 0 0 / 10%);
 		float: left;
 		width: 108px;
-		background-color: #FF7930;
+		background-color: #2596BE;
 		margin-top: 16px;
 	}
 }
@@ -1435,7 +1435,7 @@ img.img-first-bck-contn-sch-round {
 .heade-content-login-page {
 	text-align: center;
 	/* padding: 20px 20px 20px; */
-	background-color: #EA6B00;
+	background-color: #2596BE;
 	margin: 0px 100px 0px;
 	border-bottom-left-radius: 50px;
 	border-bottom-right-radius: 50px;
@@ -1463,7 +1463,7 @@ img.img-first-bck-contn-sch-round {
 }
 
 .bookService {
-	background: #EA6B00;
+	background: #2596BE;
 	color: #FFFFFF !important;
 	padding: 2% 20%;
 	border-radius: 0px 30px 30px 0px;
@@ -1556,7 +1556,7 @@ a.bookService.rounded-right:hover {
 .content-form-login-page-school-plugin .login-submit input {
 	border-radius: 28px;
 	padding: 6px 110px;
-	background-color: #EA6B00;
+	background-color: #2596BE;
 	border: 0px;
 	color: #ffffff;
 	font-size: 20px;
@@ -1595,7 +1595,8 @@ body.school-registration-page {
 	top: 0 !important;
 }
 
-@media (min-width: 768px) .main-div-school-container {
+@media (min-width: 768px) {
+.main-div-school-container {
 	/* padding: 100px 0px; */
 	/* margin: 50px 0px; */
 	background-color: #ffffff;
@@ -1607,6 +1608,7 @@ body.school-registration-page {
 	overflow: hidden;
 	position: absolute;
 	/* top: 420px !important; */
+}
 }
 
 .background-main-div-plugin-login .container {
@@ -1621,7 +1623,7 @@ body.school-registration-page {
 }
 
 a:hover {
-	color: #EA6B00;
+	color: #2596BE;
 }
 
 .addbutton {

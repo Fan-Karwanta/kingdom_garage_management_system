@@ -2391,7 +2391,7 @@ return [
     'Payment failed. Please try again.' => 'Payment failed. Please try again.',
     'Payment was cancelled.' => 'Payment was cancelled.',
 
-    'Powered By GarageMaster' => 'Powered By GarageMaster',
+    'Powered By GarageMaster' => 'Powered By KingDom MS',
     'In the Role column, You can add Number for following roles' => 'In the Role column, You can add Number for following roles',
     'Import Users from CSV' => 'Import Users from CSV',
     'Download Sample CSV' => 'Download Sample CSV',

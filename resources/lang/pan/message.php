@@ -2059,7 +2059,7 @@ return [
     'An error occurred while processing the payment.' => 'ਭੁਗਤਾਨ ਪ੍ਰਕਿਰਿਆ ਦੌਰਾਨ ਗਲਤੀ ਆਈ।',
     'Payment failed. Please try again.' => 'ਭੁਗਤਾਨ ਫੇਲ੍ਹ ਹੋ ਗਿਆ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।',
     'Payment was cancelled.' => 'ਭੁਗਤਾਨ ਰੱਦ ਕਰ ਦਿੱਤਾ ਗਿਆ।',
-    'Powered By GarageMaster' => 'ਗੈਰੇਜਮਾਸਟਰ ਦੁਆਰਾ ਸੰਚਾਲਿਤ',
+    'Powered By GarageMaster' => 'ਕਿੰਗਡਮ MS ਦੁਆਰਾ ਸੰਚਾਲਿਤ',
     'In the Role column, You can add Number for following roles' => 'ਰੋਲ ਕਾਲਮ ਵਿੱਚ, ਤੁਸੀਂ ਹੇਠ ਲਿਖੀਆਂ ਭੂਮਿਕਾਵਾਂ ਲਈ ਨੰਬਰ ਸ਼ਾਮਲ ਕਰ ਸਕਦੇ ਹੋ',
     'Import Users from CSV' => 'CSV ਤੋਂ ਉਪਭੋਗਤਾਵਾਂ ਆਯਾਤ ਕਰੋ',
     'Download Sample CSV' => 'ਨਮੂਨਾ CSV ਡਾਊਨਲੋਡ ਕਰੋ',

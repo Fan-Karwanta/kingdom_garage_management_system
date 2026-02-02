@@ -558,6 +558,7 @@
             </div>
             @endif
 
+            {{-- Stripe API key warning commented out per user request
             @if ($p_key == null)
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <h4 class="text-danger" style="text-align: center;">
@@ -565,6 +566,7 @@
                 </h4>
             </div>
             @endif
+            --}}
         </div>
     </div>
 </body>

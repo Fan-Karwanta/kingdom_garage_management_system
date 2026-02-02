@@ -2361,7 +2361,7 @@ return [
     'An error occurred while processing the payment.' => 'கட்டணத்தை செயலாக்கும் போது பிழை ஏற்பட்டது.',
     'Payment failed. Please try again.' => 'கட்டணம் தோல்வியடைந்தது. தயவுசெய்து மீண்டும் முயற்சிக்கவும்.',
     'Payment was cancelled.' => 'கட்டணம் ரத்து செய்யப்பட்டது.',
-    'Powered By GarageMaster' => 'கேரேஜ்மாஸ்டர் மூலம் இயக்கப்படுகிறது',
+    'Powered By GarageMaster' => 'கிங்டம் MS மூலம் இயக்கப்படுகிறது',
     'In the Role column, You can add Number for following roles' => 'பாத்திரம் நெடுவரிசையில், பின்வரும் பாத்திரங்களுக்கு எண்ணைச் சேர்க்கலாம்',
     'Import Users from CSV' => 'CSV இலிருந்து பயனர்களை இறக்குமதி செய்யவும்',
     'Download Sample CSV' => 'மாதிரி CSV பதிவிறக்கவும்',

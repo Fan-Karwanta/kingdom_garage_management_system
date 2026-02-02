@@ -2034,7 +2034,7 @@ return [
     'Copyright' => 'Kopiereg',
     'All Rights Reserved' => 'Alle Regte Voorbehou',
     'Version' => 'Weergawe',
-    'Powered By GarageMaster' => 'Aangedryf deur GarageMaster',
+    'Powered By GarageMaster' => 'Aangedryf deur KingDom MS',
     'In the Role column, You can add Number for following roles' => "In die Rol-kolom kan u 'n nommer vir die volgende rolle byvoeg",
     'Import Users from CSV' => 'Voer Gebruikers in vanaf CSV',
     'Download Sample CSV' => 'Laai Voorbeeld CSV af',

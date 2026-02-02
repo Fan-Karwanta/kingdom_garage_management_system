@@ -2361,7 +2361,7 @@ return [
     'An error occurred while processing the payment.' => 'เกิดข้อผิดพลาดขณะดำเนินการชำระเงิน',
     'Payment failed. Please try again.' => 'การชำระเงินล้มเหลว โปรดลองอีกครั้ง',
     'Payment was cancelled.' => 'การชำระเงินถูกยกเลิก',
-    'Powered By GarageMaster' => 'ขับเคลื่อนโดย GarageMaster',
+    'Powered By GarageMaster' => 'ขับเคลื่อนโดย KingDom MS',
     'In the Role column, You can add Number for following roles' => 'ในคอลัมน์บทบาท คุณสามารถเพิ่มหมายเลขสำหรับบทบาทต่อไปนี้',
     'Import Users from CSV' => 'นำเข้าผู้ใช้จาก CSV',
     'Download Sample CSV' => 'ดาวน์โหลดตัวอย่าง CSV',

@@ -153,7 +153,7 @@ a:hover {
 
 .daterangepicker.picker_4 .calendar-table td,
 .daterangepicker.picker_4 .calendar-table td.off {
-    background: #EA6B00;
+    background: #2596BE;
     border: 1px solid #fff;
     border-radius: 0;
 }
@@ -186,7 +186,7 @@ a:hover {
 }
 
 .left_col {
-    background: #EA6B00;
+    background: #2596BE;
 }
 
 .nav-sm .container.body .col-md-3.left_col {
@@ -579,8 +579,8 @@ body .container.body .right_col {
 }
 
 .bg-orange {
-    background: #f39c12 !important;
-    border: 1px solid #f39c12 !important;
+    background: #2596BE !important;
+    border: 1px solid #2596BE !important;
     color: #fff;
 }
 
@@ -627,7 +627,7 @@ body .container.body .right_col {
 }
 
 .container input:checked~.checkmark {
-    background-color: #EA6B00;
+    background-color: #2596BE;
 }
 
 .checkmark:after {
@@ -665,7 +665,7 @@ body .container.body .right_col {
 
 body {
     color: #73879c;
-    background: #EA6B00;
+    background: #2596BE;
     font-family: "Poppins";
     font-size: 13px;
     font-weight: 400;
@@ -1635,7 +1635,7 @@ button.btn.btn-default.buttons-print,
 .btn.btn-default.buttons-excel,
 .btn.btn-default.buttons-pdf.buttons-html5 {
     color: #ffffff;
-    background: #EA6B00;
+    background: #2596BE;
     border: none !important;
 }
 
@@ -1944,7 +1944,7 @@ ul.quick-list li {
 
 .dropdown-item:hover {
     text-decoration: none;
-    color: #EA6B00;
+    color: #2596BE;
     background-color: #FFFFFF;
 }
 
@@ -2115,7 +2115,7 @@ span.right {
     padding: 5px 0 0;
     position: fixed;
     width: 230px;
-    background: #EA6B00;
+    background: #2596BE;
     z-index: 999;
 }
 
@@ -2126,7 +2126,7 @@ span.right {
     font-size: 17px;
     display: block;
     float: left;
-    background: #EA6B00;
+    background: #2596BE;
     cursor: pointer;
 }
 
@@ -2902,7 +2902,7 @@ textarea.parsley-error {
 
 .btn {
     border-radius: 0px;
-    /* background-color: #EA6B00; */
+    /* background-color: #2596BE; */
     color: #333333;
     border: 1px solid black;
 }
@@ -2915,7 +2915,7 @@ a.btn-warning {
 }
 
 .btn-success {
-    background: #EA6B00 !important;
+    background: #2596BE !important;
     border: none;
     color: #FFFFFF;
 }
@@ -3339,7 +3339,7 @@ ul.social li {
 }
 
 .chat .status.away {
-    background: #f39c12;
+    background: #2596BE;
 }
 
 .chat .status.offline {
@@ -3961,7 +3961,7 @@ ul.project_files li a i {
 
 .form-group .btn {
     /* margin-bottom: -6px; */
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     /* margin-right: 33em; */
     /* width: 488px; */
@@ -5140,7 +5140,7 @@ p.col-md-12.col-lg-12.col-xl-12.col-xxl-12.col-sm-12.col-xs-12.ln_solid {
 button#add_new_product {
     width: 112px;
     margin-left: 58px;
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     border: none;
 }
@@ -5567,13 +5567,13 @@ div#quotation_info {
 }
 
 button.btn.btn-outline-secondary.vehiclemodel {
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     border: none;
 }
 
 button.btn.btn-outline-secondary {
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     border: none;
     height: 35px;
@@ -5585,7 +5585,7 @@ button.btn.btn-outline-secondary {
 
 button.btn.btn-outline-secondary.btn-sm {
     color: #ffffff;
-    background: #EA6B00;
+    background: #2596BE;
     /* border: 1px solid #333333; */
     font-size: 14px;
     /* margin-left: 30px; */
@@ -5593,13 +5593,13 @@ button.btn.btn-outline-secondary.btn-sm {
 }
 
 button#add_new_description {
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     border: none;
 }
 
 button.btn.btn-outline-secondary.btn-sm.newaddvehicledescription {
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     border: none;
     font-size: 14px;
@@ -5727,7 +5727,7 @@ tr.even {
 } */
 
 button#add_new_entry {
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     border: none;
     /* margin-left: -869px; */
@@ -5989,7 +5989,7 @@ a.btn.timezonecancel {
 
 button.btn.timezonesubmit {
     /* margin-left: 10px; */
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     border: none;
     /* width: 495px; */
@@ -6010,7 +6010,7 @@ a.btn.BusinesshoursCancel {
 button.btn.btn-success.BusinesshoursSubmit {
     width: 488px;
     margin-left: 10px;
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     border: none;
 
@@ -6186,11 +6186,11 @@ select.form-control.select_producttype.select_producttype_1 {
 /* .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active */
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active:visited {
-    color: #EA6B00;
-    border-bottom: 3px solid #EA6B00;
+    color: #2596BE;
+    border-bottom: 3px solid #2596BE;
 }
 .nav-tabs .nav-link.active{
-    border-color: #EA6B00 !important;
+    border-color: #2596BE !important;
 }
 
 /* ---------------- sub buttons add/remove.. ---------------- */
@@ -6223,7 +6223,7 @@ button.btn.btn-outline-secondary.vehiclemodel {
 }
 
 button.btn.btn-outline-secondary_observation {
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     border: none;
     /* margin-left: -337px; */
@@ -6233,7 +6233,7 @@ button.btn.btn-outline-secondary_observation {
 }
 
 button#add_new_check {
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     border: none;
     /* margin-left: -337px; */
@@ -6244,7 +6244,7 @@ button#add_new_check {
 }
 
 button.btn.btn-outline-secondary_vehiclesale {
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     border: none;
     /* margin-left: 19px; */
@@ -6353,7 +6353,7 @@ div.container {
 }
 
 button.btn.select_all {
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
     border: none;
     /* margin-top: -151px; */
@@ -6409,7 +6409,7 @@ label.text-dark {
 }
 
 /* button.btn{
-    background: #EA6B00;
+    background: #2596BE;
     border: none;
     color: #FFFFFF;
     margin-left: 0px; 
@@ -6547,7 +6547,7 @@ select.form-control.repair_category {
 }
 
 .scroll-image a img:hover {
-    border: 2px solid #EA6B00;
+    border: 2px solid #2596BE;
 }
 
 
@@ -6574,7 +6574,7 @@ a.btn.btn-primary.cancelJobcardSubmitButton {
 }
 
 button.btn.btn-success.gatepassSubmitButton {
-    background: #EA6B00;
+    background: #2596BE;
     border: none;
     color: #FFFFFF;
     /* margin-left: 15px; */
@@ -6639,7 +6639,7 @@ label.text-end.fw-bold {
 }
 
 button.btn.btn-outline-model-secondary {
-    background: #EA6B00;
+    background: #2596BE;
     color: #ffffff;
     border: none;
 }
@@ -6677,7 +6677,7 @@ button.btn.btn-success.reset {
 }
 
 input.btn.btn-secondary.stoke {
-    background: #EA6B00;
+    background: #2596BE;
     color: #ffffff;
     border: none;
 }
@@ -6691,7 +6691,7 @@ img.stock_print_img {
 } */
 
 button.btn.btn-success.col-md-offset-10.check_submit.observationPointModelSubmitButton {
-    background: #EA6B00;
+    background: #2596BE;
 }
 
 /* .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
@@ -6732,11 +6732,11 @@ button.btn.btn-outline-secondary.closeButton {
 }
 
 /* .swal-button--cancel{
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
 }
 .swal-button--cancel:not([disabled]):hover{
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: #FFFFFF;
 } */
 .modalfooterline {
@@ -6765,7 +6765,7 @@ table.table.table-bordered.quotation_total {
 }
 
 tr.grand_total {
-    background-color: #EA6B00;
+    background-color: #2596BE;
     width: 345px;
     margin-left: -30px;
 }
@@ -6777,7 +6777,7 @@ a.btn.btn-primary.cancelvehicleservice {
 }
 
 button.btn.btn-success.addvehicleservice {
-    background: #EA6B00;
+    background: #2596BE;
     /* width: 357px; */
     margin-right: 45px;
 }
@@ -6886,7 +6886,7 @@ button.btn.btn-success.addcustomer {
 }
 
 button.swal-button.swal-button--cancel.alertbtn {
-    background: #EA6B00;
+    background: #2596BE;
     color: #FFFFFF;
 }
 
@@ -7064,7 +7064,7 @@ input[type="checkbox"] {
 }
 
 .vehicleImg {
-    border: 2px solid #EA6B00 !important;
+    border: 2px solid #2596BE !important;
 
     .accordion-button:not(.collapsed) {
         background: #f5f5f5;
@@ -7089,7 +7089,7 @@ img.system_logo_img {
 }
 
 .row.col-md-4.col-lg-4.col-xl-4.col-xxl-4.col-sm-4.col-xs-4.grand_total_modal {
-    background: #EA6B00;
+    background: #2596BE;
     color: #FFFFFF;
     margin-left: 65%;
 }
@@ -7101,7 +7101,7 @@ label.total_amount {
 }
 
 .row.col-md-4.col-lg-4.col-xl-4.col-xxl-4.col-sm-4.col-xs-4.grand_total_modal_quotation {
-    background: #EA6B00;
+    background: #2596BE;
     color: #FFFFFF;
     margin-left: 55%;
     width: 270px;
@@ -7137,7 +7137,7 @@ table#adddatatable4 {
 }
 
 .grand_total_modal_invoice {
-    background: #EA6B00;
+    background: #2596BE;
     color: #FFFFFF;
     margin-left: 55%;
     width: 311px;
@@ -7149,7 +7149,7 @@ table#adddatatable4 {
 }
 
 .grand_total_modal_sale_part {
-    background: #EA6B00;
+    background: #2596BE;
     color: #FFFFFF;
     margin-left: 55%;
     width: 270px;
@@ -7157,7 +7157,7 @@ table#adddatatable4 {
 }
 
 .grand_total_modal_fullpaid {
-    background: #EA6B00;
+    background: #2596BE;
     color: #FFFFFF;
     margin-left: 54%;
     width: 276px;
@@ -7228,7 +7228,7 @@ table#adddatatable1_freeservice {
 }
 
 .grand_total_freeservice {
-    background: #EA6B00;
+    background: #2596BE;
     color: #FFFFFF;
     margin-right: 2%; 
     float: inline-end;
@@ -7405,7 +7405,7 @@ body a {
 
 .submit2 {
     color: #ffffff !important;
-    background-color: #EA6B00 !important;
+    background-color: #2596BE !important;
     border: none !important;
 }
 
@@ -7424,7 +7424,7 @@ button.submit2 {
 }
 
 .left-border {
-    border-left: 4px solid #EA6B00 !important;
+    border-left: 4px solid #2596BE !important;
 }
 
 .note-search,

@@ -26,7 +26,7 @@ use Illuminate\Support\Str;
   }
 
   .li {
-    background-color: #EA6B00;
+    background-color: #2596BE;
     color: white;
     /* padding: 15px; */
     font-size: 14px;
@@ -41,7 +41,7 @@ use Illuminate\Support\Str;
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #FFEFE6;
+    background-color: #E6F4FA;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -61,8 +61,8 @@ use Illuminate\Support\Str;
   }
 
   .dropdown-content a:hover {
-    background-color: #FFEFE6;
-    color: #EA6B00;
+    background-color: #E6F4FA;
+    color: #2596BE;
   }
 
   .dropdown:hover .dropdown-content {
@@ -224,7 +224,7 @@ margin-left: -15px;
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: #FFEFE6;
+      background-color: #E6F4FA;
       min-width: 160px;
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       z-index: 1;
@@ -277,7 +277,7 @@ margin-left: -15px;
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: #FFEFE6;
+      background-color: #E6F4FA;
       min-width: 160px;
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       z-index: 1;
@@ -324,7 +324,7 @@ margin-left: -15px;
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: #FFEFE6;
+      background-color: #E6F4FA;
       min-width: 160px;
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       z-index: 1;
@@ -720,58 +720,30 @@ $currentRoute = str_replace($baseUrl, "", $currentUrl);
                 </li>
                 @endcan
 
-                @php
-                $helpdocumentroute = ['/helpdocument/list'];
-                @endphp
-               
-                <li class="{{in_array($currentRoute,$helpdocumentroute) || Str::startsWith($currentRoute, '/helpdocument/') ? 'active' : ''}}"><a href="{!! url('/helpdocument/list') !!}"><i class="fa-solid fa-file margin-right-10px"></i> {{ trans('message.Help Document') }}
-                  </a>
-                </li>
-              
+                {{-- Help Document removed per user request --}}
+
                 @php
                 $inventoryRoutes = ['/setting/general_setting/list','/setting/timezone/list','/setting/accessrights/show','/setting/hours/list','/setting/stripe/list','/branch_setting/list','/setting/payment-gateways/list','/how-to-videos','/addons'];
                 @endphp
                 @if (getActiveAdmin(Auth::User()->id) == 'yes')
-                <li class="{{ in_array($currentRoute, $inventoryRoutes) || Str::startsWith($currentRoute, '/setting/general_setting/list') || Str::startsWith($currentRoute, '/addons') || Str::startsWith($currentRoute, '/how-to-videos') ? 'active' : '' }}">
-                  <div class="dropdown w-100 ">
-                    <a href="javascript:void(0);" class="settingitem" ><i class="fa-solid fa-gear margin-right-10px"></i> {{ trans('message.Settings') }}
-                      <span class="fa fa-chevron-right dropdown-right-icon icon"></span>
-                  </a>
-                      <div class="dropdown-content">
-                          <a href="{!! url('/setting/general_setting/list') !!}">{{ trans('message.General Settings') }}</a>
-                          <a href="{!! url('/addons') !!}">{{ trans('message.Addons') }}</a>
-                          <a href="{!! url('/how-to-videos') !!}">{{ trans('message.How To Videos') }}</a>
-                      </div>
-                  </div>
-              </li>
+                <li class="{{ in_array($currentRoute, $inventoryRoutes) || Str::startsWith($currentRoute, '/setting/general_setting/list') || Str::startsWith($currentRoute, '/addons') ? 'active' : '' }}">
+                    <a href="{!! url('/setting/general_setting/list') !!}"><i class="fa-solid fa-gear margin-right-10px"></i> {{ trans('message.Settings') }}
+                    </a>
+                </li>
                 @else
                 @if (Gate::allows('generalsetting_view'))
                 @can('generalsetting_view')
-                <li class="{{ in_array($currentRoute, $inventoryRoutes) || Str::startsWith($currentRoute, '/setting/general_setting/list') || Str::startsWith($currentRoute, '/how-to-videos') ? 'active' : '' }}">
-                  <div class="dropdown w-100">
-                    <a href="javascript:void(0);" class="settingitem" ><i class="fa-solid fa-gear margin-right-10px"></i> {{ trans('message.Settings') }}
-                      <span class="fa fa-chevron-right dropdown-right-icon icon"></span>
-                  </a>
-                      <div class="dropdown-content">
-                          <a href="{!! url('/setting/general_setting/list') !!}">{{ trans('message.General Settings') }}</a>
-                          <a href="{!! url('/how-to-videos') !!}">{{ trans('message.How To Videos') }}</a>
-                      </div>
-                  </div>
-              </li>
+                <li class="{{ in_array($currentRoute, $inventoryRoutes) || Str::startsWith($currentRoute, '/setting/general_setting/list') ? 'active' : '' }}">
+                    <a href="{!! url('/setting/general_setting/list') !!}"><i class="fa-solid fa-gear margin-right-10px"></i> {{ trans('message.Settings') }}
+                    </a>
+                </li>
                 @endcan
                 @else
                 @can('timezone_view')
-                <li class="{{ in_array($currentRoute, $inventoryRoutes) || Str::startsWith($currentRoute, '/setting/timezone/list') || Str::startsWith($currentRoute, '/how-to-videos') ? 'active' : '' }}">
-                  <div class="dropdown w-100">
-                      <a href="javascript:void(0);" class="settingitem" ><i class="fa-solid fa-gear margin-right-10px"></i> {{ trans('message.Settings') }}
-                          <span class="fa fa-chevron-right dropdown-right-icon icon"></span>
-                      </a>
-                      <div class="dropdown-content">
-                          <a href="{!! url('/setting/timezone/list') !!}">{{ trans('message.General Settings') }}</a>
-                          <a href="{!! url('/how-to-videos') !!}">{{ trans('message.How To Videos') }}</a>
-                      </div>
-                  </div>
-              </li>
+                <li class="{{ in_array($currentRoute, $inventoryRoutes) || Str::startsWith($currentRoute, '/setting/timezone/list') ? 'active' : '' }}">
+                    <a href="{!! url('/setting/timezone/list') !!}"><i class="fa-solid fa-gear margin-right-10px"></i> {{ trans('message.Settings') }}
+                    </a>
+                </li>
                 @endcan
                 @endif
                 @endif
@@ -813,7 +785,7 @@ $currentRoute = str_replace($baseUrl, "", $currentUrl);
         ?>
         @yield('content')
         <footer class="footerforallpage bottom-0 bg-white text-center" id="footerforid">
-         <span class="footerbottom me-3">{{ trans('message.Copyright') }} {{ $year }} | {{ $systemName }} | {{ trans('message.All Rights Reserved') }} | {{trans('message.Version')}} {{$version}} | <a href="https://mojoomla.com/product/garage-master-garage-management-system">{{trans('message.Powered By GarageMaster')}}</a></span>
+                 <span class="footerbottom me-3">{{ trans('message.Copyright') }} {{ $year }} | {{ $systemName }} | {{ trans('message.All Rights Reserved') }} | {{trans('message.Version')}} {{$version}} | <a href="#">Powered By KingDom MS</a></span>
         </footer>                        
       </div>
     </div>

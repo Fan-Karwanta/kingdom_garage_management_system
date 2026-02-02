@@ -334,6 +334,17 @@ class SalesPartcontroller extends Controller
         $products = $request->product;
 
         if (! empty($products)) {
+            // Server-side stock validation to prevent negative stock
+            foreach ($products['product_id'] as $key => $value) {
+                $Product_id = $products['product_id'][$key];
+                $qty = $products['qty'][$key];
+                $Currentstock = getStockCurrent($Product_id);
+                
+                if ($qty > $Currentstock) {
+                    return redirect()->back()->with('error', 'Insufficient stock! Available stock for product is ' . $Currentstock . ' but requested ' . $qty)->withInput();
+                }
+            }
+
             foreach ($products['product_id'] as $key => $value) {
                 $Product_id = $products['product_id'][$key];
                 $qty = $products['qty'][$key];

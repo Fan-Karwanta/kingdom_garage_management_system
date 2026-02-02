@@ -2369,7 +2369,7 @@ return [
     'An error occurred while processing the payment.' => 'Er is een fout opgetreden bij het verwerken van de betaling.',
     'Payment failed. Please try again.' => 'Betaling mislukt. Probeer het opnieuw.',
     'Payment was cancelled.' => 'Betaling geannuleerd.',
-    'Powered By GarageMaster' => 'Aangedreven door GarageMaster',
+    'Powered By GarageMaster' => 'Aangedreven door KingDom MS',
     'In the Role column, You can add Number for following roles' => 'In de kolom Rol kunt u een nummer toevoegen voor de volgende rollen',
     'Import Users from CSV' => 'Gebruikers importeren vanuit CSV',
     'Download Sample CSV' => 'Voorbeeld CSV downloaden',

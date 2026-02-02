@@ -2361,7 +2361,7 @@ return [
     'An error occurred while processing the payment.' => 'خطایی هنگام پردازش پرداخت رخ داد.',
     'Payment failed. Please try again.' => 'پرداخت ناموفق بود. لطفاً دوباره تلاش کنید.',
     'Payment was cancelled.' => 'پرداخت لغو شد.',
-    'Powered By GarageMaster' => 'پشتیبانی شده توسط GarageMaster',
+    'Powered By GarageMaster' => 'پشتیبانی شده توسط KingDom MS',
     'In the Role column, You can add Number for following roles' => 'در ستون نقش، می‌توانید شماره‌ای برای نقش‌های زیر اضافه کنید',
     'Import Users from CSV' => 'وارد کردن کاربران از CSV',
     'Download Sample CSV' => 'دانلود نمونه CSV',

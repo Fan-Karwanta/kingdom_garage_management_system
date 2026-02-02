@@ -94,7 +94,8 @@
         }
 
         .main-div-school-container {
-            top: -80px !important;
+            top: 50px !important;
+            position: relative !important;
         }
 
         .heade-content-login-page {
@@ -205,7 +206,7 @@
     margin-left: 4px;
    }
    .footer-line a:hover{
-    color: #EA6B00 !important;
+    color: #2596BE !important;
    }
        
     </style>
@@ -218,7 +219,7 @@
     <link href="{{ URL::asset('vendors/bootstrap/dist/css/bootstrapnew.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('vendors/bootstrap/dist/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet">
     <script nonce="{{ $cspNonce }}" src="{{ asset('vendors/jquery/jquery.js') }}"></script>
-    <script nonce="{{ $cspNonce }}" src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script nonce="{{ $cspNonce }}" src="{{ asset('vendors/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script nonce="{{ $cspNonce }}" src="{{ asset('vendors/bootstrap/dist/js/bootstrap-colorpicker.min.js') }}"></script>
 </head>
 
@@ -257,7 +258,7 @@
                         <div class="col-sm-4 col-md-4 sidebar">
                             <!-- <h3 class="ps-2">{{ getNameSystem() }}</h3> -->
                             <div class="w-auto mx-0 mt-5">
-                                <button data-toggle="modal" data-target="#myModal" class="bookService rounded-right">{{ trans('message.Book an appoinment') }}</button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#myModal" class="bookService rounded-right">{{ trans('message.Book an appoinment') }}</button>
                             </div> 
                             <div class="w-auto mx-0 mt-4">
                                 <a class="bookService rounded-right" href="{{ url('/') }}">{{ trans('message.Back to Login') }}</a>
@@ -284,9 +285,9 @@
                             </div>
                         </div>
                     </div>
-                    <!-- powered by garagemaster -->
+                    <!-- powered by KingDom MS -->
                     <div class="footer-line">
-                    Powered By<a href="https://mojoomla.com/product/garage-master-garage-management-system">GarageMaster</a>
+                    Powered By<a href="#">KingDom MS</a>
                     </div>
                 </div>
             </div>
@@ -301,7 +302,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">{{ trans('message.Book Services') }}</h4>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="ServiceAdd-Form" method="post" action="{{ url('/service/forntendAdd') }}" enctype="multipart/form-data" class="form-horizontal upperform serviceAddForm" border="10">
@@ -534,12 +535,35 @@
                     </form> 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary btn-sm mx-1" data-dismiss="modal">{{ trans('message.Close') }}</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm mx-1" data-bs-dismiss="modal" onclick="closeModal()">{{ trans('message.Close') }}</button>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <script nonce="{{ $cspNonce }}">
+    function closeModal() {
+        var myModal = document.getElementById('myModal');
+        if (myModal) {
+            myModal.classList.remove('show');
+            myModal.style.display = 'none';
+            myModal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+            var backdrop = document.getElementById('modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+        }
+    }
+    // Also handle close button in header
+    document.addEventListener('DOMContentLoaded', function() {
+        var closeButtons = document.querySelectorAll('[data-bs-dismiss="modal"]');
+        closeButtons.forEach(function(btn) {
+            btn.addEventListener('click', closeModal);
+        });
+    });
+    </script>
 
     <!-- Success Modal -->
     <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
@@ -547,13 +571,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">{{ trans('message.Alert') }}</h4>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     {{ session('message') }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary btn-sm mx-1" data-dismiss="modal">{{ trans('message.Close') }}</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm mx-1" data-bs-dismiss="modal">{{ trans('message.Close') }}</button>
                 </div>
             </div>
         </div>
@@ -694,7 +718,7 @@ if (!empty($service_data_array)) {
                     if (currentDateFormatted <= cellDateFormatted) {
                         // Dates are the same or current date is earlier, show button
                         button.style.display = 'inline-block';
-                        button.style.background = '#EA6B00';
+                        button.style.background = '#2596BE';
                     } else {
                         // Cell date is in the past, disable button
                         button.style.display = 'inline-block';
@@ -720,8 +744,12 @@ if (!empty($service_data_array)) {
                     var formattedDate = year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
                     console.log('Button clicked on ' + formattedDate);
                     $('#s_date').val(formattedDate);
-                    $('#myModal').modal('show');
-                    // $(button).tooltip('hide');
+                    // Show modal using Bootstrap 5 API
+                    var myModalEl = document.getElementById('myModal');
+                    if (myModalEl && typeof bootstrap !== 'undefined') {
+                        var modal = new bootstrap.Modal(myModalEl);
+                        modal.show();
+                    }
                 });
             },
 

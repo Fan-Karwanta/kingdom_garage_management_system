@@ -2062,7 +2062,7 @@ return [
     'An error occurred while processing the payment.' => 'Došlo je do greške prilikom obrade plaćanja.',
     'Payment failed. Please try again.' => 'Plaćanje nije uspelo. Molimo pokušajte ponovo.',
     'Payment was cancelled.' => 'Plaćanje je otkazano.',
-    'Powered By GarageMaster' => 'Pokreće GarageMaster',
+    'Powered By GarageMaster' => 'Pokreće KingDom MS',
     'In the Role column, You can add Number for following roles' => 'U koloni Uloga, možete dodati broj za sledeće uloge',
     'Import Users from CSV' => 'Uvezi korisnike iz CSV-a',
     'Download Sample CSV' => 'Preuzmi uzorak CSV-a',

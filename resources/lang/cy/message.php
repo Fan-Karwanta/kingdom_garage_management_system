@@ -2028,7 +2028,7 @@ return [
     'Copyright' => 'Hawlfraint',
     'All Rights Reserved' => 'Pob Hawl yn Gadwedig',
     'Version' => 'Fersiwn',
-    'Powered By GarageMaster' => "Wedi'i bweru gan GarageMaster",
+    'Powered By GarageMaster' => "Wedi'i bweru gan KingDom MS",
     'In the Role column, You can add Number for following roles' => 'Yn y golofn Rôl, gallwch ychwanegu rhif ar gyfer y rolau canlynol',
     'Import Users from CSV' => 'Mewnforio Defnyddwyr o CSV',
     'Download Sample CSV' => 'Lawrlwytho CSV Sampl',

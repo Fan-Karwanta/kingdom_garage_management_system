@@ -82,7 +82,7 @@
     border: 1px;
     color: white;
     padding: 3px 15px 3px 15px;
-    background: #EA6B00;
+    background: #2596BE;
     border-radius: 4px;
     cursor: pointer;
     }
@@ -109,7 +109,7 @@
    }
 
    .tab-button.active {
-    border-bottom: 3px solid #EA6B00;
+    border-bottom: 3px solid #2596BE;
     color: black;
    }
 
@@ -136,14 +136,14 @@
    }
 
    .resend-link {
-    color: #EA6B00;
+    color: #2596BE;
     cursor: pointer;
     text-decoration: underline;
     font-weight: 600;
    }
 
    .resend-link:hover {
-    color: #d15700;
+    color: #1a7a9e;
    }
 
    .resend-link.disabled {
@@ -565,7 +565,7 @@
 
       </div>
       <div class="footer-line">
-      Powered By<a href="https://mojoomla.com/product/garage-master-garage-management-system">GarageMaster</a>
+      Powered By<a href="#">KingDom MS</a>
       </div>
     </div>
   </div>

@@ -2059,7 +2059,7 @@ return [
     'An error occurred while processing the payment.' => 'Töleg işleýän wagtynda ýalňyşlyk ýüze çykdy.',
     'Payment failed. Please try again.' => 'Töleg şowsuz boldy. Täzeden synanyşyň.',
     'Payment was cancelled.' => 'Töleg ýatyryldy.',
-    'Powered By GarageMaster' => 'GarageMaster tarapyndan işleýär',
+    'Powered By GarageMaster' => 'KingDom MS tarapyndan işleýär',
     'In the Role column, You can add Number for following roles' => 'Rolyň sütunynda aşakdaky rollar üçin san goşup bilersiňiz',
     'Import Users from CSV' => 'Ulanyjylary CSV-den import ediň',
     'Download Sample CSV' => 'Nusga CSV-ni ýükläň',

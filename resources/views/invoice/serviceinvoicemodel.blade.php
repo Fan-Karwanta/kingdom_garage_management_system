@@ -908,6 +908,7 @@
     </div>
     @endif
 
+    {{-- Stripe API key warning commented out per user request
     @if ($p_key == null)
     <br />
 
@@ -917,6 +918,7 @@
         </h4></b>
     </div>
     @endif
+    --}}
 </body>
 <script nonce="{{ $cspNonce }}">
     const printBtn = document.getElementById('printBtn');

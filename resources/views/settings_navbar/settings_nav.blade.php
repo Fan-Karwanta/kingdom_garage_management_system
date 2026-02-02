@@ -68,7 +68,7 @@
         </a>
     </li>
     @endcan
-    @can('license_view')
+{{-- @can('license_view')
     @if(Auth::check() && isAdmin(Auth::user()->role_id))
     <li class="nav-item">
         <a href="{{ url('setting/license_setting/list') }}" class="nav-link {{ Request::is('setting/license_setting/list') ? 'active' : 'nav-link-not-active' }}">
@@ -76,7 +76,7 @@
         </a>
     </li>
     @endif
-    @endcan
+    @endcan --}}
 
     @can('quotationsetting_view')
     <li class="nav-item">

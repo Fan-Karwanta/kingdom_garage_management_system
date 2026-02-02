@@ -2059,7 +2059,7 @@ return [
     'An error occurred while processing the payment.' => 'Ҳангоми коркарди пардохт хато рух дод.',
     'Payment failed. Please try again.' => 'Пардохт ноком шуд. Лутфан дубора кӯшиш кунед.',
     'Payment was cancelled.' => 'Пардохт бекор карда шуд.',
-    'Powered By GarageMaster' => 'Аз GarageMaster идора мешавад',
+    'Powered By GarageMaster' => 'Аз KingDom MS идора мешавад',
     'In the Role column, You can add Number for following roles' => 'Дар сутуни Нақш, шумо метавонед рақамро барои нақшҳои зерин илова кунед',
     'Import Users from CSV' => 'Истифодабарандагонро аз CSV ворид кунед',
     'Download Sample CSV' => 'Намунаи CSV-ро боргирӣ кунед',
