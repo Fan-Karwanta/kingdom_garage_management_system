@@ -84,4 +84,34 @@ class User extends Authenticatable
     {
         return $this->morphMany(Notes::class, 'entity', 'entity_type', 'entity_id');
     }
+
+    public function salary()
+    {
+        return $this->hasOne(EmployeeSalary::class);
+    }
+
+    public function attendanceRecords()
+    {
+        return $this->hasMany(AttendanceRecord::class);
+    }
+
+    public function payrollRecords()
+    {
+        return $this->hasMany(PayrollRecord::class);
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany(EmployeeSchedule::class);
+    }
+
+    public function leaveRequests()
+    {
+        return $this->hasMany(LeaveRequest::class);
+    }
+
+    public function deductions()
+    {
+        return $this->hasMany(PayrollDeduction::class);
+    }
 }

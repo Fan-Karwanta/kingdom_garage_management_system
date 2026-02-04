@@ -876,6 +876,71 @@ Route::group(['prefix' => 'notes'], function () {
     Route::post('/list/delete', ['as' => 'notes/list/delete', 'uses' => 'NotesController@destroyMultiple'])->middleware('can:notes_delete');
 });
 
+// Payroll Management Module
+Route::group(['prefix' => 'payroll'], function () {
+    // Dashboard
+    Route::get('/', 'PayrollController@dashboard')->name('payroll.dashboard');
+    Route::get('/dashboard', 'PayrollController@dashboard');
+
+    // Attendance Management
+    Route::get('/attendance', 'PayrollController@attendanceList')->name('payroll.attendance');
+    Route::get('/attendance/add', 'PayrollController@attendanceCreate');
+    Route::post('/attendance/store', 'PayrollController@attendanceStore');
+    Route::get('/attendance/edit/{id}', 'PayrollController@attendanceEdit');
+    Route::post('/attendance/update/{id}', 'PayrollController@attendanceUpdate');
+    Route::get('/attendance/delete/{id}', 'PayrollController@attendanceDelete');
+    Route::get('/attendance/import', 'PayrollController@importAttendance');
+    Route::post('/attendance/import/process', 'PayrollController@processImport');
+
+    // Employee Salary Management
+    Route::get('/salary', 'PayrollController@salaryList')->name('payroll.salary');
+    Route::get('/salary/edit/{id}', 'PayrollController@salaryEdit');
+    Route::post('/salary/update/{id}', 'PayrollController@salaryUpdate');
+
+    // Payroll Periods
+    Route::get('/payroll', 'PayrollController@payrollList')->name('payroll.list');
+    Route::get('/payroll/add', 'PayrollController@payrollCreate');
+    Route::post('/payroll/store', 'PayrollController@payrollStore');
+    Route::get('/payroll/process/{id}', 'PayrollController@payrollProcess');
+    Route::post('/payroll/save/{id}', 'PayrollController@payrollSave');
+    Route::get('/payroll/view/{id}', 'PayrollController@payrollView');
+    Route::get('/payroll/approve/{id}', 'PayrollController@payrollApprove');
+    Route::get('/payroll/mark-paid/{id}', 'PayrollController@payrollMarkPaid');
+    Route::get('/payroll/delete/{id}', 'PayrollController@payrollDelete');
+
+    // Payslip
+    Route::get('/payslip/{id}', 'PayrollController@payslip');
+    Route::get('/payslip/print/{id}', 'PayrollController@payslipPrint');
+
+    // Holidays
+    Route::get('/holidays', 'PayrollController@holidayList')->name('payroll.holidays');
+    Route::get('/holidays/add', 'PayrollController@holidayCreate');
+    Route::post('/holidays/store', 'PayrollController@holidayStore');
+    Route::get('/holidays/edit/{id}', 'PayrollController@holidayEdit');
+    Route::post('/holidays/update/{id}', 'PayrollController@holidayUpdate');
+    Route::get('/holidays/delete/{id}', 'PayrollController@holidayDelete');
+
+    // Leave Requests
+    Route::get('/leave', 'PayrollController@leaveList')->name('payroll.leave');
+    Route::get('/leave/add', 'PayrollController@leaveCreate');
+    Route::post('/leave/store', 'PayrollController@leaveStore');
+    Route::get('/leave/approve/{id}', 'PayrollController@leaveApprove');
+    Route::get('/leave/reject/{id}', 'PayrollController@leaveReject');
+    Route::get('/leave/delete/{id}', 'PayrollController@leaveDelete');
+
+    // Deductions
+    Route::get('/deductions', 'PayrollController@deductionList')->name('payroll.deductions');
+    Route::get('/deductions/add', 'PayrollController@deductionCreate');
+    Route::post('/deductions/store', 'PayrollController@deductionStore');
+    Route::get('/deductions/edit/{id}', 'PayrollController@deductionEdit');
+    Route::post('/deductions/update/{id}', 'PayrollController@deductionUpdate');
+    Route::get('/deductions/delete/{id}', 'PayrollController@deductionDelete');
+
+    // Settings
+    Route::get('/settings', 'PayrollController@settings')->name('payroll.settings');
+    Route::post('/settings/update', 'PayrollController@settingsUpdate');
+});
+
 Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');
 
