@@ -477,7 +477,7 @@ if (! function_exists('getEmployeeservice')) {
     function getEmployeeservice($id, $salesid, $nowmonthdate, $nowmonthdate1)
     {
 
-        $tbl_services = DB::select("SELECT * FROM tbl_services where (done_status=2) and (assign_to='$id') and (sales_id='$salesid') and(service_date BETWEEN '".$nowmonthdate."' AND  '".$nowmonthdate1."')");
+        $tbl_services = DB::select("SELECT * FROM tbl_services where (done_status=2) and (assign_to = ?) and (sales_id = ?) and(service_date BETWEEN ? AND ?)", [$id, $salesid, $nowmonthdate, $nowmonthdate1]);
 
         if (! empty($tbl_services)) {
             foreach ($tbl_services as $tbl_services) {

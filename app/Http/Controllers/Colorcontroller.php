@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Color;
 use App\CustomField;
+use App\Http\Requests\ColorAddEditFormRequest;
 use DB;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,7 @@ class Colorcontroller extends Controller
     }
 
     // color store
-    public function store(Request $request)
+    public function store(ColorAddEditFormRequest $request)
     {
         $color = $request->color;
         $color_code = $request->c_name;
@@ -124,7 +125,7 @@ class Colorcontroller extends Controller
     }
 
     // color update
-    public function update($id, Request $request)
+    public function update($id, ColorAddEditFormRequest $request)
     {
         $color = Color::find($id);
         // $colors = Input::get('color');

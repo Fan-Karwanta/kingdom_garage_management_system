@@ -10,6 +10,7 @@ use App\User;
 use App\Vehicle;
 use Auth;
 use DB;
+use App\Http\Requests\StoreGatepassAddEditFormRequest;
 use Illuminate\Http\Request;
 use Mpdf\Mpdf;
 use Mpdf\Output\Destination;
@@ -95,14 +96,14 @@ class Getpasscontroller extends Controller
         		INNER JOIN users ON tbl_services.customer_id = users.id 
         		INNER JOIN tbl_vehicles ON tbl_services.vehicle_id = tbl_vehicles.id 
 				INNER JOIN tbl_jobcard_details ON tbl_services.id = tbl_jobcard_details.service_id 
-				INNER JOIN tbl_vehicle_types ON tbl_vehicles.vehicletype_id = tbl_vehicle_types.id where tbl_services.job_no='$jobcard'");
+				INNER JOIN tbl_vehicle_types ON tbl_vehicles.vehicletype_id = tbl_vehicle_types.id where tbl_services.job_no = ?", [$jobcard]);
 
         $getdata = str_replace(['[', ']'], '', htmlspecialchars(json_encode($gatepass), ENT_NOQUOTES));
         echo $getdata;
     }
 
     // gatepass store
-    public function store(Request $request)
+    public function store(StoreGatepassAddEditFormRequest $request)
     {
         $jobcard = $request->jobcard;
         if (getDateFormat() == 'm-d-Y') {

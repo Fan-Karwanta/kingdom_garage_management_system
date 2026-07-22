@@ -138,7 +138,7 @@ class JobCardcontroller extends Controller
         $start_date = "$year/$month/01";
         $end_date = "$year/$month/31";
 
-        $current_month = DB::select("SELECT service_date FROM tbl_services WHERE service_date BETWEEN  '$start_date' AND '$end_date'");
+        $current_month = DB::select("SELECT service_date FROM tbl_services WHERE service_date BETWEEN ? AND ?", [$start_date, $end_date]);
         if (! empty($current_month)) {
             foreach ($current_month as $list) {
                 $date[] = $list->service_date;
@@ -269,13 +269,13 @@ class JobCardcontroller extends Controller
             $review = $datas->review;
 
             if ($review == 1) {
-                $update1 = DB::update("update tbl_service_observation_points set review = 0 where services_id='$service_id' and observation_points_id='$id'");
+                $update1 = DB::table('tbl_service_observation_points')->where([['services_id', $service_id], ['observation_points_id', $id]])->update(['review' => 0]);
 
                 $delete1 = DB::table('tbl_service_pros')->where([['service_id', $service_id], ['tbl_service_observation_points_id', $tbl_service_obse_id]])->delete();
 
                 // 	echo "update1 : " .$update1. " Delete1 : ".$delete1;
             } else {
-                $update2 = DB::update("update tbl_service_observation_points set review = 1 where services_id='$service_id' and observation_points_id='$id'");
+                $update2 = DB::table('tbl_service_observation_points')->where([['services_id', $service_id], ['observation_points_id', $id]])->update(['review' => 1]);
 
                 $pros = new tbl_service_pros;
                 $pros->service_id = $service_id;
@@ -317,7 +317,7 @@ class JobCardcontroller extends Controller
         if ($modifiedData !== null) {
             // Fields to compare and update
             $fieldsToCompare = ['checkout_subpoints', 'checkout_point', 'product_id', 'price', 'quantity', 'total_price', 'chargeable', 'category_comments', 'service_charge'];
-            $data1 = DB::select("select tbl_service_pros.*, tbl_points.*,tbl_service_observation_points.id from tbl_points join tbl_service_observation_points on tbl_service_observation_points.observation_points_id = tbl_points.id join tbl_service_pros on tbl_service_pros.tbl_service_observation_points_id = tbl_service_observation_points.id where tbl_service_observation_points.services_id = $s_id and tbl_service_observation_points.review = 1 and tbl_service_pros.type = 0");
+            $data1 = DB::select("select tbl_service_pros.*, tbl_points.*,tbl_service_observation_points.id from tbl_points join tbl_service_observation_points on tbl_service_observation_points.observation_points_id = tbl_points.id join tbl_service_pros on tbl_service_pros.tbl_service_observation_points_id = tbl_service_observation_points.id where tbl_service_observation_points.services_id = ? and tbl_service_observation_points.review = 1 and tbl_service_pros.type = 0", [$s_id]);
 
             // Compare $data and $modifiedData based on 'id'
             $data = [];
@@ -338,7 +338,7 @@ class JobCardcontroller extends Controller
                 $data[] = $databaseRow;
             }
         } else {
-            $data = DB::select("select tbl_service_pros.*, tbl_points.*,tbl_service_observation_points.id from tbl_points join tbl_service_observation_points on tbl_service_observation_points.observation_points_id = tbl_points.id join tbl_service_pros on tbl_service_pros.tbl_service_observation_points_id = tbl_service_observation_points.id where tbl_service_observation_points.services_id = $s_id and tbl_service_observation_points.review = 1 and tbl_service_pros.type = 0");
+            $data = DB::select("select tbl_service_pros.*, tbl_points.*,tbl_service_observation_points.id from tbl_points join tbl_service_observation_points on tbl_service_observation_points.observation_points_id = tbl_points.id join tbl_service_pros on tbl_service_pros.tbl_service_observation_points_id = tbl_service_observation_points.id where tbl_service_observation_points.services_id = ? and tbl_service_observation_points.review = 1 and tbl_service_pros.type = 0", [$s_id]);
         }
 
         // dd($data);
@@ -404,7 +404,7 @@ class JobCardcontroller extends Controller
         		INNER JOIN users ON tbl_services.customer_id = users.id
         		INNER JOIN tbl_vehicles ON tbl_services.vehicle_id = tbl_vehicles.id
 				INNER JOIN tbl_jobcard_details ON tbl_services.id = tbl_jobcard_details.service_id
-				INNER JOIN tbl_vehicle_types ON tbl_vehicles.vehicletype_id = tbl_vehicle_types.id where tbl_services.job_no='$job_id'");
+				INNER JOIN tbl_vehicle_types ON tbl_vehicles.vehicletype_id = tbl_vehicle_types.id where tbl_services.job_no = ?", [$job_id]);
 
         $data = str_replace(['[', ']'], '', htmlspecialchars(json_encode($all_sql), ENT_NOQUOTES));
         echo $data;
@@ -451,7 +451,7 @@ class JobCardcontroller extends Controller
         $start_date = "$year/$month/01";
         $end_date = "$year/$month/31";
 
-        $current_month = DB::select("SELECT service_date FROM tbl_services WHERE service_date BETWEEN  '$start_date' AND '$end_date'");
+        $current_month = DB::select("SELECT service_date FROM tbl_services WHERE service_date BETWEEN ? AND ?", [$start_date, $end_date]);
         if (! empty($current_month)) {
             foreach ($current_month as $list) {
                 $date[] = $list->service_date;
@@ -526,6 +526,13 @@ class JobCardcontroller extends Controller
     // jobcard store
     public function store(Request $request)
     {
+        $request->validate([
+            'job_no' => 'required|string',
+            'service_id' => 'required|integer',
+            'in_date' => 'required|string',
+            'out_date' => 'required|string',
+        ]);
+
         $job_no = $request->job_no;
         $service_id = $request->service_id;
         $assignTo = $request->AssigneTo;
@@ -545,7 +552,7 @@ class JobCardcontroller extends Controller
         $kms = $request->kms;
         $coupan_no = $request->coupan_no;
 
-        $out_date = DB::update("update tbl_jobcard_details set out_date='$odate' , next_date='$nextService' ,next_kms_run='$nextKms' where service_id=$service_id");
+        $out_date = DB::table('tbl_jobcard_details')->where('service_id', $service_id)->update(['out_date' => $odate, 'next_date' => $nextService, 'next_kms_run' => $nextKms]);
         // $out_date = DB::update("update tbl_jobcard_details set out_date='$odate' where service_id=$service_id");
         $chargeableOld = $request->yesno_;
         $chargeableNew = $request->yesno;
@@ -617,18 +624,20 @@ class JobCardcontroller extends Controller
                 } else {
                     // dd($product_id2, $qty2, $price2, $total2, $charge_abl, $comment, $service_id, $category, $sub);
                     $type = 0;
-                    DB::update("update tbl_service_pros set
-														product_id = '$product_id2',
-														quantity = '$qty2',
-														price = '$price2',
-														total_price = '$total2',
-														chargeable = '$charge_abl',
-														type='$type',
-														category_comments='".addslashes($comment)."',
-														service_charge='$service_charge',
-                                                        discount = '$discount',
-                                                        tax = '$tax'
-														where service_id = $service_id and category = '$category' and obs_point = '$sub'");
+                    DB::table('tbl_service_pros')
+                                                        ->where([['service_id', $service_id], ['category', $category], ['obs_point', $sub]])
+                                                        ->update([
+                                                            'product_id' => $product_id2,
+                                                            'quantity' => $qty2,
+                                                            'price' => $price2,
+                                                            'total_price' => $total2,
+                                                            'chargeable' => $charge_abl,
+                                                            'type' => $type,
+                                                            'category_comments' => $comment,
+                                                            'service_charge' => $service_charge,
+                                                            'discount' => $discount,
+                                                            'tax' => $tax,
+                                                        ]);
 
                     $checking_servicePro = 1;
                     // dd($type);
@@ -690,8 +699,8 @@ class JobCardcontroller extends Controller
                 ->update(['out_date' => $odate, 'kms_run' => $kms]);
         }
 
-        DB::update("update `tbl_services` set done_status=1 where id=$service_id");
-        DB::update("update `tbl_jobcard_details` set done_status=1 where service_id=$service_id");
+        DB::table('tbl_services')->where('id', $service_id)->update(['done_status' => 1]);
+        DB::table('tbl_jobcard_details')->where('service_id', $service_id)->update(['done_status' => 1]);
 
         /* If Mot Test done then Add to related service charge */
         $get_mot_status_of_service_tbl = DB::table('tbl_services')->where('id', '=', $service_id)->first();
@@ -869,7 +878,7 @@ class JobCardcontroller extends Controller
         $tax = AccountTaxRate::get();
         $logo = Setting::first();
 
-        $data = DB::select("select tbl_service_pros.*, tbl_points.*,tbl_service_observation_points.id from tbl_points join tbl_service_observation_points on tbl_service_observation_points.observation_points_id = tbl_points.id join tbl_service_pros on tbl_service_pros.tbl_service_observation_points_id = tbl_service_observation_points.id where tbl_service_observation_points.services_id = $viewid and tbl_service_observation_points.review = 1 and tbl_service_pros.type = 0");
+        $data = DB::select("select tbl_service_pros.*, tbl_points.*,tbl_service_observation_points.id from tbl_points join tbl_service_observation_points on tbl_service_observation_points.observation_points_id = tbl_points.id join tbl_service_pros on tbl_service_pros.tbl_service_observation_points_id = tbl_service_observation_points.id where tbl_service_observation_points.services_id = ? and tbl_service_observation_points.review = 1 and tbl_service_pros.type = 0", [$viewid]);
         // dd($data);
         $data_new = $servicePros = DB::table('tbl_service_pros')
             ->where('service_id', $id)
@@ -1418,7 +1427,7 @@ class JobCardcontroller extends Controller
         $tax = AccountTaxRate::get();
         $logo = Setting::first();
 
-        $data = DB::select("select tbl_service_pros.*, tbl_points.*,tbl_service_observation_points.id from tbl_points join tbl_service_observation_points on tbl_service_observation_points.observation_points_id = tbl_points.id join tbl_service_pros on tbl_service_pros.tbl_service_observation_points_id = tbl_service_observation_points.id where tbl_service_observation_points.services_id = $viewid and tbl_service_observation_points.review = 1 and tbl_service_pros.type = 0");
+        $data = DB::select("select tbl_service_pros.*, tbl_points.*,tbl_service_observation_points.id from tbl_points join tbl_service_observation_points on tbl_service_observation_points.observation_points_id = tbl_points.id join tbl_service_pros on tbl_service_pros.tbl_service_observation_points_id = tbl_service_observation_points.id where tbl_service_observation_points.services_id = ? and tbl_service_observation_points.review = 1 and tbl_service_pros.type = 0", [$viewid]);
 
         $fetch_mot_test_status = Service::where('id', '=', $id)->first();
 

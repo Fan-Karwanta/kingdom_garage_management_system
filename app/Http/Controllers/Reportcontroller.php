@@ -78,7 +78,7 @@ class Reportcontroller extends Controller
 
             if ($s_date == '' && $e_date == '' && $all_customer == 'all' && $all_salesman == 'all') {
 
-                $Sales = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`date`),4) as date FROM tbl_sales where customer_id='$all_customer' group by YEAR(`date`) ORDER BY date ASC");
+                $Sales = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`date`),4) as date FROM tbl_sales where customer_id = ? group by YEAR(`date`) ORDER BY date ASC", [$all_customer]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -86,7 +86,7 @@ class Reportcontroller extends Controller
 
                 $salesreport = Sale::where([['soft_delete', 0], ['branch_id', $adminCurrentBranch->branch_id]])->get();
             } elseif ($s_date != '' && $e_date != '' && $all_customer == 'all' && $all_salesman == 'all') {
-                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN  '$s_date' AND '$e_date' GROUP BY MONTH(date), YEAR(date)");
+                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN ? AND ? GROUP BY MONTH(date), YEAR(date)", [$s_date, $e_date]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -94,14 +94,14 @@ class Reportcontroller extends Controller
 
                 $salesreport = Sale::whereBetween('date', [$s_date, $e_date])->where([['soft_delete', 0], ['branch_id', $adminCurrentBranch->branch_id]])->get();
             } elseif ($s_date == '' && $e_date == '' && $all_customer != 'all' && $all_salesman == 'all') {
-                $Sales = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`date`),4) as date FROM tbl_sales where customer_id='$all_customer' group by YEAR(`date`) ORDER BY date ASC");
+                $Sales = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`date`),4) as date FROM tbl_sales where customer_id = ? group by YEAR(`date`) ORDER BY date ASC", [$all_customer]);
                 $title_report = 'All Sales';
                 $date_report = 'Year';
                 $title = 'Sales';
 
                 $salesreport = Sale::where('customer_id', '=', $all_customer)->where([['soft_delete', 0], ['branch_id', $adminCurrentBranch->branch_id]])->get();
             } elseif ($s_date != '' && $e_date != '' && $all_customer != 'all' && $all_salesman == 'all') {
-                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN  '$s_date' AND '$e_date' and customer_id='$all_customer' GROUP BY MONTH(date), YEAR(date)");
+                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN ? AND ? and customer_id = ? GROUP BY MONTH(date), YEAR(date)", [$s_date, $e_date, $all_customer]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -109,7 +109,7 @@ class Reportcontroller extends Controller
 
                 $salesreport = Sale::whereBetween('date', [$s_date, $e_date])->where('customer_id', '=', $all_customer)->where([['soft_delete', 0], ['branch_id', $adminCurrentBranch->branch_id]])->get();
             } elseif ($s_date != '' && $e_date != '' && $all_customer == 'all' && $all_salesman != 'all') {
-                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN  '$s_date' AND '$e_date' and salesmanname='$all_salesman' GROUP BY MONTH(date), YEAR(date)");
+                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN ? AND ? and salesmanname = ? GROUP BY MONTH(date), YEAR(date)", [$s_date, $e_date, $all_salesman]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -117,7 +117,7 @@ class Reportcontroller extends Controller
 
                 $salesreport = Sale::whereBetween('date', [$s_date, $e_date])->where('salesmanname', '=', $all_salesman)->where([['soft_delete', 0], ['branch_id', $adminCurrentBranch->branch_id]])->get();
             } elseif ($s_date != '' && $e_date != '' && $all_customer != 'all' && $all_salesman != 'all') {
-                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN  '$s_date' AND '$e_date' and customer_id='$all_customer' and salesmanname='$all_salesman' GROUP BY MONTH(date), YEAR(date)");
+                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN ? AND ? and customer_id = ? and salesmanname = ? GROUP BY MONTH(date), YEAR(date)", [$s_date, $e_date, $all_customer, $all_salesman]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -130,7 +130,7 @@ class Reportcontroller extends Controller
 
             if ($s_date == '' && $e_date == '' && $all_customer == 'all' && $all_salesman == 'all') {
 
-                $Sales = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`date`),4) as date FROM tbl_sales where customer_id='$all_customer' group by YEAR(`date`) ORDER BY date ASC");
+                $Sales = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`date`),4) as date FROM tbl_sales where customer_id = ? group by YEAR(`date`) ORDER BY date ASC", [$all_customer]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -138,7 +138,7 @@ class Reportcontroller extends Controller
 
                 $salesreport = Sale::where('soft_delete', '=', 0)->get();
             } elseif ($s_date != '' && $e_date != '' && $all_customer == 'all' && $all_salesman == 'all') {
-                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN  '$s_date' AND '$e_date' GROUP BY MONTH(date), YEAR(date)");
+                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN ? AND ? GROUP BY MONTH(date), YEAR(date)", [$s_date, $e_date]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -146,14 +146,14 @@ class Reportcontroller extends Controller
 
                 $salesreport = Sale::whereBetween('date', [$s_date, $e_date])->get();
             } elseif ($s_date == '' && $e_date == '' && $all_customer != 'all' && $all_salesman == 'all') {
-                $Sales = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`date`),4) as date FROM tbl_sales where customer_id='$all_customer' group by YEAR(`date`) ORDER BY date ASC");
+                $Sales = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`date`),4) as date FROM tbl_sales where customer_id = ? group by YEAR(`date`) ORDER BY date ASC", [$all_customer]);
                 $title_report = 'All Sales';
                 $date_report = 'Year';
                 $title = 'Sales';
 
                 $salesreport = Sale::where('customer_id', '=', $all_customer)->get();
             } elseif ($s_date != '' && $e_date != '' && $all_customer != 'all' && $all_salesman == 'all') {
-                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN  '$s_date' AND '$e_date' and customer_id='$all_customer' GROUP BY MONTH(date), YEAR(date)");
+                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN ? AND ? and customer_id = ? GROUP BY MONTH(date), YEAR(date)", [$s_date, $e_date, $all_customer]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -161,7 +161,7 @@ class Reportcontroller extends Controller
 
                 $salesreport = Sale::whereBetween('date', [$s_date, $e_date])->where('customer_id', '=', $all_customer)->get();
             } elseif ($s_date != '' && $e_date != '' && $all_customer == 'all' && $all_salesman != 'all') {
-                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN  '$s_date' AND '$e_date' and salesmanname='$all_salesman' GROUP BY MONTH(date), YEAR(date)");
+                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN ? AND ? and salesmanname = ? GROUP BY MONTH(date), YEAR(date)", [$s_date, $e_date, $all_salesman]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -169,7 +169,7 @@ class Reportcontroller extends Controller
 
                 $salesreport = Sale::whereBetween('date', [$s_date, $e_date])->where('salesmanname', '=', $all_salesman)->get();
             } elseif ($s_date != '' && $e_date != '' && $all_customer != 'all' && $all_salesman != 'all') {
-                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN  '$s_date' AND '$e_date' and customer_id='$all_customer' and salesmanname='$all_salesman' GROUP BY MONTH(date), YEAR(date)");
+                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN ? AND ? and customer_id = ? and salesmanname = ? GROUP BY MONTH(date), YEAR(date)", [$s_date, $e_date, $all_customer, $all_salesman]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -180,7 +180,7 @@ class Reportcontroller extends Controller
         } else {
             $Select_salesman = User::where([['role', '=', 'employee'], ['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->get();
             if ($s_date == '' && $e_date == '' && $all_customer == 'all' && $all_salesman == 'all') {
-                $Sales = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`date`),4) as date FROM tbl_sales where customer_id='$all_customer' group by YEAR(`date`) ORDER BY date ASC");
+                $Sales = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`date`),4) as date FROM tbl_sales where customer_id = ? group by YEAR(`date`) ORDER BY date ASC", [$all_customer]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -188,7 +188,7 @@ class Reportcontroller extends Controller
 
                 $salesreport = Sale::where([['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->get();
             } elseif ($s_date != '' && $e_date != '' && $all_customer == 'all' && $all_salesman == 'all') {
-                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN  '$s_date' AND '$e_date' GROUP BY MONTH(date), YEAR(date)");
+                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN ? AND ? GROUP BY MONTH(date), YEAR(date)", [$s_date, $e_date]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -196,14 +196,14 @@ class Reportcontroller extends Controller
 
                 $salesreport = Sale::whereBetween('date', [$s_date, $e_date])->where([['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->get();
             } elseif ($s_date == '' && $e_date == '' && $all_customer != 'all' && $all_salesman == 'all') {
-                $Sales = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`date`),4) as date FROM tbl_sales where customer_id='$all_customer' group by YEAR(`date`) ORDER BY date ASC");
+                $Sales = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`date`),4) as date FROM tbl_sales where customer_id = ? group by YEAR(`date`) ORDER BY date ASC", [$all_customer]);
                 $title_report = 'All Sales';
                 $date_report = 'Year';
                 $title = 'Sales';
 
                 $salesreport = Sale::where('customer_id', '=', $all_customer)->where([['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->get();
             } elseif ($s_date != '' && $e_date != '' && $all_customer != 'all' && $all_salesman == 'all') {
-                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN  '$s_date' AND '$e_date' and customer_id='$all_customer' GROUP BY MONTH(date), YEAR(date)");
+                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN ? AND ? and customer_id = ? GROUP BY MONTH(date), YEAR(date)", [$s_date, $e_date, $all_customer]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -211,7 +211,7 @@ class Reportcontroller extends Controller
 
                 $salesreport = Sale::whereBetween('date', [$s_date, $e_date])->where('customer_id', '=', $all_customer)->where([['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->get();
             } elseif ($s_date != '' && $e_date != '' && $all_customer == 'all' && $all_salesman != 'all') {
-                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN  '$s_date' AND '$e_date' and salesmanname='$all_salesman' GROUP BY MONTH(date), YEAR(date)");
+                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN ? AND ? and salesmanname = ? GROUP BY MONTH(date), YEAR(date)", [$s_date, $e_date, $all_salesman]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -219,7 +219,7 @@ class Reportcontroller extends Controller
 
                 $salesreport = Sale::whereBetween('date', [$s_date, $e_date])->where('salesmanname', '=', $all_salesman)->where([['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->get();
             } elseif ($s_date != '' && $e_date != '' && $all_customer != 'all' && $all_salesman != 'all') {
-                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN  '$s_date' AND '$e_date' and customer_id='$all_customer' and salesmanname='$all_salesman' GROUP BY MONTH(date), YEAR(date)");
+                $Sales = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`date`),'-',RIGHT(YEAR(`date`),4)) as date FROM tbl_sales where date BETWEEN ? AND ? and customer_id = ? and salesmanname = ? GROUP BY MONTH(date), YEAR(date)", [$s_date, $e_date, $all_customer, $all_salesman]);
 
                 $title_report = 'All Sales';
                 $date_report = 'Year';
@@ -298,7 +298,7 @@ class Reportcontroller extends Controller
                 $servicereport = Service::where('done_status', '=', 1)->where([['soft_delete', 0]])->orderBy('id', 'desc')->get();
             } elseif ($s_date == '' && $e_date == '' && $all_service == 'free') {
 
-                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (service_type='$all_service') and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC");
+                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (service_type = ?) and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC", [$all_service]);
                 $title_report = 'All Service';
                 $date_report = 'Year';
                 $title = 'Service';
@@ -306,7 +306,7 @@ class Reportcontroller extends Controller
                 $servicereport = Service::where([['done_status', '=', 1], ['service_type', '=', $all_service]])->where([['soft_delete', 0]])->orderBy('id', 'desc')->get();
             } elseif ($s_date == '' && $e_date == '' && $all_service == 'paid') {
 
-                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (service_type='$all_service') and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC");
+                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (service_type = ?) and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC", [$all_service]);
                 $title_report = 'All Service';
                 $date_report = 'Year';
                 $title = 'Service';
@@ -315,7 +315,7 @@ class Reportcontroller extends Controller
             } elseif ($s_date != '' && $e_date != '' && $all_service == 'all') {
 
                 if ($select_customerId != '') {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1)  and (customer_id='$select_customerId') GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1)  and (customer_id = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $select_customerId]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -325,7 +325,7 @@ class Reportcontroller extends Controller
                         ->where([['soft_delete', 0]])
                         ->whereBetween('service_date', [$s_date, $e_date])->orderBy('id', 'desc')->get();
                 } else {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -337,7 +337,7 @@ class Reportcontroller extends Controller
                 }
             } elseif ($s_date != '' && $e_date != '' && $all_service == 'free') {
                 if ($select_customerId != '') {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and (service_type='$all_service') and (customer_id='$select_customerId') GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (service_type = ?) and (customer_id = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_service, $select_customerId]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -349,7 +349,7 @@ class Reportcontroller extends Controller
                         ->whereBetween('service_date', [$s_date, $e_date])->orderBy('id', 'desc')->get();
                 } else {
 
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and (service_type='$all_service')GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (service_type = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_service]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -363,7 +363,7 @@ class Reportcontroller extends Controller
             } elseif ($s_date != '' && $e_date != '' && $all_service == 'paid') {
                 // Selected customer record return
                 if ($select_customerId != '') {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and (service_type='$all_service') and (customer_id='$select_customerId') GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (service_type = ?) and (customer_id = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_service, $select_customerId]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -374,7 +374,7 @@ class Reportcontroller extends Controller
                         ->where([['soft_delete', 0]])
                         ->whereBetween('service_date', [$s_date, $e_date])->orderBy('id', 'desc')->get();
                 } else {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and (service_type='$all_service')GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (service_type = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_service]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -396,7 +396,7 @@ class Reportcontroller extends Controller
                 $servicereport = Service::where('done_status', '=', 1)->orderBy('id', 'desc')->get();
             } elseif ($s_date == '' && $e_date == '' && $all_service == 'free') {
 
-                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (service_type='$all_service') and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC");
+                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (service_type = ?) and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC", [$all_service]);
                 $title_report = 'All Service';
                 $date_report = 'Year';
                 $title = 'Service';
@@ -404,7 +404,7 @@ class Reportcontroller extends Controller
                 $servicereport = Service::where([['done_status', '=', 1], ['service_type', '=', $all_service]])->orderBy('id', 'desc')->get();
             } elseif ($s_date == '' && $e_date == '' && $all_service == 'paid') {
 
-                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (service_type='$all_service') and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC");
+                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (service_type = ?) and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC", [$all_service]);
                 $title_report = 'All Service';
                 $date_report = 'Year';
                 $title = 'Service';
@@ -412,7 +412,7 @@ class Reportcontroller extends Controller
                 $servicereport = Service::where([['done_status', '=', 1], ['service_type', '=', $all_service]])->orderBy('id', 'desc')->get();
             } elseif ($s_date != '' && $e_date != '' && $all_service == 'all') {
                 if ($select_customerId != '') {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$e_date' AND '$s_date') and (done_status=1) and (customer_id='$select_customerId') GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (customer_id = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$e_date, $s_date, $select_customerId]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -421,7 +421,7 @@ class Reportcontroller extends Controller
                     $servicereport = Service::where([['done_status', '=', 1], ['customer_id', '=', $select_customerId]])
                         ->whereBetween('service_date', [$s_date, $e_date])->orderBy('id', 'desc')->get();
                 } else {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -432,7 +432,7 @@ class Reportcontroller extends Controller
                 }
             } elseif ($s_date != '' && $e_date != '' && $all_service == 'free') {
                 if ($select_customerId != '') {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and (service_type='$all_service') and (customer_id='$select_customerId') GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (service_type = ?) and (customer_id = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_service, $select_customerId]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -443,7 +443,7 @@ class Reportcontroller extends Controller
                         ->whereBetween('service_date', [$s_date, $e_date])->orderBy('id', 'desc')->get();
                 } else {
 
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and (service_type='$all_service')GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (service_type = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_service]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -455,7 +455,7 @@ class Reportcontroller extends Controller
                 }
             } elseif ($s_date != '' && $e_date != '' && $all_service == 'paid') {
                 if ($select_customerId != '') {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and (service_type='$all_service') and (customer_id='$select_customerId') GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (service_type = ?) and (customer_id = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_service, $select_customerId]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -465,7 +465,7 @@ class Reportcontroller extends Controller
                         ->where('service_type', '=', $all_service)
                         ->whereBetween('service_date', [$s_date, $e_date])->orderBy('id', 'desc')->get();
                 } else {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and (service_type='$all_service')GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (service_type = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_service]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -487,7 +487,7 @@ class Reportcontroller extends Controller
                 $servicereport = Service::where('done_status', '=', 1)->where([['soft_delete', 0]])->orderBy('id', 'desc')->get();
             } elseif ($s_date == '' && $e_date == '' && $all_service == 'free') {
 
-                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (service_type='$all_service') and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC");
+                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (service_type = ?) and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC", [$all_service]);
                 $title_report = 'All Service';
                 $date_report = 'Year';
                 $title = 'Service';
@@ -495,7 +495,7 @@ class Reportcontroller extends Controller
                 $servicereport = Service::where([['done_status', '=', 1], ['service_type', '=', $all_service]])->where([['soft_delete', 0]])->orderBy('id', 'desc')->get();
             } elseif ($s_date == '' && $e_date == '' && $all_service == 'paid') {
 
-                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (service_type='$all_service') and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC");
+                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (service_type = ?) and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC", [$all_service]);
                 $title_report = 'All Service';
                 $date_report = 'Year';
                 $title = 'Service';
@@ -504,7 +504,7 @@ class Reportcontroller extends Controller
             } elseif ($s_date != '' && $e_date != '' && $all_service == 'all') {
 
                 if ($select_customerId != '') {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1)  and (customer_id='$select_customerId') GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1)  and (customer_id = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $select_customerId]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -514,7 +514,7 @@ class Reportcontroller extends Controller
                         ->where([['soft_delete', 0]])
                         ->whereBetween('service_date', [$s_date, $e_date])->orderBy('id', 'desc')->get();
                 } else {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -526,7 +526,7 @@ class Reportcontroller extends Controller
                 }
             } elseif ($s_date != '' && $e_date != '' && $all_service == 'free') {
                 if ($select_customerId != '') {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and (service_type='$all_service') and (customer_id='$select_customerId') GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (service_type = ?) and (customer_id = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_service, $select_customerId]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -538,7 +538,7 @@ class Reportcontroller extends Controller
                         ->whereBetween('service_date', [$s_date, $e_date])->orderBy('id', 'desc')->get();
                 } else {
 
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and (service_type='$all_service')GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (service_type = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_service]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -552,7 +552,7 @@ class Reportcontroller extends Controller
             } elseif ($s_date != '' && $e_date != '' && $all_service == 'paid') {
                 // Selected customer record return
                 if ($select_customerId != '') {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and (service_type='$all_service') and (customer_id='$select_customerId') GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (service_type = ?) and (customer_id = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_service, $select_customerId]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -563,7 +563,7 @@ class Reportcontroller extends Controller
                         ->where([['soft_delete', 0]])
                         ->whereBetween('service_date', [$s_date, $e_date])->orderBy('id', 'desc')->get();
                 } else {
-                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and (service_type='$all_service')GROUP BY MONTH(service_date), YEAR(service_date)");
+                    $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and (service_type = ?) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_service]);
 
                     $title_report = 'All Service';
                     $date_report = 'Year';
@@ -724,7 +724,7 @@ class Reportcontroller extends Controller
 
                 $productname = Product::where([['soft_delete', 0]])->get();
             } elseif ($all_product != 'all' && $all_item == 'item') {
-                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where product_type_id='$all_product' group by YEAR(`product_date`) ORDER BY product_date ASC");
+                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where product_type_id = ? group by YEAR(`product_date`) ORDER BY product_date ASC", [$all_product]);
                 $title_report = 'All Product';
                 $date_report = 'Year';
                 $title = 'Product';
@@ -739,7 +739,7 @@ class Reportcontroller extends Controller
 
                 $productname = Product::where('tbl_products.product_type_id', '=', $all_product)->where([['soft_delete', 0]])->get();
             } elseif ($all_product == 'all' && $all_item != 'item') {
-                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where name='$all_item' group by YEAR(`product_date`) ORDER BY product_date ASC");
+                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where name = ? group by YEAR(`product_date`) ORDER BY product_date ASC", [$all_item]);
                 $title_report = 'All Product';
                 $date_report = 'Year';
                 $title = 'Product';
@@ -755,7 +755,7 @@ class Reportcontroller extends Controller
                     // ->where('tbl_products.branch_id', '=', $adminCurrentBranch->branch_id)
                     ->get();
             } elseif ($all_product != 'all' && $all_item != 'item') {
-                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where (product_type_id='$all_product') and (name='$all_item') group by YEAR(`product_date`) ORDER BY product_date ASC");
+                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where (product_type_id = ?) and (name = ?) group by YEAR(`product_date`) ORDER BY product_date ASC", [$all_product, $all_item]);
                 $title_report = 'All Product';
                 $date_report = 'Year';
                 $title = 'Product';
@@ -785,7 +785,7 @@ class Reportcontroller extends Controller
                     ->get();
                 $productname = Product::get();
             } elseif ($all_product != 'all' && $all_item == 'item') {
-                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where product_type_id='$all_product' group by YEAR(`product_date`) ORDER BY product_date ASC");
+                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where product_type_id = ? group by YEAR(`product_date`) ORDER BY product_date ASC", [$all_product]);
                 $title_report = 'All Product';
                 $date_report = 'Year';
                 $title = 'Product';
@@ -798,7 +798,7 @@ class Reportcontroller extends Controller
                     ->get();
                 $productname = Product::where('tbl_products.product_type_id', '=', $all_product)->get();
             } elseif ($all_product == 'all' && $all_item != 'item') {
-                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where name='$all_item' group by YEAR(`product_date`) ORDER BY product_date ASC");
+                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where name = ? group by YEAR(`product_date`) ORDER BY product_date ASC", [$all_item]);
                 $title_report = 'All Product';
                 $date_report = 'Year';
                 $title = 'Product';
@@ -813,7 +813,7 @@ class Reportcontroller extends Controller
                     ->where('tbl_products.id', '=', $all_item)
                     ->get();
             } elseif ($all_product != 'all' && $all_item != 'item') {
-                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where (product_type_id='$all_product') and (name='$all_item') group by YEAR(`product_date`) ORDER BY product_date ASC");
+                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where (product_type_id = ?) and (name = ?) group by YEAR(`product_date`) ORDER BY product_date ASC", [$all_product, $all_item]);
                 $title_report = 'All Product';
                 $date_report = 'Year';
                 $title = 'Product';
@@ -846,7 +846,7 @@ class Reportcontroller extends Controller
 
                 $productname = Product::where([['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->get();
             } elseif ($all_product != 'all' && $all_item == 'item') {
-                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where product_type_id='$all_product' group by YEAR(`product_date`) ORDER BY product_date ASC");
+                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where product_type_id = ? group by YEAR(`product_date`) ORDER BY product_date ASC", [$all_product]);
                 $title_report = 'All Product';
                 $date_report = 'Year';
                 $title = 'Product';
@@ -861,7 +861,7 @@ class Reportcontroller extends Controller
 
                 $productname = Product::where('tbl_products.product_type_id', '=', $all_product)->where([['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->get();
             } elseif ($all_product == 'all' && $all_item != 'item') {
-                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where name='$all_item' group by YEAR(`product_date`) ORDER BY product_date ASC");
+                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where name = ? group by YEAR(`product_date`) ORDER BY product_date ASC", [$all_item]);
                 $title_report = 'All Product';
                 $date_report = 'Year';
                 $title = 'Product';
@@ -877,7 +877,7 @@ class Reportcontroller extends Controller
                     ->where('tbl_products.branch_id', '=', $currentUser->branch_id)
                     ->get();
             } elseif ($all_product != 'all' && $all_item != 'item') {
-                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where (product_type_id='$all_product') and (name='$all_item') group by YEAR(`product_date`) ORDER BY product_date ASC");
+                $product = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`product_date`),4) as date FROM tbl_products where (product_type_id = ?) and (name = ?) group by YEAR(`product_date`) ORDER BY product_date ASC", [$all_product, $all_item]);
                 $title_report = 'All Product';
                 $date_report = 'Year';
                 $title = 'Product';
@@ -1236,7 +1236,7 @@ class Reportcontroller extends Controller
         } else {
             $servicereport = Service::where([['done_status', '=', 1], ['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->orderBy('id', 'desc')->get();
 
-            $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where done_status=1 and branch_id= '".$currentUser->branch_id."'  group by YEAR(`service_date`) ORDER BY service_date ASC");
+            $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where done_status=1 and branch_id = ? group by YEAR(`service_date`) ORDER BY service_date ASC", [$currentUser->branch_id]);
 
             $Select_employee = DB::table('users')->where([['role', '=', 'employee'], ['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->get()->toArray();
         }
@@ -1274,7 +1274,7 @@ class Reportcontroller extends Controller
                 $date_report = 'Year';
                 $title = 'Service';
 
-                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (assign_to='$all_employee') and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC");
+                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (assign_to = ?) and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC", [$all_employee]);
 
                 $servicereport = Service::where([['done_status', '=', 1], ['soft_delete', 0]])->orderBy('id', 'desc')->get();
 
@@ -1284,7 +1284,7 @@ class Reportcontroller extends Controller
                 $date_report = 'Year';
                 $title = 'Service';
 
-                $service = DB::select("select count(*) as counts, CONCAT(	MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) GROUP BY MONTH(service_date), YEAR(service_date)");
+                $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date]);
 
                 $Select_employee = User::where([['role', '=', 'employee'], ['soft_delete', 0]])->get();
 
@@ -1294,7 +1294,7 @@ class Reportcontroller extends Controller
                 $date_report = 'Year';
                 $title = 'Service';
 
-                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (assign_to='$all_employee') and (done_status=1)group by YEAR(`service_date`) ORDER BY service_date ASC");
+                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (assign_to = ?) and (done_status=1)group by YEAR(`service_date`) ORDER BY service_date ASC", [$all_employee]);
 
                 $Select_employee = User::where([['role', '=', 'employee'], ['soft_delete', 0]])->get();
 
@@ -1304,7 +1304,7 @@ class Reportcontroller extends Controller
                 $date_report = 'Year';
                 $title = 'Service';
 
-                $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and assign_to='$all_employee' GROUP BY MONTH(service_date), YEAR(service_date)");
+                $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where (service_date BETWEEN ? AND ?) and (done_status=1) and assign_to = ? GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_employee]);
 
                 $Select_employee = User::where([['role', '=', 'employee'], ['soft_delete', 0]])->get();
 
@@ -1322,7 +1322,7 @@ class Reportcontroller extends Controller
 
                 $Select_employee = User::where('role', '=', 'employee')->get();
 
-                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (assign_to='$all_employee') and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC");
+                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (assign_to = ?) and (done_status=1) group by YEAR(`service_date`) ORDER BY date ASC", [$all_employee]);
 
                 $servicereport = Service::where('done_status', '=', 1)->orderBy('id', 'desc')->get();
             } elseif ($s_date != '' && $e_date != '' && $all_employee == 'all') {
@@ -1330,7 +1330,7 @@ class Reportcontroller extends Controller
                 $date_report = 'Year';
                 $title = 'Service';
 
-                $service = DB::select("select count(*) as counts, CONCAT(	MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) GROUP BY MONTH(service_date), YEAR(service_date)");
+                $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date]);
 
                 $Select_employee = User::where('role', '=', 'employee')->get();
 
@@ -1340,7 +1340,7 @@ class Reportcontroller extends Controller
                 $date_report = 'Year';
                 $title = 'Service';
 
-                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (assign_to='$all_employee') and (done_status=1) group by YEAR(`service_date`) ORDER BY service_date ASC");
+                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (assign_to = ?) and (done_status=1) group by YEAR(`service_date`) ORDER BY service_date ASC", [$all_employee]);
 
                 $Select_employee = User::where('role', '=', 'employee')->get();
 
@@ -1350,7 +1350,7 @@ class Reportcontroller extends Controller
                 $date_report = 'Year';
                 $title = 'Service';
 
-                $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and assign_to='$all_employee' GROUP BY MONTH(service_date), YEAR(service_date)");
+                $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where (service_date BETWEEN ? AND ?) and (done_status=1) and assign_to = ? GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_employee]);
 
                 $Select_employee = User::where('role', '=', 'employee')->get();
 
@@ -1366,7 +1366,7 @@ class Reportcontroller extends Controller
                 $date_report = 'Year';
                 $title = 'Service';
 
-                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (assign_to='$all_employee') and (done_status=1) and '".$currentUser->branch_id."' group by YEAR(`service_date`) ORDER BY date ASC");
+                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (assign_to = ?) and (done_status=1) and ? group by YEAR(`service_date`) ORDER BY date ASC", [$all_employee, $currentUser->branch_id]);
 
                 $servicereport = Service::where([['done_status', '=', 1], ['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->orderBy('id', 'desc')->get();
 
@@ -1376,7 +1376,7 @@ class Reportcontroller extends Controller
                 $date_report = 'Year';
                 $title = 'Service';
 
-                $service = DB::select("select count(*) as counts, CONCAT(	MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and '".$currentUser->branch_id."' GROUP BY MONTH(service_date), YEAR(service_date)");
+                $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where  (service_date BETWEEN ? AND ?) and (done_status=1) and ? GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $currentUser->branch_id]);
 
                 $Select_employee = User::where([['role', '=', 'employee'], ['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->get();
 
@@ -1386,7 +1386,7 @@ class Reportcontroller extends Controller
                 $date_report = 'Year';
                 $title = 'Service';
 
-                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (assign_to='$all_employee') and (done_status=1) and '".$currentUser->branch_id."' group by YEAR(`service_date`) ORDER BY service_date ASC");
+                $service = DB::select("SELECT count(*) as counts, RIGHT(YEAR(`service_date`),4) as date FROM tbl_services where (assign_to = ?) and (done_status=1) and ? group by YEAR(`service_date`) ORDER BY service_date ASC", [$all_employee, $currentUser->branch_id]);
 
                 $Select_employee = User::where([['role', '=', 'employee'], ['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->get();
 
@@ -1396,7 +1396,7 @@ class Reportcontroller extends Controller
                 $date_report = 'Year';
                 $title = 'Service';
 
-                $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where (service_date BETWEEN  '$s_date' AND '$e_date') and (done_status=1) and assign_to='$all_employee' and '".$currentUser->branch_id."' GROUP BY MONTH(service_date), YEAR(service_date)");
+                $service = DB::select("select count(*) as counts, CONCAT(MONTHNAME(`service_date`),'-',RIGHT(YEAR(`service_date`),4)) as date FROM tbl_services where (service_date BETWEEN ? AND ?) and (done_status=1) and assign_to = ? and ? GROUP BY MONTH(service_date), YEAR(service_date)", [$s_date, $e_date, $all_employee, $currentUser->branch_id]);
 
                 $Select_employee = User::where([['role', '=', 'employee'], ['soft_delete', 0], ['branch_id', $currentUser->branch_id]])->get();
 

@@ -33,7 +33,7 @@ class Languagecontroller extends Controller
         $direction = $request->direction;
         $dire_table = DB::table('tbl_language_directions')->orderBy('id', 'desc')->first();
         $id = $dire_table->id;
-        DB::update("update tbl_language_directions set direction='$direction' where id=$id");
+        DB::table('tbl_language_directions')->where('id', $id)->update(['direction' => $direction]);
 
         return redirect('/setting/language/direction/list')->with('message', 'Successfully Updated');
     }
@@ -41,21 +41,24 @@ class Languagecontroller extends Controller
     // language store
     public function store(Request $request)
     {
+        $request->validate([
+            'language' => 'required|string|max:10',
+        ]);
         $lang = $request->language;
 
         $id = Auth::user()->id;
         $users = DB::table('users')->where('id', '=', $id)->first();
         $language = $users->language;
-        DB::update("update users set language='$lang' where id=$id");
+        DB::table('users')->where('id', $id)->update(['language' => $lang]);
 
         if ($lang == 'ar') {
             $dire_table = DB::table('tbl_language_directions')->orderBy('id', 'desc')->first();
             $id = $dire_table->id;
-            DB::update("update tbl_language_directions set direction='rtl' where id=$id");
+            DB::table('tbl_language_directions')->where('id', $id)->update(['direction' => 'rtl']);
         } else {
             $dire_table = DB::table('tbl_language_directions')->orderBy('id', 'desc')->first();
             $id = $dire_table->id;
-            DB::update("update tbl_language_directions set direction='ltr' where id=$id");
+            DB::table('tbl_language_directions')->where('id', $id)->update(['direction' => 'ltr']);
         }
 
         return redirect('/setting/timezone/list')->with('message', 'Successfully Updated');

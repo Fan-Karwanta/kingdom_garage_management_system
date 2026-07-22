@@ -79,7 +79,7 @@ class HomeController extends Controller
         $admin = DB::table('users')->where('role', '=', 'admin')->first();
         $firstname = $admin->name;
         $email = $admin->email;
-        $monthservice = DB::select("SELECT * FROM tbl_services where (done_status=1) and (service_date BETWEEN '".$laststart1."' AND  '".$lastend1."')");
+        $monthservice = DB::select("SELECT * FROM tbl_services where (done_status=1) and (service_date BETWEEN ? AND ?)", [$laststart1, $lastend1]);
 
         $logo = DB::table('tbl_settings')->first();
         $systemname = $logo->system_name;
@@ -180,7 +180,7 @@ class HomeController extends Controller
                     $message .= '<table class="table table-bordered" width="100%"  style="border-collapse:collapse;">';
                     $message .= '<tr><th align="left">#</th> <th align="left"><b>Coupon Number</b></th> <th align="left"><b>Customer Name</b></th> <th align="left"><b>Vehicle Name</b></th> <th align="left"><b>Service Date</b></th> <th align="left"><b>AssignedTo</b></th> </tr><br/>';
 
-                    $Upmonthservice = DB::select("SELECT * FROM tbl_services where (done_status=2) and (service_date BETWEEN '".$nowmonthdate."' AND  '".$nowmonthdate1."')");
+                    $Upmonthservice = DB::select("SELECT * FROM tbl_services where (done_status=2) and (service_date BETWEEN ? AND ?)", [$nowmonthdate, $nowmonthdate1]);
 
                     $admin = DB::table('users')->where('role', '=', 'admin')->first();
                     if (! empty($admin)) {
@@ -379,7 +379,7 @@ class HomeController extends Controller
                 $emp_id = $employees->id;
                 $email = $employees->email;
 
-                $weekservice = DB::select("SELECT * FROM tbl_services where (done_status=1) and (assign_to='$emp_id') and(service_date BETWEEN '".$week_start."' AND  '".$week_end."')");
+                $weekservice = DB::select("SELECT * FROM tbl_services where (done_status=1) and (assign_to = ?) and(service_date BETWEEN ? AND ?)", [$emp_id, $week_start, $week_end]);
                 $emailformats = DB::table('tbl_mail_notifications')->where('notification_for', '=', 'weekly_servicelist')->first();
                 if ($emailformats->is_send == 0) {
                     if ($week_start == $nowdate) {
@@ -487,7 +487,7 @@ class HomeController extends Controller
                     $message .= '<table class="table table-bordered" width="100%"  style="border-collapse:collapse;">';
                     $message .= '<tr><th align="left">#</th> <th align="left"><b>Coupon Number</b></th> <th align="left"><b>Customer Name</b></th> <th align="left"><b>Vehicle Name</b></th><th align="left"><b>Service Date</b></th> <th align="left"><b>AssignedTo</b></th> </tr><br/>';
 
-                    $Upnextweekservice = DB::select("SELECT * FROM tbl_services where (done_status=2) and (service_date BETWEEN '".$start."' AND  '".$end."')");
+                    $Upnextweekservice = DB::select("SELECT * FROM tbl_services where (done_status=2) and (service_date BETWEEN ? AND ?)", [$start, $end]);
 
                     if (! empty($Upnextweekservice)) {
                         $i = 1;
@@ -684,32 +684,32 @@ class HomeController extends Controller
 
         if (isAdmin(Auth::User()->role_id)) {
             // top five vehicle service
-            $vehical = DB::select("SELECT count(id) as count,`vehicle_id` as vid FROM tbl_services where (done_status=1) and (service_date BETWEEN '".$start_date."' AND  '".$end_date."') group by `vehicle_id` limit 5");
+            $vehical = DB::select("SELECT count(id) as count,`vehicle_id` as vid FROM tbl_services where (done_status=1) and (service_date BETWEEN ? AND ?) group by `vehicle_id` limit 5", [$start_date, $end_date]);
 
             // top five employee performance
-            $performance = DB::select("SELECT count(id) as count,`assign_to` as a_id FROM tbl_services where (done_status=1) and (service_date BETWEEN '".$start_date."' AND  '".$end_date."') group by `assign_to` limit 5");
+            $performance = DB::select("SELECT count(id) as count,`assign_to` as a_id FROM tbl_services where (done_status=1) and (service_date BETWEEN ? AND ?) group by `assign_to` limit 5", [$start_date, $end_date]);
 
             // ontime service
-            $datediff = DB::select("SELECT DATEDIFF(tbl_gatepasses.service_out_date,tbl_services.service_date) as days,COUNT(tbl_services.job_no) as counts FROM `tbl_services` join tbl_gatepasses on tbl_services.job_no=tbl_gatepasses.jobcard_id where tbl_services.done_status=1 and (tbl_services.service_date BETWEEN '".$start_date."' AND  '".$end_date."') and (tbl_gatepasses.service_out_date BETWEEN '".$start_date."' AND  '".$end_date."')GROUP BY days ");
+            $datediff = DB::select("SELECT DATEDIFF(tbl_gatepasses.service_out_date,tbl_services.service_date) as days,COUNT(tbl_services.job_no) as counts FROM `tbl_services` join tbl_gatepasses on tbl_services.job_no=tbl_gatepasses.jobcard_id where tbl_services.done_status=1 and (tbl_services.service_date BETWEEN ? AND ?) and (tbl_gatepasses.service_out_date BETWEEN ? AND ?)GROUP BY days ", [$start_date, $end_date, $start_date, $end_date]);
         } elseif (getUsersRole(Auth::user()->role_id) == 'Support Staff' || getUsersRole(Auth::user()->role_id) == 'Accountant' || getUsersRole(Auth::user()->role_id) == 'Employee' || getUsersRole(Auth::user()->role_id) == 'Branch Admin') {
 
             // top five vehicle service
-            $vehical = DB::select("SELECT count(id) as count,`vehicle_id` as vid FROM tbl_services where (done_status=1) and (branch_id = '".$currentUser->branch_id."') and (service_date BETWEEN '".$start_date."' AND  '".$end_date."') group by `vehicle_id` limit 5");
+            $vehical = DB::select("SELECT count(id) as count,`vehicle_id` as vid FROM tbl_services where (done_status=1) and (branch_id = ?) and (service_date BETWEEN ? AND ?) group by `vehicle_id` limit 5", [$currentUser->branch_id, $start_date, $end_date]);
 
             // top five employee performance
-            $performance = DB::select("SELECT count(id) as count,`assign_to` as a_id FROM tbl_services where (done_status=1) and (branch_id = '".$currentUser->branch_id."') and (service_date BETWEEN '".$start_date."' AND  '".$end_date."') group by `assign_to` limit 5");
+            $performance = DB::select("SELECT count(id) as count,`assign_to` as a_id FROM tbl_services where (done_status=1) and (branch_id = ?) and (service_date BETWEEN ? AND ?) group by `assign_to` limit 5", [$currentUser->branch_id, $start_date, $end_date]);
 
             // ontime service
-            $datediff = DB::select("SELECT DATEDIFF(tbl_gatepasses.service_out_date,tbl_services.service_date) as days,COUNT(tbl_services.job_no) as counts FROM `tbl_services` join tbl_gatepasses on tbl_services.job_no=tbl_gatepasses.jobcard_id where tbl_services.done_status=1 and (tbl_services.branch_id = '".$currentUser->branch_id."') and (tbl_services.service_date BETWEEN '".$start_date."' AND  '".$end_date."') and (tbl_gatepasses.service_out_date BETWEEN '".$start_date."' AND  '".$end_date."')GROUP BY days ");
+            $datediff = DB::select("SELECT DATEDIFF(tbl_gatepasses.service_out_date,tbl_services.service_date) as days,COUNT(tbl_services.job_no) as counts FROM `tbl_services` join tbl_gatepasses on tbl_services.job_no=tbl_gatepasses.jobcard_id where tbl_services.done_status=1 and (tbl_services.branch_id = ?) and (tbl_services.service_date BETWEEN ? AND ?) and (tbl_gatepasses.service_out_date BETWEEN ? AND ?)GROUP BY days ", [$currentUser->branch_id, $start_date, $end_date, $start_date, $end_date]);
         } elseif (getUsersRole(Auth::user()->role_id) == 'Customer') {
             // top five vehicle service
-            $vehical = DB::select("SELECT count(id) as count,`vehicle_id` as vid FROM tbl_services where (done_status=1) and (service_date BETWEEN '".$start_date."' AND  '".$end_date."') group by `vehicle_id` limit 5");
+            $vehical = DB::select("SELECT count(id) as count,`vehicle_id` as vid FROM tbl_services where (done_status=1) and (service_date BETWEEN ? AND ?) group by `vehicle_id` limit 5", [$start_date, $end_date]);
 
             // top five employee performance
-            $performance = DB::select("SELECT count(id) as count,`assign_to` as a_id FROM tbl_services where (done_status=1) and (service_date BETWEEN '".$start_date."' AND  '".$end_date."') group by `assign_to` limit 5");
+            $performance = DB::select("SELECT count(id) as count,`assign_to` as a_id FROM tbl_services where (done_status=1) and (service_date BETWEEN ? AND ?) group by `assign_to` limit 5", [$start_date, $end_date]);
 
             // ontime service
-            $datediff = DB::select("SELECT DATEDIFF(tbl_gatepasses.service_out_date,tbl_services.service_date) as days,COUNT(tbl_services.job_no) as counts FROM `tbl_services` join tbl_gatepasses on tbl_services.job_no=tbl_gatepasses.jobcard_id where tbl_services.done_status=1 and (tbl_services.service_date BETWEEN '".$start_date."' AND  '".$end_date."') and (tbl_gatepasses.service_out_date BETWEEN '".$start_date."' AND  '".$end_date."')GROUP BY days ");
+            $datediff = DB::select("SELECT DATEDIFF(tbl_gatepasses.service_out_date,tbl_services.service_date) as days,COUNT(tbl_services.job_no) as counts FROM `tbl_services` join tbl_gatepasses on tbl_services.job_no=tbl_gatepasses.jobcard_id where tbl_services.done_status=1 and (tbl_services.service_date BETWEEN ? AND ?) and (tbl_gatepasses.service_out_date BETWEEN ? AND ?)GROUP BY days ", [$start_date, $end_date, $start_date, $end_date]);
         }
 
         if (! empty($datediff)) {
@@ -1605,6 +1605,16 @@ class HomeController extends Controller
 
     public function frontendBooking(Request $request)
     {
+        $request->validate([
+            'number_plate' => 'required|string|max:50',
+            'vehical_id' => 'required|integer',
+            'vehicabrand' => 'required|integer',
+            'fueltype' => 'nullable|integer',
+            'modelname' => 'nullable|string|max:100',
+            'jobno' => 'required|string|max:50',
+            's_date' => 'required|date',
+            'repair_cat' => 'nullable|string|max:100',
+        ]);
         $Customer_detail = User::where([['soft_delete', 0], ['id', '=', Auth::User()->id]])->orderBy('id', 'DESC')->first();
         $customer_id = $Customer_detail->id;
         // vehicle details

@@ -208,6 +208,34 @@
    .footer-line a:hover{
     color: #2596BE !important;
    }
+
+   /* ---------- Modern background (match login) ---------- */
+   body.login_reset_pwd {
+        background: #ececf0 !important;
+        min-height: 100vh;
+   }
+
+   .img-all-background-box-bck-main-cont,
+   .img-first-bck-contn-sch,
+   .img-second-bck-contn-sch,
+   .img-first-bck-contn-sch-round {
+        display: none !important;
+   }
+
+   .bookService {
+        background: #16181d !important;
+        color: #ffffff !important;
+        border-radius: 12px !important;
+        padding: 12px 22px !important;
+        border: 0 !important;
+        font-weight: 600;
+        transition: background 0.2s ease;
+   }
+
+   .bookService:hover {
+        background: #EA6B00 !important;
+        color: #ffffff !important;
+   }
        
     </style>
     <!-- colorpicker links -->
@@ -671,6 +699,7 @@ if (!empty($service_data_array)) {
 
                 // Create a button element
                 var button = document.createElement('button');
+                button.type = 'button';
                 button.innerHTML = '+ Book Service'; // Set button text
                 button.style.display = 'none'; // Initially hide the button
                 button.style.color = 'white';
@@ -732,7 +761,9 @@ if (!empty($service_data_array)) {
                     button.style.display = 'none';
                 });
                 // Add event listener to button
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     // Handle button click event here
                     var date = info.date;
                     var year = date.getFullYear();
@@ -786,7 +817,10 @@ if (!empty($service_data_array)) {
                 dangerMode: false,
             }).then((willLogin) => {
                 if (willLogin) {
-                    $('#myModal').modal('hide'); // Hide modal if confirmed
+                    var bookModalEl = document.getElementById('myModal');
+                    if (bookModalEl && typeof bootstrap !== 'undefined') {
+                        bootstrap.Modal.getOrCreateInstance(bookModalEl).hide();
+                    }
                     window.location.href = "{!! url('/login') !!}";
                 } else {
                     // Optional: uncheck the radio if cancelled
@@ -885,9 +919,12 @@ if (!empty($service_data_array)) {
 <script nonce="{{ $cspNonce }}">
     // Check if a success message is present in the session
     @if(session('message'))
-        $(document).ready(function(){
-            // Show the modal with the success message
-            $('#successModal').modal('show');
+        document.addEventListener('DOMContentLoaded', function () {
+            // Show the modal with the success message (Bootstrap 5 API)
+            var successEl = document.getElementById('successModal');
+            if (successEl && typeof bootstrap !== 'undefined') {
+                bootstrap.Modal.getOrCreateInstance(successEl).show();
+            }
         });
     @endif
 </script>

@@ -10,6 +10,7 @@ use App\User;
 use App\Vehicle;
 use Auth;
 use DB;
+use App\Http\Requests\StoreRtoTaxAddEditFormRequest;
 use Illuminate\Http\Request;
 
 class Rtocontroller extends Controller
@@ -64,7 +65,7 @@ class Rtocontroller extends Controller
     }
 
     // rto store
-    public function store(Request $request)
+    public function store(StoreRtoTaxAddEditFormRequest $request)
     {
         $rto = new RtoTax;
         $rto->vehicle_id = $request->v_id;
@@ -141,7 +142,7 @@ class Rtocontroller extends Controller
     }
 
     // rto update
-    public function update($id, Request $request)
+    public function update($id, StoreRtoTaxAddEditFormRequest $request)
     {
 
         $rto = RtoTax::find($id);

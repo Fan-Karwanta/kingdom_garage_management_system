@@ -6,6 +6,7 @@ use App\EmailLog;
 use App\User;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 use Mail;
 use Illuminate\Support\Facades\View;
 
@@ -78,43 +79,49 @@ class PasswordResetController extends Controller
     // }
     public function forgotpassword(Request $request)
     {
-        $token = $request->_token;
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
         $email = $request->email;
         $user = DB::table('users')->where('email', '=', $email)->first();
-      
-        if ($user != '') {
+
+        if ($user) {
             try {
                 $name = $user->name;
                 $logo = DB::table('tbl_settings')->first();
                 $systemname = $logo->system_name;
-                
+
+                // Generate a proper reset token using Laravel's Password broker
+                $token = Password::createToken(User::find($user->id));
+
                 // Check if email notification is enabled
                 $emailformats = DB::table('tbl_mail_notifications')
                     ->where('notification_for', '=', 'forgot_password')
                     ->first();
-                
+
                 if ($emailformats && $emailformats->is_send == 0) {
                     $mail_format = $emailformats->notification_text;
                     $notification_label = $emailformats->notification_label;
                     $mail_subjects = $emailformats->subject;
                     $mail_send_from =env('MAIL_FROM_ADDRESS') ?? $emailformats->send_from;
-                    
-                    // Create reset link
+
+                    // Create reset link with proper token
                     $reset_link = url('passwords/reset/'.$token.'/'.$email);
-                    
+
                     // Replace placeholders in subject
                     $search_subject = ['{ system_name }'];
                     $replace_subject = [$systemname];
                     $mail_sub = str_replace($search_subject, $replace_subject, $mail_subjects);
-                    
+
                     // Replace placeholders in email content
                     $search = ['{ system_name }', '{ user_name }', '{ reset_link }', '{ email }'];
                     $replace = [$systemname, $name, $reset_link, $email];
                     $email_content = str_replace($search, $replace, $mail_format);
-                    
+
                     $redirect_url = url('passwords/reset/'.$token.'/'.$email);
                     $systemLink = url('/');
-                    
+
                     // Render Blade template with all required variables
                     $blade_view = View::make('mail.template', [
                         'notification_label' => $notification_label,
@@ -122,7 +129,7 @@ class PasswordResetController extends Controller
                         'redirect_url' => $redirect_url,
                         'system_link' => $systemLink,
                     ])->render();
-                   
+
                     // Send email
                     try {
                         Mail::send([], [], function ($message) use ($email, $mail_sub, $blade_view, $mail_send_from) {
@@ -133,7 +140,7 @@ class PasswordResetController extends Controller
                     } catch (\Exception $e) {
                         \Log::error('Error sending forgot_password email: '.$e->getMessage());
                     }
-                    
+
                     // Store email log entry
                     $emailLog = new EmailLog;
                     $emailLog->recipient_email = $email;
@@ -141,7 +148,7 @@ class PasswordResetController extends Controller
                     $emailLog->content = $email_content;
                     $emailLog->save();
                 }
-                
+
             } catch (\Exception $e) {
                 \Log::error('Error in forgotpassword: '.$e->getMessage());
             }
@@ -155,27 +162,49 @@ class PasswordResetController extends Controller
     // reset password form
     public function geturl($token, $email)
     {
+        // Verify the token exists in the password_resets table
+        $resetRecord = DB::table('password_resets')
+            ->where('email', $email)
+            ->where('token', $token)
+            ->first();
+
+        if (! $resetRecord) {
+            return redirect('/password/reset')->with('message', 'Invalid or expired password reset link!');
+        }
+
         return view('auth.passwords.reset', compact('token', 'email'));
     }
 
     // new password
     public function passwordnew(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'password' => 'required|min:6|max:12|regex:/^(?=.*[a-zA-Z])(?=.*\d).+$/',
             'password_confirmation' => 'required|same:password',
-            'password.required' => 'Password Field is required',
-            'password_confirmation.required' => 'Confirm Password Field is required',
-            'password_confirmation.same' => 'Confirm Password must be same as password',
         ]);
+
         $email = $request->email;
+        $token = $request->token;
+
+        // Verify the token is valid before allowing password change
+        $resetRecord = DB::table('password_resets')
+            ->where('email', $email)
+            ->where('token', $token)
+            ->first();
+
+        if (! $resetRecord) {
+            return redirect('/password/reset')->with('message', 'Invalid or expired password reset token!');
+        }
+
         $user = DB::table('users')->where('email', '=', $email)->first();
         $id = $user->id;
 
         $user = User::find($id);
-        // $user->password=bcrypt(Input::get("password_confirmation"));
         $user->password = bcrypt($request->password_confirmation);
         $user->save();
+
+        // Delete the used token
+        DB::table('password_resets')->where('email', $email)->delete();
 
         return redirect('/')->with('message', 'Your Password Has Been Successfully Changed !');
     }

@@ -36,35 +36,35 @@ class Timezonecontroller extends Controller
         $time = $request->timezone;
         $id = Auth::user()->id;
         $users = DB::table('users')->where('id', '=', $id)->first();
-        DB::update("update users set timezone='$time' where id=$id");
+        DB::table('users')->where('id', $id)->update(['timezone' => $time]);
 
         $lang = $request->language;
 
         $id = Auth::user()->id;
         $users = DB::table('users')->where('id', '=', $id)->first();
         $language = $users->language;
-        DB::update("update users set language='$lang' where id=$id");
+        DB::table('users')->where('id', $id)->update(['language' => $lang]);
 
         if ($lang == 'ar') {
             $id = Auth::user()->id;
-            DB::update("update users set gst_no='rtl' where id=$id");
+            DB::table('users')->where('id', $id)->update(['gst_no' => 'rtl']);
         } else {
             $id = Auth::user()->id;
-            DB::update("update users set gst_no='ltr' where id=$id");
+            DB::table('users')->where('id', $id)->update(['gst_no' => 'ltr']);
         }
 
         $date = $request->dateformat;
         if (! empty($date)) {
             $dateformat = DB::table('tbl_settings')->first();
             $first = $dateformat->id;
-            DB::update("update tbl_settings set date_format='$date' where id=$first");
+            DB::table('tbl_settings')->where('id', $first)->update(['date_format' => $date]);
         }
 
         $Currency = $request->Currency;
         if (! empty($Currency)) {
             $Currencyformat = DB::table('tbl_settings')->first();
             $id = $Currencyformat->id;
-            DB::update("update tbl_settings set currancy='$Currency' where id=$id");
+            DB::table('tbl_settings')->where('id', $id)->update(['currancy' => $Currency]);
         }
 
         $frontend_booking = $request->frontend_service;
@@ -75,22 +75,22 @@ class Timezonecontroller extends Controller
             $default_emp = $request->default_emp;
             $default_charge = $request->default_charge;
             $default_password = $request->default_password;
-            DB::update("update tbl_settings set frontend_service='$frontend_service',default_emp='$default_emp',default_charge='$default_charge',default_password='$default_password' where id=$id");
+            DB::table('tbl_settings')->where('id', $id)->update(['frontend_service' => $frontend_service, 'default_emp' => $default_emp, 'default_charge' => $default_charge, 'default_password' => $default_password]);
         } else {
             $frontend_service = 0;
             $default_emp = null;
             $default_charge = null;
             $default_password = null;
-            DB::update("update tbl_settings set frontend_service='$frontend_service',default_emp='$default_emp',default_charge='$default_charge',default_password='$default_password' where id=$id");
+            DB::table('tbl_settings')->where('id', $id)->update(['frontend_service' => $frontend_service, 'default_emp' => $default_emp, 'default_charge' => $default_charge, 'default_password' => $default_password]);
         }
 
         $edit_service = $request->edit_service;
         $service = DB::table('tbl_settings')->first();
         $id = $service->id;
         if ($edit_service == 'on') {
-            DB::update("update tbl_settings set edit_service='1' where id=$id");
+            DB::table('tbl_settings')->where('id', $id)->update(['edit_service' => '1']);
         } else {
-            DB::update("update tbl_settings set edit_service='0' where id=$id");
+            DB::table('tbl_settings')->where('id', $id)->update(['edit_service' => '0']);
         }
 
         return redirect('/setting/timezone/list')->with('message', 'Other Settings Updated Successfully');

@@ -13,6 +13,7 @@ use App\User;
 use App\Washbay;
 use Auth;
 use DB;
+use App\Http\Requests\StoreQuotationAddEditFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
@@ -40,7 +41,7 @@ class QuotationController extends Controller
         $servi_id = '';
         $start_date = "$year/$month/01";
         $end_date = "$year/$month/30";
-        $current_month = DB::select("SELECT service_date FROM tbl_services where service_date BETWEEN  '$start_date' AND '$end_date'");
+        $current_month = DB::select("SELECT service_date FROM tbl_services where service_date BETWEEN ? AND ?", [$start_date, $end_date]);
 
         if (! empty($current_month)) {
             foreach ($current_month as $list) {
@@ -126,7 +127,7 @@ class QuotationController extends Controller
     }
 
     /* Save Quotation Service Data inside Service Table (First step of add service) */
-    public function store(Request $request)
+    public function store(StoreQuotationAddEditFormRequest $request)
     {
         // dd($request->all());
         $job = 'J'.substr($request->jobno, 1);
@@ -326,7 +327,7 @@ class QuotationController extends Controller
         $tax = DB::table('tbl_account_tax_rates')->get()->toArray();
         $logo = DB::table('tbl_settings')->first();
 
-        $data = DB::select("select tbl_service_pros.*, tbl_points.*,tbl_service_observation_points.id from tbl_points join tbl_service_observation_points on tbl_service_observation_points.observation_points_id = tbl_points.id join tbl_service_pros on tbl_service_pros.tbl_service_observation_points_id = tbl_service_observation_points.id where tbl_service_observation_points.services_id = $viewid and tbl_service_observation_points.review = 1 and tbl_service_pros.type = 0");
+        $data = DB::select("select tbl_service_pros.*, tbl_points.*,tbl_service_observation_points.id from tbl_points join tbl_service_observation_points on tbl_service_observation_points.observation_points_id = tbl_points.id join tbl_service_pros on tbl_service_pros.tbl_service_observation_points_id = tbl_service_observation_points.id where tbl_service_observation_points.services_id = ? and tbl_service_observation_points.review = 1 and tbl_service_pros.type = 0", [$viewid]);
 
         /* Get status of MoT test is it checked or not */
         $fetch_mot_test_status = DB::table('tbl_services')->where('id', '=', $id)->first();
@@ -478,18 +479,22 @@ class QuotationController extends Controller
                 } else {
                     // dd($product_id2, $qty2, $price2, $total2, $charge_abl, $comment, $service_id, $category, $sub);
                     $type = 0;
-                    DB::update("update tbl_service_pros set 
-														product_id = '$product_id2',
-														quantity = '$qty2',
-														price = '$price2', 
-														total_price = '$total2',
-														chargeable = '$charge_abl',
-														type='$type',
-														category_comments='$comment',
-														service_charge='$service_charge',
-                                                        discount = '$discount',
-                                                        tax = '$tax'
-														where service_id = $service_id and category = '$category' and obs_point = '$sub'");
+                    DB::table('tbl_service_pros')
+                        ->where('service_id', $service_id)
+                        ->where('category', $category)
+                        ->where('obs_point', $sub)
+                        ->update([
+                            'product_id' => $product_id2,
+                            'quantity' => $qty2,
+                            'price' => $price2,
+                            'total_price' => $total2,
+                            'chargeable' => $charge_abl,
+                            'type' => $type,
+                            'category_comments' => $comment,
+                            'service_charge' => $service_charge,
+                            'discount' => $discount,
+                            'tax' => $tax,
+                        ]);
 
                     $checking_servicePro = 1;
                 }

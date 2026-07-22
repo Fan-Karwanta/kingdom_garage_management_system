@@ -22,6 +22,8 @@ use App\Vehicle;
 use App\Washbay;
 use Auth;
 use DB;
+use App\Http\Requests\InvoiceAddEditFormRequest;
+use App\Http\Requests\StoreInvoiceEditFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
@@ -980,7 +982,7 @@ class InvoiceController extends Controller
     }
 
     // invoice store
-    public function store(Request $request)
+    public function store(InvoiceAddEditFormRequest $request)
     {
         try {
             // dd($request);
@@ -2108,7 +2110,7 @@ class InvoiceController extends Controller
     }
 
     // invoice update
-    public function update(Request $request, $id)
+    public function update(StoreInvoiceEditFormRequest $request, $id)
     {
         $tbl_invoices = DB::table('tbl_invoices')->where('id', '=', $id)->first();
         // dd($tbl_invoices);

@@ -38,10 +38,10 @@ Route::get('/home', function () {
 })->name('home');
 
 // For mobile app
-Route::get('/app_login', 'LoginController@login');
+Route::get('/app_login', 'LoginController@login')->middleware('throttle:5,1');
 Route::get('/task', 'Customercontroller@getKanban');
-Route::get('/app_forgotpassword', 'RestePassword@forgotpassword');
-Route::get('/sidemenu', 'Accessrightscontroller@sidemenu')->withoutMiddleware(['auth']);
+Route::get('/app_forgotpassword', 'RestePassword@forgotpassword')->middleware('throttle:5,1');
+Route::get('/sidemenu', 'Accessrightscontroller@sidemenu')->middleware('auth');
 Route::get('/get_license', 'DomainController@get_license')->withoutMiddleware(['auth']);
 Route::post('/store_license', 'DomainController@store_license')->withoutMiddleware(['auth']);
 
@@ -53,6 +53,9 @@ Route::get('/Update_version', 'instaltionController@Update_version');
 Route::get('/workflow', 'WorkflowController@getKanban');
 
 Auth::routes();
+
+// Override default login route with rate limiting
+Route::post('/login', 'Auth\LoginController@login')->middleware('throttle:5,1')->name('login');
 
 // Route::get('/installation_form', function () {
 // 	return view('Installer.index');
@@ -70,11 +73,11 @@ Route::get('/installation_form', function () {
 Route::post('/installation', ['as' => '/instaltion', 'uses' => 'instaltionController@index']);
 
 // Login with mobile otp
-Route::post('/login/otp/send', 'LoginOtpController@sendOtp')->name('login.otp.send');
-Route::post('/login/otp/verify', 'LoginOtpController@verifyOtp')->name('login.otp.verify.submit');
+Route::post('/login/otp/send', 'LoginOtpController@sendOtp')->name('login.otp.send')->middleware('throttle:5,1');
+Route::post('/login/otp/verify', 'LoginOtpController@verifyOtp')->name('login.otp.verify.submit')->middleware('throttle:5,1');
 
 // password
-Route::post('/password/forgot', 'PasswordResetController@forgotpassword');
+Route::post('/password/forgot', 'PasswordResetController@forgotpassword')->middleware('throttle:3,1');
 Route::get('passwords/reset/{token}/{email}', 'PasswordResetController@geturl');
 Route::post('/passwordchange', 'PasswordResetController@passwordnew');
 
@@ -941,29 +944,31 @@ Route::group(['prefix' => 'payroll'], function () {
     Route::post('/settings/update', 'PayrollController@settingsUpdate');
 });
 
-Route::get('/clear-cache', function () {
-    $exitCode = Artisan::call('cache:clear');
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('/clear-cache', function () {
+        $exitCode = Artisan::call('cache:clear');
 
-    return '<h1>Cache facade value cleared</h1>';
-});
+        return '<h1>Cache facade value cleared</h1>';
+    });
 
-// Clear Route cache:
-Route::get('/route-cache', function () {
-    $exitCode = Artisan::call('route:clear');
+    // Clear Route cache:
+    Route::get('/route-cache', function () {
+        $exitCode = Artisan::call('route:clear');
 
-    return '<h1>Route cache cleared</h1>';
-});
+        return '<h1>Route cache cleared</h1>';
+    });
 
-// Clear View cache:
-Route::get('/view-clear', function () {
-    $exitCode = Artisan::call('view:clear');
+    // Clear View cache:
+    Route::get('/view-clear', function () {
+        $exitCode = Artisan::call('view:clear');
 
-    return '<h1>View cache cleared</h1>';
-});
+        return '<h1>View cache cleared</h1>';
+    });
 
-// Clear Config cache:
-Route::get('/config-cache', function () {
-    $exitCode = Artisan::call('config:cache');
+    // Clear Config cache:
+    Route::get('/config-cache', function () {
+        $exitCode = Artisan::call('config:cache');
 
-    return '<h1>Clear Config cleared</h1>';
+        return '<h1>Clear Config cleared</h1>';
+    });
 });

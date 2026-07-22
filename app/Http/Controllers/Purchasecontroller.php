@@ -365,7 +365,7 @@ class Purchasecontroller extends Controller
     //     $stock = DB::table('tbl_stock_records')->where('product_id', '=', $pid)->first();
     //     $sid = $stock->no_of_stoke;
     //     $total = $sid - $qty;
-    //     DB::update("update tbl_stock_records set no_of_stoke='$total' where product_id='$pid'");
+    //     DB::table('tbl_stock_records')->where('product_id', $pid)->update(['no_of_stoke' => $total]);
     //     $product = DB::table('tbl_purchase_history_records')->where('id', '=', $productid)->delete();
     // }
     // delete product
@@ -386,7 +386,7 @@ public function deleteproduct(Request $request)
             $total = $sid - $qty;
             
             // Update stock
-            DB::update("update tbl_stock_records set no_of_stoke='$total' where product_id='$pid'");
+            DB::table('tbl_stock_records')->where('product_id', $pid)->update(['no_of_stoke' => $total]);
         }
         
         // Delete the purchase history record
@@ -507,7 +507,7 @@ public function deleteproduct(Request $request)
 
                     $qty = $products['qty'][$key] + $old_stock;
 
-                    DB::update("update tbl_stock_records set no_of_stoke='$qty' where product_id='$Product_id'");
+                    DB::table('tbl_stock_records')->where('product_id', $Product_id)->update(['no_of_stoke' => $qty]);
                 } else {
                     $product = new Stock;
                     $product->product_id = $Product_id;
@@ -596,7 +596,7 @@ public function deleteproduct(Request $request)
 
                 $qty = $old_stock - $total;
 
-                DB::update("update tbl_stock_records set no_of_stoke='$qty' where product_id='$product_id'");
+                DB::table('tbl_stock_records')->where('product_id', $product_id)->update(['no_of_stoke' => $qty]);
             }
         }
 

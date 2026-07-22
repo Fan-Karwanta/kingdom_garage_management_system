@@ -17,17 +17,23 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $user = User::all();
-        $email = $request->input('email');
-        $password = $request->input('password');
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
 
-        $user = User::where('email', $email)->first();
+        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
+            $user = Auth::user();
 
-        if ($user && password_verify($password, $user->password)) {
-
-            Auth::login($user);
-
-            // return redirect()->route('dashboard');
+            if ($user->soft_delete == 1) {
+                Auth::logout();
+                return Response::json([
+                    'status' => false,
+                    'code' => 401,
+                    'message' => 'Account has been deleted',
+                    'data' => null,
+                ], 401);
+            }
 
             $response = [
                 'status' => true,
@@ -38,22 +44,17 @@ class LoginController extends Controller
                     'Name' => $user->name.' '.$user->lastname,
                     'Role' => $user->role,
                     'image' => $user->image ? url('public/admin/'.$user->image) : null,
-
                 ],
             ];
 
             return Response::json($response, 200);
         }
 
-        $response = [
+        return Response::json([
             'status' => false,
             'code' => 401,
             'message' => 'Invalid credentials',
             'data' => null,
-        ];
-
-        return Response::json($response, 401);
-
-        // return redirect()->back();
+        ], 401);
     }
 }

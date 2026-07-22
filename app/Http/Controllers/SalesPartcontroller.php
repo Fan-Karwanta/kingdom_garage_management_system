@@ -15,6 +15,7 @@ use App\User;
 use App\Vehicle;
 use Auth;
 use DB;
+use App\Http\Requests\StoreSalesPartAddEditFormRequest;
 use Illuminate\Http\Request;
 
 class SalesPartcontroller extends Controller
@@ -318,7 +319,7 @@ class SalesPartcontroller extends Controller
     // 		}
     // 	}
     // }
-    public function store(Request $request)
+    public function store(StoreSalesPartAddEditFormRequest $request)
     {
         $this->validate($request, [
             'qty' => 'numeric',

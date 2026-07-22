@@ -22,6 +22,7 @@ use App\Vehicle;
 use App\Washbay;
 use Auth;
 use DB;
+use App\Http\Requests\ServiceAddEditFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
@@ -455,6 +456,10 @@ class ServicesControler extends Controller
     // add repair Category
     public function addRepairCategory(Request $request)
     {
+        $request->validate([
+            'repair_category_name' => 'required|string|max:255',
+        ]);
+
         $repairCategoryName = $request->repair_category_name;
 
         $repairCategories = DB::table('table_repair_category')->where('repair_category_name', '=', $repairCategoryName)->count();
@@ -793,7 +798,7 @@ class ServicesControler extends Controller
     }
 
     // Service store
-    public function store(Request $request)
+    public function store(ServiceAddEditFormRequest $request)
     {
         $mot_test_status = $request->motTestStatusCheckbox;
         $mot_charge = $request->motTestCharge;
@@ -1032,9 +1037,9 @@ class ServicesControler extends Controller
 
         $sale_regi = DB::table('tbl_sales')->where('vehicle_id', '=', $vehicalname)->first();
         if (! empty($sale_regi)) {
-            DB::update("update tbl_sales set registration_no = '$reg_no' where vehicle_id = $vehicalname");
+            DB::table('tbl_sales')->where('vehicle_id', $vehicalname)->update(['registration_no' => $reg_no]);
         } else {
-            DB::update("update tbl_vehicles set registration_no = '$reg_no' where id = $vehicalname");
+            DB::table('tbl_vehicles')->where('id', $vehicalname)->update(['registration_no' => $reg_no]);
         }
 
         $logo = DB::table('tbl_settings')->first();
@@ -1069,9 +1074,9 @@ class ServicesControler extends Controller
         if (! empty($datas)) {
             $review = $datas->review;
             if ($review == 1) {
-                DB::update("update tbl_service_observation_points set review = 0 where services_id='$service_id' and observation_points_id='$id'");
+                DB::table('tbl_service_observation_points')->where([['services_id', $service_id], ['observation_points_id', $id]])->update(['review' => 0]);
             } else {
-                DB::update("update tbl_service_observation_points set review = 1 where services_id='$service_id' and observation_points_id='$id'");
+                DB::table('tbl_service_observation_points')->where([['services_id', $service_id], ['observation_points_id', $id]])->update(['review' => 1]);
             }
         } else {
             $data = new tbl_service_observation_points;
@@ -1362,9 +1367,9 @@ class ServicesControler extends Controller
 
         $sale_regi = DB::table('tbl_sales')->where('vehicle_id', '=', $vehicalname)->first();
         if (! empty($sale_regi)) {
-            DB::update("update tbl_sales set registration_no = '$reg_no' where vehicle_id = $vehicalname");
+            DB::table('tbl_sales')->where('vehicle_id', $vehicalname)->update(['registration_no' => $reg_no]);
         } else {
-            DB::update("update tbl_vehicles set registration_no = '$reg_no' where id = $vehicalname");
+            DB::table('tbl_vehicles')->where('id', $vehicalname)->update(['registration_no' => $reg_no]);
         }
         $logo = DB::table('tbl_settings')->first();
         $inspection_points_library_data = DB::table('inspection_points_library')->get();

@@ -57,324 +57,558 @@
     });
 </script>
   <style>
-    .login_form {
-      background: #2A3F54;
+    /* ============ Modern Login Revamp ============ */
+    * {
+      box-sizing: border-box;
     }
 
-    .login_content {
-      text-shadow: none;
-    }
-   .footer-line{
-    position: fixed;
-    bottom: 10px;
-    left:45%;
-    font-weight: 300;
-    color:grey;
-    text-align: center;
-    align-items: center;
-   }
-   .footer-line a{
-    text-decoration:underline;
-    font-weight: 300;
-    margin-left: 4px;
-   }
-   .otpButton{
-    border: 1px;
-    color: white;
-    padding: 3px 15px 3px 15px;
-    background: #2596BE;
-    border-radius: 4px;
-    cursor: pointer;
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
     }
 
-   /* New styles for tabs */
-   .login-tabs {
-    display: flex;
-    margin-bottom: 35px;
-    border-radius: 4px;
-    background: white;
-    overflow: hidden;
-   }
-
-   .tab-button {
-    flex: 1;
-    padding: 10px 15px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    color: #666;
-   }
-
-   .tab-button.active {
-    border-bottom: 3px solid #2596BE;
-    color: black;
-   }
-
-   .tab-content {
-    display: none;
-   }
-
-   .tab-content.active {
-    display: block;
-   }
-
-   .otp-container {
-    text-align: center;
-   }
-
-   .countdown-timer {
-    background: #fff3cd;
-    color: #856404;
-    padding: 8px;
-    border-radius: 4px;
-    margin: 10px 0;
-    font-weight: 600;
-    font-size: 12px;
-   }
-
-   .resend-link {
-    color: #2596BE;
-    cursor: pointer;
-    text-decoration: underline;
-    font-weight: 600;
-   }
-
-   .resend-link:hover {
-    color: #1a7a9e;
-   }
-
-   .resend-link.disabled {
-    color: #ccc;
-    cursor: not-allowed;
-    text-decoration: none;
-   }
-
-   .success-message {
-    background: #d4edda;
-    color: #155724;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 15px;
-    border: 1px solid #c3e6cb;
-    font-size: 13px;
-   }
-
-   .error-message {
-    color: #dc3545;
-    font-size: 12px;
-    margin-top: 3px;
-    display: block;
-   }
-
-   .mobile-login-section {
-    margin-top: 20px;
-   }
-
-   .back-button {
-    background: #6c757d;
-    color: white;
-    padding: 3px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 12px;
-   }
-   #mobile_no{
-    border: none;
-    border-bottom: 1px solid black;
-   }
-    @media only screen and (max-width: 575px) {
-      .content-form-login-page-school-plugin.md-form {
-        margin-left: 50px;
-      }
-
-
+    body.school-login-page {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: #ececf0 !important;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px 56px;
     }
 
-    @media only screen and (width: 575px) {
-      .logo-title-img-school-plugin {
-        margin-top: 60px;
-        margin-left: 50px;
-        width: 450px;
-      }
-
-      .forgot_pwd_scl,
-      .forgot_pwd_scl:hover {
-        margin-left: 0px;
-      }
+    .login-shell {
+      width: 100%;
+      max-width: 1040px;
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
+      display: flex;
+      overflow: hidden;
+      min-height: 640px;
     }
 
-    @media only screen and (max-width: 575px) {
-      .header-title-trusted-plugin {
-        font-size: 30px;
-      }
+    /* ---------- Left visual panel ---------- */
+    .login-visual {
+      flex: 0 0 46%;
+      position: relative;
+      margin: 20px;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        linear-gradient(200deg, rgba(10, 12, 18, 0.82) 0%, rgba(20, 24, 34, 0.35) 42%, rgba(234, 107, 0, 0.38) 100%),
+        url("{{ URL::asset('public/garragelogo/bg_login_104.png') }}") center / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px 36px;
+      min-height: 600px;
+    }
 
-      .heade-content-login-page {
-        margin: 0px 0px 0px;
-        border-bottom-left-radius: 0px;
-        border-bottom-right-radius: 0px;
-      }
+    .login-visual h2 {
+      color: #ffffff;
+      font-size: 40px;
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin: 0;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+    }
 
-      .main-div-school-container {
-        background-color: transparent;
-        border-radius: 0px;
-        box-shadow: 0px 0px 0px 0px rgba(20, 20, 20, 0.5);
-      }
+    .login-visual .visual-tagline {
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+    }
 
-      .img-second-right-side-min-sch .img-second-bck-contn-sch {
+    /* ---------- Right form panel ---------- */
+    .login-panel {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 56px;
+    }
+
+    .brand-logo img {
+      max-height: 64px;
+      max-width: 190px;
+      object-fit: contain;
+      margin-bottom: 18px;
+    }
+
+    .login-heading {
+      font-size: 30px;
+      font-weight: 700;
+      color: #111827;
+      margin: 0 0 6px;
+      letter-spacing: -0.4px;
+    }
+
+    .login-subheading {
+      color: #9ca3af;
+      font-size: 14.5px;
+      line-height: 1.55;
+      margin: 0 0 28px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #6b7280;
+      margin: 0 0 6px 2px;
+    }
+
+    .login-demo,
+    .login-password {
+      margin: 0 0 16px;
+    }
+
+    .login-demo label,
+    .login-password label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #6b7280;
+      margin: 0 0 6px 2px;
+    }
+
+    input.input,
+    #mobile_no,
+    #otp {
+      width: 100%;
+      height: 48px;
+      padding: 12px 16px;
+      font-size: 14.5px;
+      color: #111827;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      -webkit-appearance: none;
+    }
+
+    input.input:focus,
+    #mobile_no:focus,
+    #otp:focus {
+      border-color: #EA6B00;
+      box-shadow: 0 0 0 3px rgba(234, 107, 0, 0.12);
+    }
+
+    input.input::placeholder {
+      color: #c3c8d0;
+    }
+
+    .login-remember {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 4px 0 20px;
+    }
+
+    .login-remember label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: #4b5563;
+      font-weight: 400;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .login-remember input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #EA6B00;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .forgot_pwd_scl,
+    .forgot_pwd_scl:hover,
+    .forgot_pwd_scl:focus {
+      font-size: 13.5px;
+      color: #EA6B00;
+      font-weight: 500;
+      text-decoration: none;
+      margin: 0;
+    }
+
+    .forgot_pwd_scl:hover {
+      text-decoration: underline;
+    }
+
+    .form-row-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 4px 0 20px;
+    }
+
+    .form-row-flex .login-remember {
+      margin: 0;
+    }
+
+    .login-submit {
+      margin: 0 0 8px;
+    }
+
+    .login-submit .button.button-primary,
+    .otpButton {
+      width: 100%;
+      height: 50px;
+      background: #16181d;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+      box-shadow: 0 6px 16px rgba(22, 24, 29, 0.22);
+    }
+
+    .login-submit .button.button-primary:hover,
+    .otpButton:hover {
+      background: #EA6B00;
+      box-shadow: 0 8px 20px rgba(234, 107, 0, 0.3);
+    }
+
+    .login-submit .button.button-primary:active,
+    .otpButton:active {
+      transform: translateY(1px);
+    }
+
+    /* ---------- Divider + Book appointment ---------- */
+    .login-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 22px 0;
+      color: #9ca3af;
+      font-size: 13px;
+    }
+
+    .login-divider::before,
+    .login-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e5e7eb;
+    }
+
+    a.bookService {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      height: 50px;
+      background: #ffffff;
+      color: #111827 !important;
+      font-size: 14.5px;
+      font-weight: 600;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      text-decoration: none !important;
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    a.bookService:hover {
+      border-color: #EA6B00;
+      color: #EA6B00 !important;
+      background: rgba(234, 107, 0, 0.05);
+    }
+
+    a.bookService .fa {
+      color: #EA6B00;
+    }
+
+    /* ---------- Password toggle ---------- */
+    .password-container {
+      position: relative;
+    }
+
+    .login-password {
+      position: relative;
+    }
+
+    .login-password .input {
+      padding-right: 44px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 15px;
+      top: 46px;
+      cursor: pointer;
+      color: #9ca3af;
+      font-size: 15px;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .password-toggle:hover {
+      color: #EA6B00;
+    }
+
+    /* ---------- Tabs (email / mobile login) ---------- */
+    .login-tabs {
+      display: flex;
+      margin-bottom: 26px;
+      border-radius: 12px;
+      background: #f3f4f6;
+      padding: 4px;
+      overflow: hidden;
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 10px 14px;
+      background: transparent;
+      border: none;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      color: #6b7280;
+    }
+
+    .tab-button.active {
+      background: #ffffff;
+      color: #111827;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.1);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* ---------- OTP / mobile login ---------- */
+    .otp-container {
+      text-align: center;
+    }
+
+    .countdown-timer {
+      background: #fff7ed;
+      color: #9a3412;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 12px 0;
+      font-weight: 600;
+      font-size: 12.5px;
+      border: 1px solid #ffedd5;
+    }
+
+    .resend-link {
+      color: #EA6B00;
+      cursor: pointer;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    .resend-link:hover {
+      color: #c25800;
+    }
+
+    .resend-link.disabled {
+      color: #d1d5db;
+      cursor: not-allowed;
+      text-decoration: none;
+    }
+
+    .success-message {
+      background: #ecfdf5;
+      color: #065f46;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      border: 1px solid #d1fae5;
+      font-size: 13px;
+    }
+
+    .error-message {
+      color: #dc2626;
+      font-size: 12px;
+      margin-top: 4px;
+      display: block;
+    }
+
+    .help-block.text-danger {
+      color: #dc2626;
+      font-size: 12.5px;
+      margin-top: 6px;
+      display: block;
+      width: auto !important;
+    }
+
+    .mobile-login-section {
+      margin-top: 8px;
+    }
+
+    .back-button {
+      background: #f3f4f6;
+      color: #4b5563;
+      padding: 10px 18px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.2s ease;
+    }
+
+    .back-button:hover {
+      background: #e5e7eb;
+    }
+
+    /* ---------- Footer ---------- */
+    .footer-line {
+      position: fixed;
+      bottom: 14px;
+      left: 0;
+      right: 0;
+      font-weight: 400;
+      color: #9ca3af;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .footer-line a {
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 4px;
+      color: #EA6B00;
+    }
+
+    .footer-line a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .login-visual {
         display: none;
       }
 
-      .img-one-right-side-min-sch .img-first-bck-contn-sch {
-        display: none;
-      }
-
-      img.img-first-bck-contn-sch-round {
-        display: none;
-      }
-
-      .logo-title-img-school-plugin {
-        margin-top: 60px;
-        margin-left: auto;
-      }
-
-      .logo-title-img-school-plugin a img {
-        width: auto;
-        background-color: rgba(234, 107, 0, 0.07);
-      }
-
-      .col-sm-7.col-sm-offset-3.col-md-7.col-md-offset-2.main.content-start {
-        margin-top: 0px;
-
-      }
-
-      .background-main-div-plugin-login .container {
-        top: 0px;
-        width: 100%;
-      }
-
-      img.head_logo {
-        display: none;
-      }
-
-    }
-
-    @media (max-width: 1024px) and (min-width: 768px) {
-      .header-title-trusted-plugin {
-        font-size: 50px;
-      }
-
-      .heade-content-login-page {
-        margin: 0px 0px 0px;
-        border-bottom-left-radius: 50px;
-        border-bottom-right-radius: 50px;
-      }
-
-      img.head_logo {
-        display: none;
-      }
-
-      .school-page .navbar-inverse {
-        background-color: rgba(234, 107, 0, 0.07);
-        border-color: rgba(234, 107, 0, 0.07);
-        padding: 0px 0px;
-        border-radius: 0px;
-        left: 18px;
-        width: 43rem;
-      }
-
-      .col-sm-7.col-sm-offset-3.col-md-7.col-md-offset-2.main.content-start {
-        /* margin-top: 10px; */
-        width: 100%;
-        margin: 8px 10px;
-      }
-
-      img.img-first-bck-contn-sch-round {
-        position: absolute;
-        top: 620px;
-        right: 30px;
-      }
-
-    }
-  </style>
-  <!-- Add this CSS to your existing <style> section -->
-  <style>
-  .password-container {
-    position: relative;
-  }
-
-  .password-toggle {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #666;
-    font-size: 16px;
-    user-select: none;
-  }
-
-  .password-toggle:hover {
-    color: #EA6B00;
-  }
-
-  .login-password {
-    position: relative;
-  }
-
-  .login-password .input {
-    padding-right: 40px; /* Make space for the icon */
-  }
-  </style>
-  <style>
-    @media (max-width: 375px) {
-
-      .forgot_pwd_scl,
-      .forgot_pwd_scl:hover {
-        margin-left: 80px;
-      }
-      .footer-line{
-         left:30% !important;
+      .login-panel {
+        padding: 44px 36px;
       }
     }
 
-    @media (max-width: 320px) {
-      .content-form-login-page-school-plugin.md-form {
-        margin-left: 30px;
+    @media (max-width: 480px) {
+      body.school-login-page {
+        padding: 12px 10px 48px;
       }
 
-      .forgot_pwd_scl,
-      .forgot_pwd_scl:hover {
-        margin-left: 80px;
+      .login-shell {
+        border-radius: 20px;
+        min-height: auto;
+      }
+
+      .login-panel {
+        padding: 36px 24px;
+      }
+
+      .login-heading {
+        font-size: 25px;
       }
     }
 
-    @media (min-width: 425px) and (max-width: 767px) {
-      .content-form-login-page-school-plugin.md-form {
-        margin-left: 80px;
-      }
-
-      .forgot_pwd_scl,
-      .forgot_pwd_scl:hover {
-        margin-left: 80px;
-      }
+    /* ---------- Overrides for legacy own.css ---------- */
+    .content-form-login-page-school-plugin.md-form form p.login-demo,
+    .content-form-login-page-school-plugin.md-form form p.login-password,
+    .content-form-login-page-school-plugin.md-form form p.login-remember,
+    .content-form-login-page-school-plugin .login-demo,
+    .content-form-login-page-school-plugin .login-password {
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 0 16px !important;
+      position: relative;
     }
 
-    @media (min-width: 768px) and (max-width: 991px) {
-      .school-page .navbar-inverse {
-        left: 0px;
-      }
+    .content-form-login-page-school-plugin .login-demo label,
+    .content-form-login-page-school-plugin .login-password label {
+      position: static !important;
+      transform: none !important;
+      display: block !important;
+      font-size: 12.5px !important;
+      font-weight: 500 !important;
+      color: #6b7280 !important;
+      margin: 0 0 6px 2px !important;
     }
 
-    @media (min-width: 992px) and (max-width: 1199px) {
-      .school-page .navbar-inverse {
-        left: 0px;
-        width: 51rem;
-      }
+    .md-form label.active {
+      transform: none !important;
+    }
+
+    .content-form-login-page-school-plugin .login-demo #user_login,
+    .content-form-login-page-school-plugin .login-demo #email_reset,
+    .content-form-login-page-school-plugin .login-password #user_pass,
+    .content-form-login-page-school-plugin input.input {
+      width: 100% !important;
+      height: 48px !important;
+      padding: 12px 16px !important;
+      font-size: 14.5px !important;
+      color: #111827 !important;
+      background: #ffffff !important;
+      border: 1px solid #e5e7eb !important;
+      border-radius: 12px !important;
+      letter-spacing: normal !important;
+      -webkit-appearance: none;
+    }
+
+    .content-form-login-page-school-plugin .login-password #user_pass {
+      padding-right: 44px !important;
+    }
+
+    .content-form-login-page-school-plugin .login-demo #user_login:focus,
+    .content-form-login-page-school-plugin .login-demo #email_reset:focus,
+    .content-form-login-page-school-plugin .login-password #user_pass:focus,
+    .content-form-login-page-school-plugin input.input:focus {
+      border-color: #EA6B00 !important;
+      box-shadow: 0 0 0 3px rgba(234, 107, 0, 0.12) !important;
+      outline: 0 !important;
+    }
+
+    .content-form-login-page-school-plugin .login-submit input {
+      width: 100% !important;
+      height: 50px !important;
+      padding: 0 !important;
+      background: #16181d !important;
+      border-radius: 12px !important;
+      font-size: 15px !important;
+      text-transform: none !important;
+    }
+
+    .content-form-login-page-school-plugin .login-submit input:hover {
+      background: #EA6B00 !important;
+    }
+
+    .content-form-login-page-school-plugin .login-remember label {
+      position: static !important;
+      transform: none !important;
+      color: #4b5563 !important;
+      font-size: 13.5px !important;
+    }
+
+    .content-form-login-page-school-plugin .forgot_pwd_scl,
+    .content-form-login-page-school-plugin .forgot_pwd_scl:hover {
+      margin-left: 0 !important;
+      color: #EA6B00 !important;
     }
   </style>
 </head>
@@ -390,47 +624,23 @@
 <!-- <body class="login"> -->
 
 <body class="school-login-page school-page">
-  <div class="img-all-background-box-bck-main-cont">
-    <div class="img-one-right-side-min-sch">
-      <img class="img-first-bck-contn-sch" src="{{ URL::asset('public/general_setting/Group 18368.png') }}">
+
+  <div class="login-shell">
+
+    <div class="login-visual">
+      <h2>Keep Your Vehicle<br>Running Perfectly</h2>
+      <p class="visual-tagline">{{ getNameSystem() }} &mdash; complete garage management, from job cards to invoices, all in one place.</p>
     </div>
 
-    <div class="img-second-right-side-min-sch">
-      <img class="img-second-bck-contn-sch" src="{{ URL::asset('public/general_setting/Group 18367 (1).png') }}">
-    </div>
-    <div class="img-one-right-side-min-sch">
-      <img class="img-first-bck-contn-sch-round" src="{{ URL::asset('public/general_setting/Group 18369.png') }}">
-    </div>
-  </div>
+    <div class="login-panel">
+      <div class="brand-logo">
+        <img src="{{ URL::asset('/public/general_setting/' . getLogoSystem()) }}" alt="{{ getNameSystem() }}">
+      </div>
 
-  <div class="background-main-div-plugin-login">
-    <div class="container">
-      <div class="main-div-school-container">
-        <div class="header-bnner-login-page-mc">
-          <div class="heade-content-login-page">
-            <h1 class="header-title-trusted-plugin">
-              <img src="{{ URL::asset('public/general_setting/medal 1.png') }}" class="head_logo">
-              <span class="double_shadow_to_text_plugin_trusted"> {{ getNameSystem() }}</span>
-            </h1>
-            <!-- <h3 class="selling-codecanyon-plugin">Best in segment on codecanyon</h3> -->
-          </div>
-        </div>
+      <h1 class="login-heading">Welcome Back</h1>
+      <p class="login-subheading">Sign in to {{ getNameSystem() }} to manage your garage operations.</p>
 
-        <div class="row">
-
-          <div class="col-sm-5 col-md-5 sidebar">
-            <div class="image-container">
-              <img src="{{ URL::asset('/public/general_setting/' . getLogoSystem()) }}" alt="Your Image Description">
-            </div>
-            <?php if (getFrontendBooking() === 1): ?>
-              <div class="w-auto mx-0 my-5">
-                  <a class="bookService rounded-right" href="{{ url('/service/frontendBook') }}">{{trans('message.Book an appoinment')}}</a>
-              </div>
-            <?php endif; ?>
-          </div>
-
-          <div class="col-sm-7 col-sm-offset-3 col-md-7 col-md-offset-2 main content-start">
-            <div class="content-form-login-page-school-plugin md-form">
+      <div class="content-form-login-page-school-plugin md-form">
 
               @php
                   $smsAddonExists = \Illuminate\Support\Facades\View::exists('smsaddon::sms_setting');
@@ -480,9 +690,11 @@
                     </span>
                     @endif
                   </p>
-                  <p class="login-remember"><label><input name="rememberme" type="checkbox" id="rememberme" value="forever" />&nbsp;{{trans('message.Remember me')}}</label>
-                  </p>
-                  <a class="forgot_pwd_scl" href="{{ url('/password/reset') }}" title="Lost Password">{{trans('message.Forgot Password')}}?</a>
+                  <div class="form-row-flex">
+                    <p class="login-remember"><label><input name="rememberme" type="checkbox" id="rememberme" value="forever" />&nbsp;{{trans('message.Remember me')}}</label>
+                    </p>
+                    <a class="forgot_pwd_scl" href="{{ url('/password/reset') }}" title="Lost Password">{{trans('message.Forgot Password')}}?</a>
+                  </div>
 
                   <p class="login-submit">
                     <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary" value="{{trans('message.Log In')}}" title="Log In">
@@ -558,14 +770,11 @@
                 </div>
               @endif
 
-            </div>
-          </div>
-        </div>
+        <?php if (getFrontendBooking() === 1): ?>
+          <div class="login-divider">Or</div>
+          <a class="bookService" href="{{ url('/service/frontendBook') }}"><i class="fa fa-calendar"></i>{{trans('message.Book an appoinment')}}</a>
+        <?php endif; ?>
 
-
-      </div>
-      <div class="footer-line">
-      Powered By<a href="#">KingDom MS</a>
       </div>
     </div>
   </div>

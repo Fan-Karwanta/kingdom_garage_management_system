@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Response;
 use Mail;
 
@@ -13,41 +14,35 @@ class RestePassword extends Controller
     // password reset link
     public function forgotpassword(Request $request)
     {
-        $token = 's5qvke7CVoSkN1RdVjzB3SaHntzB3Vd68ZHSwBKU';
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
         $email = $request->email;
         $user = DB::table('users')->where('email', '=', $email)->first();
 
-        if ($user != '') {
+        if ($user) {
+            $token = Password::createToken(User::find($user->id));
             $name = $user->name;
-            $pass = $user->password;
 
-            $actual_link = $_SERVER['HTTP_HOST'];
-            $startip = '0.0.0.0';
-            $endip = '255.255.255.255';
             $link = url('passwords/reset/'.$token.'/'.$email);
             $email_content = 'To Reset Your Password Please Click...'.$link;
             $mail_sub = 'Reset Password';
-            $mail_send_from = 'cakephp.projects@gmail.com';
+            $mail_send_from = env('MAIL_FROM_ADDRESS', 'noreply@example.com');
             $data = [
                 'email' => $email,
-                'password' => $pass,
                 'name' => $name,
                 'token' => $token,
+                'reset_link' => $link,
             ];
 
-            if (($actual_link == 'localhost' || $actual_link == 'localhost:8080') || ($actual_link >= $startip && $actual_link <= $endip)) {
-
-                Mail::send('home', $data, function ($message) use ($data) {
-                    $message->from('cakephp.projects@gmail.com', 'Reset Password');
+            try {
+                Mail::send('mail.template', $data, function ($message) use ($data, $mail_send_from) {
+                    $message->from($mail_send_from, 'Reset Password');
                     $message->to($data['email'])->subject('Reset Password');
                 });
-            } else {
-                // Live format email
-                $headers = "MIME-Version: 1.0\r\n";
-                $headers .= 'Content-type: text/plain; charset=iso-8859-1'."\r\n";
-                $headers .= 'From:'.$mail_send_from."\r\n";
-
-                $data = mail($email, $mail_sub, $email_content, $headers);
+            } catch (\Exception $e) {
+                \Log::error('Error sending forgotpassword email: '.$e->getMessage());
             }
 
             $response = [
@@ -58,21 +53,15 @@ class RestePassword extends Controller
             ];
 
             return Response::json($response, 200);
-
-            // return redirect('/password/reset')->with('message', 'Your password reset link has been sent to your email address !');
-
         } else {
-
             $response = [
-                'status' => true,
+                'status' => false,
                 'code' => 401,
                 'message' => 'Please enter valid Email',
                 'data' => null,
             ];
 
             return Response::json($response, 401);
-
-            // return redirect('/password/reset')->with('message', 'Email Address you have entered is not match with our records !');
         }
     }
 }

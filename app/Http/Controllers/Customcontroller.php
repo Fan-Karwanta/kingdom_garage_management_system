@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CustomField;
+use App\Http\Requests\StoreCustomFieldAddEditFormRequest;
 use DB;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,7 @@ class Customcontroller extends Controller
     }
 
     // customfields store
-    public function store(Request $request)
+    public function store(StoreCustomFieldAddEditFormRequest $request)
     {
         // dd($request->all());
         $colomfield = $request->colomfield;
@@ -108,7 +109,7 @@ class Customcontroller extends Controller
     }
 
     // customfields update
-    public function update($id, Request $request)
+    public function update($id, StoreCustomFieldAddEditFormRequest $request)
     {
         // dd($request->all());
         $radio_labels = $request->r_label;

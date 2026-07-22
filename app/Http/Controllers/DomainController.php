@@ -17,6 +17,12 @@ class DomainController extends Controller
 
     public function update_domain(Request $request)
     {
+        $request->validate([
+            'domain_name' => 'required|string|max:255',
+            'purchase_key' => 'required|string|max:255',
+            'purchase_email' => 'required|email|max:255',
+        ]);
+
         $domain_name = $request->domain_name;
         $licence_key = $request->purchase_key;
         $purchase_email = $request->purchase_email;
@@ -35,6 +41,12 @@ class DomainController extends Controller
     // For app licence start
     public function store_license(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email|max:255',
+            'url' => 'required|string|max:255',
+            'licence_key' => 'required|string|max:255',
+        ]);
+
         $app_email = $request->input('email');
         $app_url = $request->input('url');
         $app_licence_key = $request->input('licence_key');

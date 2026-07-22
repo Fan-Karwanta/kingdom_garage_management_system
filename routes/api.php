@@ -18,8 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:api')->get('/app_login', [LoginController::class, 'login']);
-Route::middleware('auth:api')->get('/app_forgotpassword', 'RestePassword@forgotpassword');
-Route::get('/sidemenu', 'Accessrightscontroller@sidemenu')->withoutMiddleware(['auth']);
-Route::get('/get_license', 'DomainController@get_license')->withoutMiddleware(['auth']);
-Route::post('/store_license', 'DomainController@store_license')->withoutMiddleware(['auth']);
+Route::get('/app_login', [LoginController::class, 'login'])->middleware('throttle:5,1');
+Route::get('/app_forgotpassword', 'RestePassword@forgotpassword')->middleware('throttle:3,1');
+Route::middleware('auth:api')->get('/sidemenu', 'Accessrightscontroller@sidemenu');
+Route::get('/get_license', 'DomainController@get_license')->withoutMiddleware(['auth'])->middleware('throttle:5,1');
+Route::post('/store_license', 'DomainController@store_license')->withoutMiddleware(['auth'])->middleware('throttle:5,1');

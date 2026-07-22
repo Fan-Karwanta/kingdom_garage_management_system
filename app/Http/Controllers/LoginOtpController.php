@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
-require_once base_path('packages/mjsms/smsaddon/vendor/autoload.php');
+// require_once base_path('packages/mjsms/smsaddon/vendor/autoload.php'); // SMS addon package not installed
 
 class LoginOtpController extends Controller
 {

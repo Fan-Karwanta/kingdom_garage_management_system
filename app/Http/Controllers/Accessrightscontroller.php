@@ -28,7 +28,7 @@ class Accessrightscontroller extends Controller
     {
         $Customers = Input::get('Customers_id');
         $value = Input::get('value');
-        DB::update("update tbl_accessrights set customers='$value' where id='$Customers'");
+        DB::table('tbl_accessrights')->where('id', $Customers)->update(['customers' => $value]);
     }
 
     // emp store
@@ -36,7 +36,7 @@ class Accessrightscontroller extends Controller
     {
         $Employee_id = Input::get('Employee_id');
         $value = Input::get('value');
-        DB::update("update tbl_accessrights set employee='$value' where id='$Employee_id'");
+        DB::table('tbl_accessrights')->where('id', $Employee_id)->update(['employee' => $value]);
     }
 
     // staff store
@@ -44,7 +44,7 @@ class Accessrightscontroller extends Controller
     {
         $Support_staff_id = Input::get('Support_staff_id');
         $value = Input::get('value');
-        DB::update("update tbl_accessrights set support_staff='$value' where id='$Support_staff_id'");
+        DB::table('tbl_accessrights')->where('id', $Support_staff_id)->update(['support_staff' => $value]);
     }
 
     // accountant store
@@ -52,7 +52,7 @@ class Accessrightscontroller extends Controller
     {
         $Accountant_id = Input::get('Accountant_id');
         $value = Input::get('value');
-        DB::update("update tbl_accessrights set accountant='$value' where id='$Accountant_id'");
+        DB::table('tbl_accessrights')->where('id', $Accountant_id)->update(['accountant' => $value]);
     }
 
     /*********************New Access Rights Code**********************/

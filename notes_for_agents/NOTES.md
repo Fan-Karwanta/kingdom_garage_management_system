@@ -12,3 +12,16 @@ Add security headers middleware — X-Content-Type-Options: nosniff, X-Frame-Opt
 Add validation to unauthenticated frontend routes — frontendBook, forntendAdd, state/city AJAX endpoints need input validation even though they're public (you missed this one)
 Quality / Reliability
 Add basic PHPUnit tests — 15-20 test cases covering login, invoice creation, stock adjustment, payroll calculation, customer CRUD
+
+
+Another batch of improvements :
+
+Replace custom login with Laravel's Auth::attempt() — you're still manually doing password_verify() instead of using the framework's built-in auth
+
+Generate and set APP_KEY in .env.example or document it in deployment steps
+Add Form Request validation to the remaining ~50+ store/update endpoints
+Secure API routes — /api/app_login, /api/sidemenu etc. are still public
+Tighten password reset throttle to throttle:3,1 (5 is generous for password reset)
+Remove unused password field from RestePassword.php email data array
+Expand test coverage — 5 tests is a start, aim for 15-20 covering models and key controllers
+Audit remaining controllers for raw SQL — there are ~60+ controllers and only ~15 were touched

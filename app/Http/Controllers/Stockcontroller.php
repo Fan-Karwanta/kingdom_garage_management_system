@@ -67,6 +67,10 @@ class Stockcontroller extends Controller
     // stock update
     public function update($id, Request $request)
     {
+        $request->validate([
+            'product' => 'required|integer',
+            'qty' => 'required|numeric',
+        ]);
         $stocks = DB::table('tbl_stock_records')->where('id', '=', $id)->first();
         $oldstock = $stocks->no_of_stoke;
         $newstock = $request->qty;

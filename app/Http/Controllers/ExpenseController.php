@@ -10,6 +10,7 @@ use App\ExpenseHistoryRecord;
 use App\User;
 use Auth;
 use DB;
+use App\Http\Requests\StoreExpenseAddEditFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -71,7 +72,7 @@ class ExpenseController extends Controller
     }
 
     // expense store
-    public function store(Request $request)
+    public function store(StoreExpenseAddEditFormRequest $request)
     {
         if (getDateFormat() == 'm-d-Y') {
             $dates = date('Y-m-d', strtotime(str_replace('-', '/', $request->date)));
@@ -155,7 +156,7 @@ class ExpenseController extends Controller
     }
 
     // expense update
-    public function update(Request $request, $id)
+    public function update(StoreExpenseAddEditFormRequest $request, $id)
     {
         if (getDateFormat() == 'm-d-Y') {
             $dates = date('Y-m-d', strtotime(str_replace('-', '/', $request->date)));
@@ -200,7 +201,11 @@ class ExpenseController extends Controller
             $expense_entr = $expense_entry[$key];
             $expense_lbls = $expense_label[$key];
 
-            DB::insert("insert into tbl_expenses_history_records set tbl_expenses_id = $request->id, expense_amount = $expense_entr, label_expense = '$expense_lbls' ");
+            DB::table('tbl_expenses_history_records')->insert([
+    'tbl_expenses_id' => $request->id,
+    'expense_amount' => $expense_entr,
+    'label_expense' => $expense_lbls,
+]);
         }
 
         return redirect('expense/list')->with('message', 'Expense Updated Successfully');

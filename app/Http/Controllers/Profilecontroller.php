@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProfileSettingEditFormRequest;
 use App\Setting;
 use App\User;
 use Auth;
@@ -26,7 +27,7 @@ class Profilecontroller extends Controller
     }
 
     // profile update
-    public function update($id, Request $request)
+    public function update($id, StoreProfileSettingEditFormRequest $request)
     {
 
         $usimgdtaa = DB::table('users')->where('id', '=', $id)->first();

@@ -113,7 +113,7 @@ class InvoicePaymentController extends Controller
 
             if ($paymentSuccess) {
 
-                $sql = DB::update("update tbl_invoices set paid_amount='$amount', payment_status='2', charge_id='' where invoice_number=$invoice_number");
+                $sql = DB::table('tbl_invoices')->where('invoice_number', $invoice_number)->update(['paid_amount' => $amount, 'payment_status' => '2', 'charge_id' => '']);
 
                 // $tbl_incomes->status = '2'; // Full Paid
 

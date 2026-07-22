@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Branch;
 use App\BranchSetting;
 use App\CustomField;
+use App\Http\Requests\StoreIncomeEditRequest;
 use App\Http\Requests\StoreIncomeRequest;
 use App\Income;
 use App\IncomeHistoryRecord;
@@ -236,7 +237,7 @@ class IncomeController extends Controller
     }
 
     // income update
-    public function update(Request $request, $id)
+    public function update(StoreIncomeEditRequest $request, $id)
     {
         $paidamount = getSumOfIncome($id);
         $Total_Amount = $request->Total_Amount;
@@ -307,7 +308,12 @@ class IncomeController extends Controller
             foreach ($income_entry as $key => $value) {
                 $income_entr = $income_entry[$key];
                 $income_lbls = $income_label[$key];
-                DB::insert("insert into tbl_income_history_records set tbl_income_id = $request->id, income_amount = $income_entr, income_label = '$income_lbls', branch_id  = '$request->branch'");
+                DB::table('tbl_income_history_records')->insert([
+    'tbl_income_id' => $request->id,
+    'income_amount' => $income_entr,
+    'income_label' => $income_lbls,
+    'branch_id' => $request->branch,
+]);
                 $amount_recevied += $income_entr;
             }
 
@@ -329,9 +335,9 @@ class IncomeController extends Controller
             }
 
             if ($payment_number == $payment_number1) {
-                DB::update("update tbl_invoices set paid_amount='$paid_amount1',amount_recevied='$amount_recevied' where id=$invoice_id");
+                DB::table('tbl_invoices')->where('id', $invoice_id)->update(['paid_amount' => $paid_amount1, 'amount_recevied' => $amount_recevied]);
             } else {
-                DB::update("update tbl_invoices set paid_amount='$paid_amount1' where id=$invoice_id");
+                DB::table('tbl_invoices')->where('id', $invoice_id)->update(['paid_amount' => $paid_amount1]);
             }
 
             $tbl_payment_recordss = DB::table('tbl_payment_records')->where('payment_number', '=', $payment_number)->first();
@@ -370,9 +376,9 @@ class IncomeController extends Controller
         $total_paid = $paid_amount - $amount;
 
         if ($tbl_invoices == $payment_number1) {
-            DB::update("update tbl_invoices set paid_amount='$total_paid',amount_recevied='0',payment_status='1' where id=$invoice_id");
+            DB::table('tbl_invoices')->where('id', $invoice_id)->update(['paid_amount' => $total_paid, 'amount_recevied' => 0, 'payment_status' => '1']);
         } else {
-            DB::update("update tbl_invoices set paid_amount='$total_paid',payment_status='1' where id=$invoice_id");
+            DB::table('tbl_invoices')->where('id', $invoice_id)->update(['paid_amount' => $total_paid, 'payment_status' => '1']);
         }
 
         DB::table('tbl_payment_records')->where('payment_number', $payment_number)->update(['soft_delete' => 1]);

@@ -20,15 +20,22 @@ class StripePaymentController extends Controller
 
     public function __construct()
     {
-        $updatekey = DB::table('updatekey')->first();
-        $this->s_key = $updatekey->secret_key;
+        // Prefer env-based key, fall back to database
+        $this->s_key = env('STRIPE_SECRET');
 
-        if (\Schema::hasTable('payment_gateways')) {
-            $stripe_payment_gateway = DB::table('payment_gateways')->where('gateway_name', 'stripe')->first();
-            if ($stripe_payment_gateway) {
-                $stripedetail = json_decode($stripe_payment_gateway->credentials);
-                if (! empty($stripedetail->secret_key)) {
-                    $this->s_key = $stripedetail->secret_key;
+        if (empty($this->s_key)) {
+            $updatekey = DB::table('updatekey')->first();
+            if ($updatekey) {
+                $this->s_key = $updatekey->secret_key;
+            }
+
+            if (\Schema::hasTable('payment_gateways')) {
+                $stripe_payment_gateway = DB::table('payment_gateways')->where('gateway_name', 'stripe')->first();
+                if ($stripe_payment_gateway) {
+                    $stripedetail = json_decode($stripe_payment_gateway->credentials);
+                    if (! empty($stripedetail->secret_key)) {
+                        $this->s_key = $stripedetail->secret_key;
+                    }
                 }
             }
         }

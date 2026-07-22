@@ -30,6 +30,9 @@ class ObservationTypecontroller extends Controller
     // observation type store
     public function store(Request $request)
     {
+        $request->validate([
+            'o_type' => 'required|string|max:255',
+        ]);
         $o_point = new tbl_observation_types;
         $o_point->type = $request->o_type;
         $o_point->save();
@@ -57,6 +60,9 @@ class ObservationTypecontroller extends Controller
     // observation type update
     public function update($id, Request $request)
     {
+        $request->validate([
+            'o_type' => 'required|string|max:255',
+        ]);
         $o_point = tbl_observation_types::find($id);
         $o_point->type = $request->o_type;
         $o_point->save();

@@ -317,7 +317,7 @@ class Productcontroller extends Controller
     }
 
     // product update
-    public function update(Request $request, $id)
+    public function update(ProductAddEditFormRequest $request, $id)
     {
         $p_date = $request->p_date;
         $p_no = $request->p_no;
