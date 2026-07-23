@@ -656,5 +656,19 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAccess(['branchAdmin_owndata']);
         });
 
+        // For Payroll Module Policy
+        Gate::define('payroll_view', function ($user) {
+            return $user->hasAccess(['payroll_view']);
+        });
+        Gate::define('payroll_add', function ($user) {
+            return $user->hasAccess(['payroll_add']);
+        });
+        Gate::define('payroll_edit', function ($user) {
+            return $user->hasAccess(['payroll_edit']);
+        });
+        Gate::define('payroll_delete', function ($user) {
+            return $user->hasAccess(['payroll_delete']);
+        });
+
     }
 }

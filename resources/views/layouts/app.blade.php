@@ -508,6 +508,28 @@ $currentRoute = str_replace($baseUrl, "", $currentUrl);
                 </li>
                 @endcanany
 
+                {{-- Payroll Management Module --}}
+                @can('payroll_view')
+                @php
+                $payrollRoutes = ['/payroll','/payroll/dashboard','/payroll/attendance','/payroll/salary','/payroll/payroll','/payroll/holidays','/payroll/leave','/payroll/deductions','/payroll/settings'];
+                @endphp
+                <li class="{{ in_array($currentRoute, $payrollRoutes) || Str::startsWith($currentRoute, '/payroll') ? 'active' : '' }}">
+                  <div class="dropdown w-100">
+                    <a href="#"><i class="fa-solid fa-wallet margin-right-10px"></i> Payroll<span class="fa fa-chevron-right dropdown-right-icon icon"> </span></a>
+                    <div class="dropdown-content">
+                      <a href="{!! url('/payroll') !!}">Dashboard</a>
+                      <a href="{!! url('/payroll/attendance') !!}">Attendance</a>
+                      <a href="{!! url('/payroll/salary') !!}">Employee Salaries</a>
+                      <a href="{!! url('/payroll/payroll') !!}">Payroll Periods</a>
+                      <a href="{!! url('/payroll/leave') !!}">Leave Requests</a>
+                      <a href="{!! url('/payroll/deductions') !!}">Deductions</a>
+                      <a href="{!! url('/payroll/holidays') !!}">Holidays</a>
+                      <a href="{!! url('/payroll/settings') !!}">Settings</a>
+                    </div>
+                  </div>
+                </li>
+                @endcan
+
                 @canany(['customer_view', 'employee_view', 'supportstaff_view', 'accountant_view', 'branchAdmin_view'])
                 @php
                 $inventoryRoutes = ['/customer/list','/employee/list','/supportstaff/list','/accountant/list','/branchadmin/list','/customer/add','/employee/add','/supportstaff/add','/accountant/add','/branchadmin/add'];
@@ -719,26 +741,6 @@ $currentRoute = str_replace($baseUrl, "", $currentUrl);
                   </a>
                 </li>
                 @endcan
-
-                {{-- Payroll Management Module --}}
-                @php
-                $payrollRoutes = ['/payroll','/payroll/dashboard','/payroll/attendance','/payroll/salary','/payroll/payroll','/payroll/holidays','/payroll/leave','/payroll/deductions','/payroll/settings'];
-                @endphp
-                <li class="{{ in_array($currentRoute, $payrollRoutes) || Str::startsWith($currentRoute, '/payroll') ? 'active' : '' }}">
-                  <div class="dropdown w-100">
-                    <a href="#"><i class="fa-solid fa-wallet margin-right-10px"></i> Payroll<span class="fa fa-chevron-right dropdown-right-icon icon"> </span></a>
-                    <div class="dropdown-content">
-                      <a href="{!! url('/payroll') !!}">Dashboard</a>
-                      <a href="{!! url('/payroll/attendance') !!}">Attendance</a>
-                      <a href="{!! url('/payroll/salary') !!}">Employee Salaries</a>
-                      <a href="{!! url('/payroll/payroll') !!}">Payroll Periods</a>
-                      <a href="{!! url('/payroll/leave') !!}">Leave Requests</a>
-                      <a href="{!! url('/payroll/deductions') !!}">Deductions</a>
-                      <a href="{!! url('/payroll/holidays') !!}">Holidays</a>
-                      <a href="{!! url('/payroll/settings') !!}">Settings</a>
-                    </div>
-                  </div>
-                </li>
 
                 {{-- Help Document removed per user request --}}
 

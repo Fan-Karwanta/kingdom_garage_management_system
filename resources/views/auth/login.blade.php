@@ -134,10 +134,19 @@
     }
 
     .brand-logo img {
-      max-height: 64px;
-      max-width: 190px;
+      max-height: 120px;
+      max-width: 320px;
+      width: auto;
+      height: auto;
       object-fit: contain;
       margin-bottom: 18px;
+    }
+
+    @media (max-width: 480px) {
+      .brand-logo img {
+        max-height: 80px;
+        max-width: 220px;
+      }
     }
 
     .login-heading {
@@ -346,7 +355,9 @@
     .password-toggle {
       position: absolute;
       right: 15px;
-      top: 46px;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-top: 11px; /* shift down by half label height so it centers inside the input */
       cursor: pointer;
       color: #9ca3af;
       font-size: 15px;
@@ -356,6 +367,13 @@
 
     .password-toggle:hover {
       color: #EA6B00;
+    }
+
+    @media (max-width: 480px) {
+      .password-toggle {
+        right: 12px;
+        font-size: 14px;
+      }
     }
 
     /* ---------- Tabs (email / mobile login) ---------- */

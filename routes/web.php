@@ -880,68 +880,68 @@ Route::group(['prefix' => 'notes'], function () {
 });
 
 // Payroll Management Module
-Route::group(['prefix' => 'payroll'], function () {
+Route::group(['prefix' => 'payroll', 'middleware' => ['auth']], function () {
     // Dashboard
-    Route::get('/', 'PayrollController@dashboard')->name('payroll.dashboard');
-    Route::get('/dashboard', 'PayrollController@dashboard');
+    Route::get('/', 'PayrollController@dashboard')->name('payroll.dashboard')->middleware('can:payroll_view');
+    Route::get('/dashboard', 'PayrollController@dashboard')->middleware('can:payroll_view');
 
     // Attendance Management
-    Route::get('/attendance', 'PayrollController@attendanceList')->name('payroll.attendance');
-    Route::get('/attendance/add', 'PayrollController@attendanceCreate');
-    Route::post('/attendance/store', 'PayrollController@attendanceStore');
-    Route::get('/attendance/edit/{id}', 'PayrollController@attendanceEdit');
-    Route::post('/attendance/update/{id}', 'PayrollController@attendanceUpdate');
-    Route::get('/attendance/delete/{id}', 'PayrollController@attendanceDelete');
-    Route::get('/attendance/import', 'PayrollController@importAttendance');
-    Route::post('/attendance/import/process', 'PayrollController@processImport');
+    Route::get('/attendance', 'PayrollController@attendanceList')->name('payroll.attendance')->middleware('can:payroll_view');
+    Route::get('/attendance/add', 'PayrollController@attendanceCreate')->middleware('can:payroll_add');
+    Route::post('/attendance/store', 'PayrollController@attendanceStore')->middleware('can:payroll_add');
+    Route::get('/attendance/edit/{id}', 'PayrollController@attendanceEdit')->middleware('can:payroll_edit');
+    Route::post('/attendance/update/{id}', 'PayrollController@attendanceUpdate')->middleware('can:payroll_edit');
+    Route::get('/attendance/delete/{id}', 'PayrollController@attendanceDelete')->middleware('can:payroll_delete');
+    Route::get('/attendance/import', 'PayrollController@importAttendance')->middleware('can:payroll_add');
+    Route::post('/attendance/import/process', 'PayrollController@processImport')->middleware('can:payroll_add');
 
     // Employee Salary Management
-    Route::get('/salary', 'PayrollController@salaryList')->name('payroll.salary');
-    Route::get('/salary/edit/{id}', 'PayrollController@salaryEdit');
-    Route::post('/salary/update/{id}', 'PayrollController@salaryUpdate');
+    Route::get('/salary', 'PayrollController@salaryList')->name('payroll.salary')->middleware('can:payroll_view');
+    Route::get('/salary/edit/{id}', 'PayrollController@salaryEdit')->middleware('can:payroll_edit');
+    Route::post('/salary/update/{id}', 'PayrollController@salaryUpdate')->middleware('can:payroll_edit');
 
     // Payroll Periods
-    Route::get('/payroll', 'PayrollController@payrollList')->name('payroll.list');
-    Route::get('/payroll/add', 'PayrollController@payrollCreate');
-    Route::post('/payroll/store', 'PayrollController@payrollStore');
-    Route::get('/payroll/process/{id}', 'PayrollController@payrollProcess');
-    Route::post('/payroll/save/{id}', 'PayrollController@payrollSave');
-    Route::get('/payroll/view/{id}', 'PayrollController@payrollView');
-    Route::get('/payroll/approve/{id}', 'PayrollController@payrollApprove');
-    Route::get('/payroll/mark-paid/{id}', 'PayrollController@payrollMarkPaid');
-    Route::get('/payroll/delete/{id}', 'PayrollController@payrollDelete');
+    Route::get('/payroll', 'PayrollController@payrollList')->name('payroll.list')->middleware('can:payroll_view');
+    Route::get('/payroll/add', 'PayrollController@payrollCreate')->middleware('can:payroll_add');
+    Route::post('/payroll/store', 'PayrollController@payrollStore')->middleware('can:payroll_add');
+    Route::get('/payroll/process/{id}', 'PayrollController@payrollProcess')->middleware('can:payroll_edit');
+    Route::post('/payroll/save/{id}', 'PayrollController@payrollSave')->middleware('can:payroll_edit');
+    Route::get('/payroll/view/{id}', 'PayrollController@payrollView')->middleware('can:payroll_view');
+    Route::get('/payroll/approve/{id}', 'PayrollController@payrollApprove')->middleware('can:payroll_edit');
+    Route::get('/payroll/mark-paid/{id}', 'PayrollController@payrollMarkPaid')->middleware('can:payroll_edit');
+    Route::get('/payroll/delete/{id}', 'PayrollController@payrollDelete')->middleware('can:payroll_delete');
 
     // Payslip
-    Route::get('/payslip/{id}', 'PayrollController@payslip');
-    Route::get('/payslip/print/{id}', 'PayrollController@payslipPrint');
+    Route::get('/payslip/{id}', 'PayrollController@payslip')->middleware('can:payroll_view');
+    Route::get('/payslip/print/{id}', 'PayrollController@payslipPrint')->middleware('can:payroll_view');
 
     // Holidays
-    Route::get('/holidays', 'PayrollController@holidayList')->name('payroll.holidays');
-    Route::get('/holidays/add', 'PayrollController@holidayCreate');
-    Route::post('/holidays/store', 'PayrollController@holidayStore');
-    Route::get('/holidays/edit/{id}', 'PayrollController@holidayEdit');
-    Route::post('/holidays/update/{id}', 'PayrollController@holidayUpdate');
-    Route::get('/holidays/delete/{id}', 'PayrollController@holidayDelete');
+    Route::get('/holidays', 'PayrollController@holidayList')->name('payroll.holidays')->middleware('can:payroll_view');
+    Route::get('/holidays/add', 'PayrollController@holidayCreate')->middleware('can:payroll_add');
+    Route::post('/holidays/store', 'PayrollController@holidayStore')->middleware('can:payroll_add');
+    Route::get('/holidays/edit/{id}', 'PayrollController@holidayEdit')->middleware('can:payroll_edit');
+    Route::post('/holidays/update/{id}', 'PayrollController@holidayUpdate')->middleware('can:payroll_edit');
+    Route::get('/holidays/delete/{id}', 'PayrollController@holidayDelete')->middleware('can:payroll_delete');
 
     // Leave Requests
-    Route::get('/leave', 'PayrollController@leaveList')->name('payroll.leave');
-    Route::get('/leave/add', 'PayrollController@leaveCreate');
-    Route::post('/leave/store', 'PayrollController@leaveStore');
-    Route::get('/leave/approve/{id}', 'PayrollController@leaveApprove');
-    Route::get('/leave/reject/{id}', 'PayrollController@leaveReject');
-    Route::get('/leave/delete/{id}', 'PayrollController@leaveDelete');
+    Route::get('/leave', 'PayrollController@leaveList')->name('payroll.leave')->middleware('can:payroll_view');
+    Route::get('/leave/add', 'PayrollController@leaveCreate')->middleware('can:payroll_add');
+    Route::post('/leave/store', 'PayrollController@leaveStore')->middleware('can:payroll_add');
+    Route::get('/leave/approve/{id}', 'PayrollController@leaveApprove')->middleware('can:payroll_edit');
+    Route::get('/leave/reject/{id}', 'PayrollController@leaveReject')->middleware('can:payroll_edit');
+    Route::get('/leave/delete/{id}', 'PayrollController@leaveDelete')->middleware('can:payroll_delete');
 
     // Deductions
-    Route::get('/deductions', 'PayrollController@deductionList')->name('payroll.deductions');
-    Route::get('/deductions/add', 'PayrollController@deductionCreate');
-    Route::post('/deductions/store', 'PayrollController@deductionStore');
-    Route::get('/deductions/edit/{id}', 'PayrollController@deductionEdit');
-    Route::post('/deductions/update/{id}', 'PayrollController@deductionUpdate');
-    Route::get('/deductions/delete/{id}', 'PayrollController@deductionDelete');
+    Route::get('/deductions', 'PayrollController@deductionList')->name('payroll.deductions')->middleware('can:payroll_view');
+    Route::get('/deductions/add', 'PayrollController@deductionCreate')->middleware('can:payroll_add');
+    Route::post('/deductions/store', 'PayrollController@deductionStore')->middleware('can:payroll_add');
+    Route::get('/deductions/edit/{id}', 'PayrollController@deductionEdit')->middleware('can:payroll_edit');
+    Route::post('/deductions/update/{id}', 'PayrollController@deductionUpdate')->middleware('can:payroll_edit');
+    Route::get('/deductions/delete/{id}', 'PayrollController@deductionDelete')->middleware('can:payroll_delete');
 
     // Settings
-    Route::get('/settings', 'PayrollController@settings')->name('payroll.settings');
-    Route::post('/settings/update', 'PayrollController@settingsUpdate');
+    Route::get('/settings', 'PayrollController@settings')->name('payroll.settings')->middleware('can:payroll_view');
+    Route::post('/settings/update', 'PayrollController@settingsUpdate')->middleware('can:payroll_edit');
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {

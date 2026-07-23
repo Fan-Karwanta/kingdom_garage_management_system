@@ -107,7 +107,7 @@
                     </div>
                     <div>
                         <div class="stat-value">{{ $pendingLeaves }}</div>
-                        <div class="stat-label">Pending Leave Requests</div>
+                        <div class="stat-label">Pending Leave Reqs.</div>
                     </div>
                 </div>
             </div>

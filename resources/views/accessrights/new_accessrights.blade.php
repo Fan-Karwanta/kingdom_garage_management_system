@@ -1261,6 +1261,33 @@
                             </tr>
                             <!-- How to video Module Access Rights end -->
 
+                            <!-- Payroll Module Access Rights Start -->
+                            <tr>
+                              <td>Payroll</td>
+                              <td class="">
+                                <input type="checkbox" data-row="{{ $i }}" class="main_access" data-for="payroll" name="payroll[]" value="payroll_view" @if (!empty($regex->payroll_view)) @if ($regex->payroll_view == true) {{ 'checked' }} @endif
+                                @endif
+                                >
+                              </td>
+                              <td>
+                                <input type="checkbox" class="payroll_{{ $i }}" name="payroll[]" value="payroll_add" @if (!empty($regex->payroll_add)) @if ($regex->payroll_add == true) {{ 'checked' }} @endif
+                                @endif
+                                >
+                              </td>
+                              <td>
+                                <input type="checkbox" class="payroll_{{ $i }}" name="payroll[]" value="payroll_edit" @if (!empty($regex->payroll_edit)) @if ($regex->payroll_edit == true) {{ 'checked' }} @endif
+                                @endif
+                                >
+                              </td>
+                              <td>
+                                <input type="checkbox" class="payroll_{{ $i }}" name="payroll[]" value="payroll_delete" @if (!empty($regex->payroll_delete)) @if ($regex->payroll_delete == true) {{ 'checked' }} @endif
+                                @endif
+                                >
+                              </td>
+                              <td>-</td>
+                            </tr>
+                            <!-- Payroll Module Access Rights End -->
+
 
                           </tbody>
                         </table>

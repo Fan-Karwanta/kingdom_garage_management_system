@@ -117,6 +117,7 @@ class Accessrightscontroller extends Controller
         $notes = $request->notes ?? 0;
         $addons = $request->addons;
         $howtovideo = $request->howtovideo;
+        $payroll = $request->payroll;
 
         if ($id == '2') {
             $quotation = $request->input('quotation', []); // Retrieve the entire 'quotation' array
@@ -260,6 +261,9 @@ class Accessrightscontroller extends Controller
         }
         if (! empty($howtovideo)) {
             $data .= $this->store_regex($howtovideo).',';
+        }
+        if (! empty($payroll)) {
+            $data .= $this->store_regex($payroll).',';
         }
 
         $final_regex = $data;
