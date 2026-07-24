@@ -933,6 +933,7 @@ return [
     'Compliance' => 'Compliances',
     'Invoices' => 'Invoices',
     'Reports' => 'Reports',
+    'Analytics' => 'Analytics',
     'Email Templates' => 'Email Templates',
 
     'Invoice Date' => 'Invoice Date',

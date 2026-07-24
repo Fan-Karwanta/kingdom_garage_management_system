@@ -795,6 +795,12 @@ Route::group(['prefix' => 'report'], function () {
     Route::post('/generate_pdf', 'Reportcontroller@generate_pdf');
 });
 
+// Analytics Module (admin only)
+Route::group(['prefix' => 'analytics', 'middleware' => 'auth'], function () {
+    Route::get('/', 'AnalyticsController@index');
+    Route::post('/export-pdf', 'AnalyticsController@exportPdf');
+});
+
 // Sales Part
 Route::get('/sales_part/list', 'SalesPartcontroller@index')->middleware('can:salespart_view');
 Route::get('/sales_part/add', 'SalesPartcontroller@addsales')->middleware('can:salespart_add');

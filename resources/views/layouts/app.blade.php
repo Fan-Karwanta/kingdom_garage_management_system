@@ -334,6 +334,158 @@ margin-left: -15px;
       padding-left: 8px;
     }
   }
+
+  /* Close button hidden by default; only shown on mobile overlay (see media query below) */
+  .mobile-sidebar-close {
+    display: none;
+  }
+
+  /* ===== Mobile sidebar overlay (≤991px) ===== */
+  @media (max-width: 991px) {
+    /* Show sidebar as full overlay when toggled (mobile-sidebar-open) */
+    body.mobile-sidebar-open .container.body .col-md-3.left_col {
+      display: block !important;
+      width: 230px !important;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      height: 100% !important;
+      z-index: 9999;
+      overflow-y: auto;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Hide logo on smaller screens (tablets/phones) */
+    body.mobile-sidebar-open .navbar.nav_title {
+      display: none !important;
+    }
+
+    /* Remove top padding where logo used to be */
+    body.mobile-sidebar-open .left_col.scroll-view {
+      padding-top: 15px;
+    }
+
+    /* Full menu items, not collapsed icons */
+    body.mobile-sidebar-open .menu_section {
+      margin-top: 0;
+    }
+
+    body.mobile-sidebar-open .nav.side-menu {
+      margin-bottom: 0;
+    }
+
+    body.mobile-sidebar-open .nav.side-menu li {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    body.mobile-sidebar-open .nav.side-menu li a {
+      text-align: left !important;
+      font-size: 15px !important;
+      padding: 14px 18px !important;
+      transition: background-color 0.2s ease, padding-left 0.2s ease;
+    }
+
+    body.mobile-sidebar-open .nav.side-menu li a:hover,
+    body.mobile-sidebar-open .nav.side-menu li a:focus {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding-left: 22px !important;
+    }
+
+    body.mobile-sidebar-open .nav.side-menu li a i {
+      font-size: 18px !important;
+      text-align: left !important;
+      width: 28px !important;
+      margin-right: 10px !important;
+      margin-bottom: 0 !important;
+      display: inline-block !important;
+    }
+
+    /* Improve chevron/arrow icon for submenus */
+    body.mobile-sidebar-open .nav.side-menu li a span.fa-chevron-down,
+    body.mobile-sidebar-open .nav.side-menu li a span.fa-chevron-up {
+      float: right;
+      margin-top: 4px;
+      font-size: 12px;
+    }
+
+    /* Active/current page highlight */
+    body.mobile-sidebar-open .nav.side-menu li.active,
+    body.mobile-sidebar-open .nav.side-menu li.active-sm {
+      background-color: rgba(255, 255, 255, 0.12);
+      border-left: 3px solid #1ABB9C;
+    }
+
+    body.mobile-sidebar-open .nav.side-menu li ul.child_menu li a {
+      font-size: 13.5px !important;
+      padding: 12px 18px 12px 46px !important;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    body.mobile-sidebar-open .menu_section h3,
+    body.mobile-sidebar-open .profile,
+    body.mobile-sidebar-open .menu_section span.fa {
+      display: block !important;
+    }
+
+    /* Don't shift content — sidebar overlays on top */
+    body.mobile-sidebar-open .container.body .right_col,
+    body.mobile-sidebar-open .main_container .top_nav {
+      margin-left: 0 !important;
+    }
+
+    body.mobile-sidebar-open .container.body .right_col {
+      padding: 10px 20px 0 !important;
+    }
+
+    /* Backdrop to dim content behind sidebar */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9998;
+    }
+
+    body.mobile-sidebar-open .sidebar-backdrop {
+      display: block;
+    }
+
+    /* Close button inside mobile sidebar */
+    body.mobile-sidebar-open .left_col .mobile-sidebar-close {
+      display: block;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      color: #fff;
+      font-size: 20px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 10000;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+
+    body.mobile-sidebar-open .left_col .mobile-sidebar-close:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Ensure hamburger button is above overlapping profile elements */
+    .nav.toggle {
+      position: relative;
+      z-index: 10;
+    }
+
+    #menu_toggle {
+      position: relative;
+      z-index: 11;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+  }
 </style>
 
 <head>
@@ -708,6 +860,11 @@ $currentRoute = str_replace($baseUrl, "", $currentUrl);
                   </a></li>
                 @endcan
 
+                @if(isAdmin(Auth::user()->role_id))
+                <li class="{{ Str::startsWith($currentRoute, '/analytics') ? 'active' : '' }}"><a href="{!! url('/analytics') !!}"><i class="fa-solid fa-chart-pie margin-right-10px"></i>{{ trans('message.Analytics') }}
+                  </a></li>
+                @endif
+
                 @can('emailtemplate_view')
                 <li class="w-100"><a href="{!! url('/mail/mail') !!}"><i class="fa-solid fa-envelope-open-text margin-right-10px"></i>{{ trans('message.Email Templates') }}</a></li>
                 @endcan
@@ -1016,6 +1173,81 @@ $currentRoute = str_replace($baseUrl, "", $currentUrl);
         }
       });
     });
+  </script>
+
+  <!-- Mobile sidebar toggle - standalone, independent of custom.min.js -->
+  <script nonce="{{ $cspNonce }}">
+    (function() {
+      var MOBILE_BREAKPOINT = 991;
+
+      function isMobile() {
+        return window.innerWidth <= MOBILE_BREAKPOINT;
+      }
+
+      function getBody() {
+        return document.getElementById('app-layout') || document.body;
+      }
+
+      function toggleSidebar() {
+        getBody().classList.toggle('mobile-sidebar-open');
+      }
+
+      function closeSidebar() {
+        getBody().classList.remove('mobile-sidebar-open');
+      }
+
+      function initMobileSidebar() {
+        // Create backdrop element
+        if (!document.querySelector('.sidebar-backdrop')) {
+          var backdrop = document.createElement('div');
+          backdrop.className = 'sidebar-backdrop';
+          backdrop.addEventListener('click', closeSidebar);
+          document.body.appendChild(backdrop);
+        }
+
+        // Create close button inside sidebar
+        var leftCol = document.querySelector('.container.body .left_col');
+        if (leftCol && !leftCol.querySelector('.mobile-sidebar-close')) {
+          var closeBtn = document.createElement('a');
+          closeBtn.className = 'mobile-sidebar-close';
+          closeBtn.href = 'javascript:void(0)';
+          closeBtn.setAttribute('aria-label', 'Close sidebar');
+          closeBtn.innerHTML = '<i class="fa fa-times"></i>';
+          closeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeSidebar();
+          });
+          leftCol.insertBefore(closeBtn, leftCol.firstChild);
+        }
+
+        // Bind click on hamburger using event delegation (works even if element is re-rendered)
+        document.addEventListener('click', function(e) {
+          if (!isMobile()) return; // let desktop use original custom.js nav-md/nav-sm collapse behavior
+          var target = e.target;
+          // Walk up to find #menu_toggle if clicked on a child (like the <i> icon)
+          var toggleBtn = target.closest ? target.closest('#menu_toggle') : null;
+          if (toggleBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleSidebar();
+          }
+        }, true);
+
+        // If window is resized past the mobile breakpoint, ensure mobile overlay state is cleared
+        window.addEventListener('resize', function() {
+          if (!isMobile()) {
+            closeSidebar();
+          }
+        });
+      }
+
+      // Run immediately if DOM is already ready, otherwise wait
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileSidebar);
+      } else {
+        initMobileSidebar();
+      }
+    })();
   </script>
 </body>
 
