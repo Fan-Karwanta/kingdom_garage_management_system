@@ -24,8 +24,7 @@ jobs:
             composer install --no-dev --optimize-autoloader
             php artisan migrate --force
             php artisan config:cache
-            php artisan route:cache
             php artisan view:cache
-            php artisan optimize
             chmod -R 775 storage bootstrap/cache
+            touch ~/domains/drivebyautocare.com/public_html/installed.txt
             echo "Deploy completed at $(date)"
