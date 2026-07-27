@@ -1035,6 +1035,7 @@ $currentRoute = str_replace($baseUrl, "", $currentUrl);
 
   <!-- For form field validate Using Proengsoft -->
   <script nonce="{{ $cspNonce }}"type="text/javascript" src="{{ URL::asset('build/jquery-validate/1.19.2/jquery.validate.min.js') }}"></script>
+  <script nonce="{{ $cspNonce }}"type="text/javascript" src="{{ URL::asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
 
 
   <script nonce="{{ $cspNonce }}"type="text/javascript">

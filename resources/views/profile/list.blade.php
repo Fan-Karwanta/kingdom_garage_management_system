@@ -254,9 +254,6 @@
 
 
 <!-- Scripts starting -->
-<!-- <script nonce="{{ $cspNonce }}" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-<script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/jquery-3.7.1.min.js') }}"></script>
-
 <script nonce="{{ $cspNonce }}">
     $(document).ready(function() {
         $(".datepicker1").datetimepicker({
@@ -309,5 +306,4 @@
 
 <!-- Form field validation -->
 {!! JsValidator::formRequest('App\Http\Requests\StoreProfileSettingEditFormRequest', '#profileEditForm') !!}
-<!-- <script nonce="{{ $cspNonce }}" type="text/javascript" src="{{ asset('public/vendor/jsvalidation/js/jsvalidation.js') }}"></script> -->
 @endsection
