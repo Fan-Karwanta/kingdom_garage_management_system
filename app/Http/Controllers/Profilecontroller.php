@@ -87,6 +87,8 @@ class Profilecontroller extends Controller
                 $file->move(public_path().'/accountant/', $file->getClientOriginalName());
             } elseif ($usimgdtaa->role == 'branch_admin') {
                 $file->move(public_path().'/branch_admin/', $file->getClientOriginalName());
+            } elseif ($usimgdtaa->role == 'Supplier') {
+                $file->move(public_path().'/supplier/', $file->getClientOriginalName());
             }
             $profile->image = $filename;
         }

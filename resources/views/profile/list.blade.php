@@ -87,7 +87,7 @@
         <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_content mt-0">
-                    <form id="profileEditForm" action="profile/update/{{ $profile->id }}" method="post" enctype="multipart/form-data" class="form-horizontal upperform">
+                    <form id="profileEditForm" action="{{ url('setting/profile/update/' . $profile->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal upperform">
 
                         <div class="row row-mb-0">
                             <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 has-feedback {{ $errors->has('firstname') ? ' has-error' : '' }}">
@@ -222,6 +222,10 @@
                                     <img src="{{ url('public/supportstaff/' . $profile->image) }}" id="imagePreview" class="datatable_img mt-3" style="width: 60px;">
                                     @elseif($profile->role == 'accountant')
                                     <img src="{{ url('public/accountant/' . $profile->image) }}" id="imagePreview" class="datatable_img mt-3" style="width: 60px;">
+                                    @elseif($profile->role == 'branch_admin')
+                                    <img src="{{ url('public/branch_admin/' . $profile->image) }}" id="imagePreview" class="datatable_img mt-3" style="width: 60px;">
+                                    @elseif($profile->role == 'Supplier')
+                                    <img src="{{ url('public/supplier/' . $profile->image) }}" id="imagePreview" class="datatable_img mt-3" style="width: 60px;">
                                     @endif
                                     @if ($errors->has('image'))
                                     <span class="help-block">
