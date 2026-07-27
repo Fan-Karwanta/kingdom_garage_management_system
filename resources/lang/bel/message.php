@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'Увядзіце толькі лічбавыя дадзеныя.',
     'Out date is required.' => 'Патрабуецца дата.',
     'System name is required.' => 'Патрабуецца назва сістэмы.',
-    'System name must be alphabets, numbers and space.' => 'Назва сістэмы павінна быць алфавітам, нумарамі і прасторай.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Назва сістэмы павінна быць алфавітам, нумарамі і прасторай.',
     'Phone number is required.' => 'Патрабуецца нумар тэлефона.',
     'Phone number minimum 6 digits.' => 'Нумар тэлефона мінімум 6 лічбаў.',
     'Phone number maximum 16 digits.' => 'Нумар тэлефона Максімум 16 лічбаў.',

@@ -1241,7 +1241,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'Nama sistem diperlukan.',
-    'System name must be alphabets, numbers and space.' => 'Nama sistem harus berupa huruf, angka dan spasi.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Nama sistem harus berupa huruf, angka dan spasi.',
     'Phone number is required.' => 'Diperlukan nomor telepon.',
     'Phone number minimum 6 digits.' => 'Nomor telepon minimal 6 digit.',
     'Phone number maximum 16 digits.' => 'Nomor telepon maksimal 16 digit.',

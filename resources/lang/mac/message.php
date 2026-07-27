@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Внесете само нумерички податоци.',
     'Out date is required.' => 'Потребен е датум.',
     'System name is required.' => 'Потребно е име на системот.',
-    'System name must be alphabets, numbers and space.' => 'Името на системот мора да биде азбуки, броеви и простор.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Името на системот мора да биде азбуки, броеви и простор.',
     'Phone number is required.' => 'Потребен е телефонски број.',
     'Phone number minimum 6 digits.' => 'Телефонски број минимум 6 цифри.',
     'Phone number maximum 16 digits.' => 'Телефонски број максимум 16 цифри.',

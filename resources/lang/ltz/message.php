@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'Gitt nëmmen numeresch Donnéeën.',
     'Out date is required.' => 'Erauszéien ass erfuerderlech.',
     'System name is required.' => 'System Numm ass erfuerderlech.',
-    'System name must be alphabets, numbers and space.' => 'System Numm muss Alphabeten, Zuelen a Raum sinn.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'System Numm muss Alphabeten, Zuelen a Raum sinn.',
     'Phone number is required.' => 'Telefonsnummer ass erfuerderlech.',
     'Phone number minimum 6 digits.' => 'Telefonsnummer Minimum 6 Zifferen.',
     'Phone number maximum 16 digits.' => 'Telefonsnummer maximal 16 Zifferen.',

@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Gali xogta kaliya ee lambar.',
     'Out date is required.' => 'Taariikhda dibedda ayaa loo baahan yahay.',
     'System name is required.' => 'Magaca nidaamka ayaa loo baahan yahay.',
-    'System name must be alphabets, numbers and space.' => 'Magaca Nidaamka waa inuu ahaadaa mid xarfaha, nambarada iyo booska.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Magaca Nidaamka waa inuu ahaadaa mid xarfaha, nambarada iyo booska.',
     'Phone number is required.' => 'Lambarka taleefanka ayaa loo baahan yahay.',
     'Phone number minimum 6 digits.' => 'Lambarka taleefanka ugu yaraan 6 lambar.',
     'Phone number maximum 16 digits.' => 'Lambarka taleefanka ugu badnaan 16 lambar.',

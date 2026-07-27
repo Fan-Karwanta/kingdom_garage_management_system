@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Fier allinich numerike gegevens yn.',
     'Out date is required.' => 'Ut datum is fereaske.',
     'System name is required.' => 'Systeemnamme is fereaske.',
-    'System name must be alphabets, numbers and space.' => 'Systeemnamme moat alfabetten, sifers en romte wêze.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Systeemnamme moat alfabetten, sifers en romte wêze.',
     'Phone number is required.' => 'Telefoannûmer is fereaske.',
     'Phone number minimum 6 digits.' => 'Telefoannûmer Minimaal 6 sifers.',
     'Phone number maximum 16 digits.' => 'Telefoannûmer Maksimaal 16 sifers.',

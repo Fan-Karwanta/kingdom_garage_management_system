@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'Մուտքագրեք միայն թվային տվյալներ => ',
     'Out date is required.' => 'Պահանջվում է դուրս ամսաթիվը => ',
     'System name is required.' => 'Պահանջվում է համակարգի անվանումը => ',
-    'System name must be alphabets, numbers and space.' => 'Համակարգի անունը պետք է լինի այբուբեններ, համարներ եւ տարածքներ => ',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Համակարգի անունը պետք է լինի այբուբեններ, համարներ եւ տարածքներ => ',
     'Phone number is required.' => 'Հեռախոսահամարը պահանջվում է => ',
     'Phone number minimum 6 digits.' => 'Հեռախոսահամարի նվազագույն 6 թվանշան => ',
     'Phone number maximum 16 digits.' => 'Հեռախոսահամարը առավելագույնը 16 թվանշան => ',

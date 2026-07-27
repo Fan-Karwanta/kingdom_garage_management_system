@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'نام سیستم مورد نیاز است.',
-    'System name must be alphabets, numbers and space.' => 'نام سیستم باید حروف الفبا، اعداد و فاصله باشد.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'نام سیستم باید حروف الفبا، اعداد و فاصله باشد.',
     'Phone number is required.' => 'شماره تلفن الزامی است.',
     'Phone number minimum 6 digits.' => 'شماره تلفن حداقل 6 رقمی',
     'Phone number maximum 16 digits.' => 'شماره تلفن حداکثر 16 رقمی',

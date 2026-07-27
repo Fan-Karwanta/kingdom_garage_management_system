@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Vendosni vetëm të dhëna numerike.',
     'Out date is required.' => 'Kërkohet data jashtë.',
     'System name is required.' => 'Kërkohet emri i sistemit.',
-    'System name must be alphabets, numbers and space.' => 'Emri i sistemit duhet të jetë alfabete, numra dhe hapësirë.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Emri i sistemit duhet të jetë alfabete, numra dhe hapësirë.',
     'Phone number is required.' => 'Kërkohet numri i telefonit.',
     'Phone number minimum 6 digits.' => 'Numri i telefonit minimumi 6 shifra.',
     'Phone number maximum 16 digits.' => 'Numri i telefonit maksimal 16 shifra.',

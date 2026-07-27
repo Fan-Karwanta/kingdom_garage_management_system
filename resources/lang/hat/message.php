@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Antre sèlman done nimerik.',
     'Out date is required.' => 'Dat soti obligatwa.',
     'System name is required.' => 'Non sistèm lan obligatwa.',
-    'System name must be alphabets, numbers and space.' => 'Non sistèm yo dwe alfabè, nimewo ak espas.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Non sistèm yo dwe alfabè, nimewo ak espas.',
     'Phone number is required.' => 'Nimewo telefòn obligatwa.',
     'Phone number minimum 6 digits.' => 'Nimewo telefòn minimòm 6 chif.',
     'Phone number maximum 16 digits.' => 'Nimewo telefòn maksimòm 16 chif.',

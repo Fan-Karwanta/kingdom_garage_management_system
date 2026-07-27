@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => '仅输入数字数据。',
     'Out date is required.' => '需要淘汰日期。',
     'System name is required.' => '需要系统名称。',
-    'System name must be alphabets, numbers and space.' => '系统名称必须是字母，数字和空间。',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => '系统名称必须是字母，数字和空间。',
     'Phone number is required.' => '需要电话号码。',
     'Phone number minimum 6 digits.' => '电话号码至少6位数字。',
     'Phone number maximum 16 digits.' => '电话号码最多16位数字。',

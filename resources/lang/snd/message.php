@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'صرف عددي ڊيٽا داخل ڪريو.',
     'Out date is required.' => 'تاريخ جي ضرورت آهي.',
     'System name is required.' => 'سسٽم جو نالو گهربل آهي.',
-    'System name must be alphabets, numbers and space.' => 'سسٽم جو نالو لازمي طور تي الفابيٽ، نمبر ۽ جڳهه هجڻ گهرجي.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'سسٽم جو نالو لازمي طور تي الفابيٽ، نمبر ۽ جڳهه هجڻ گهرجي.',
     'Phone number is required.' => 'فون نمبر گهربل آهي.',
     'Phone number minimum 6 digits.' => 'فون نمبر گهٽ ۾ گهٽ 6 عدد.',
     'Phone number maximum 16 digits.' => 'فون نمبر وڌ کان وڌ 16 عدد.',

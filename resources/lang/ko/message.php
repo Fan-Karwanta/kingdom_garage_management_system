@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => '숫자 데이터 만 입력하십시오.',
     'Out date is required.' => '출력 날짜가 필요합니다.',
     'System name is required.' => '시스템 이름이 필요합니다.',
-    'System name must be alphabets, numbers and space.' => '시스템 이름은 알파벳, 숫자 및 공간이어야합니다.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => '시스템 이름은 알파벳, 숫자 및 공간이어야합니다.',
     'Phone number is required.' => '전화 번호가 필요합니다.',
     'Phone number minimum 6 digits.' => '전화 번호 최소 6 자리.',
     'Phone number maximum 16 digits.' => '전화 번호 최대 16 자리.',

@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'El nom del sistema és obligatori.',
-    'System name must be alphabets, numbers and space.' => 'El nom del sistema ha de ser alfabets, números i espais.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'El nom del sistema ha de ser alfabets, números i espais.',
     'Phone number is required.' => 'El número de telèfon és obligatori.',
     'Phone number minimum 6 digits.' => 'Número de telèfon mínim de 6 dígits.',
     'Phone number maximum 16 digits.' => 'Número de telèfon màxim de 16 dígits.',

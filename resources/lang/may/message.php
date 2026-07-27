@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Masukkan hanya data angka.',
     'Out date is required.' => 'Tarikh keluar diperlukan.',
     'System name is required.' => 'Nama sistem diperlukan.',
-    'System name must be alphabets, numbers and space.' => 'Nama sistem mestilah abjad, nombor dan ruang.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Nama sistem mestilah abjad, nombor dan ruang.',
     'Phone number is required.' => 'Nombor telefon diperlukan.',
     'Phone number minimum 6 digits.' => 'Nombor telefon minimum 6 digit.',
     'Phone number maximum 16 digits.' => 'Nombor telefon maksimum 16 digit.',

@@ -1247,7 +1247,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'સિસ્ટમનું નામ જરૂરી છે.',
-    'System name must be alphabets, numbers and space.' => 'સિસ્ટમનું નામ મૂળાક્ષરો, સંખ્યાઓ અને જગ્યા હોવી જોઈએ.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'સિસ્ટમનું નામ મૂળાક્ષરો, સંખ્યાઓ અને જગ્યા હોવી જોઈએ.',
     'Phone number is required.' => 'ફોન નંબર જરૂરી છે.',
     'Phone number minimum 6 digits.' => 'ફોન નંબર ઓછામાં ઓછા 6 અંકો.',
     'Phone number maximum 16 digits.' => 'ફોન નંબર મહત્તમ 16 અંકો.',

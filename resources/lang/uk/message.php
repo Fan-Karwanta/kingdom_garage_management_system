@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Введіть лише числові дані.',
     'Out date is required.' => 'Потрібна дата.',
     'System name is required.' => 'Назва системи необхідна.',
-    'System name must be alphabets, numbers and space.' => 'Назва системи повинна бути алфавітами, цифрами та простором.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Назва системи повинна бути алфавітами, цифрами та простором.',
     'Phone number is required.' => 'Потрібен номер телефону.',
     'Phone number minimum 6 digits.' => 'Номер телефону Мінімум 6 цифр.',
     'Phone number maximum 16 digits.' => 'Номер телефону Максимум 16 цифр.',

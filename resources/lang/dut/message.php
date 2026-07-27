@@ -1252,7 +1252,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'Systeemnaam is vereist.',
-    'System name must be alphabets, numbers and space.' => 'Systeemnaam moet letters, cijfers en spatie bevatten.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Systeemnaam moet letters, cijfers en spatie bevatten.',
     'Phone number is required.' => 'Telefoonnummer is vereist.',
     'Phone number minimum 6 digits.' => 'Telefoonnummer minimaal 6 cijfers.',
     'Phone number maximum 16 digits.' => 'Telefoonnummer maximaal 16 cijfers.',

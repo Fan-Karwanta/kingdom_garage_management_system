@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Ampidiro ny angon-drakitra isa fotsiny.',
     'Out date is required.' => 'Ilaina ny daty.',
     'System name is required.' => 'Ilaina ny anarana rafitra.',
-    'System name must be alphabets, numbers and space.' => 'Ny anarana sy ny rafitra dia tsy maintsy alphabets, isa ary toerana.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Ny anarana sy ny rafitra dia tsy maintsy alphabets, isa ary toerana.',
     'Phone number is required.' => 'Ilaina ny nomeraon-telefaona.',
     'Phone number minimum 6 digits.' => 'Nomeraon-telefaona farafahakeliny 6 isa.',
     'Phone number maximum 16 digits.' => 'Laharana finday 16 isa indrindra.',

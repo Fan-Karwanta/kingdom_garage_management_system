@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'ಸಂಖ್ಯಾ ಡೇಟಾವನ್ನು ಮಾತ್ರ ನಮೂದಿಸಿ.',
     'Out date is required.' => 'Date ಟ್ ದಿನಾಂಕದ ಅಗತ್ಯವಿದೆ.',
     'System name is required.' => 'ಸಿಸ್ಟಮ್ ಹೆಸರು ಅಗತ್ಯವಿದೆ.',
-    'System name must be alphabets, numbers and space.' => 'ಸಿಸ್ಟಮ್ ಹೆಸರು ವರ್ಣಮಾಲೆಗಳು, ಸಂಖ್ಯೆಗಳು ಮತ್ತು ಸ್ಥಳವಾಗಿರಬೇಕು.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'ಸಿಸ್ಟಮ್ ಹೆಸರು ವರ್ಣಮಾಲೆಗಳು, ಸಂಖ್ಯೆಗಳು ಮತ್ತು ಸ್ಥಳವಾಗಿರಬೇಕು.',
     'Phone number is required.' => 'ಫೋನ್ ಸಂಖ್ಯೆ ಅಗತ್ಯವಿದೆ.',
     'Phone number minimum 6 digits.' => 'ಫೋನ್ ಸಂಖ್ಯೆ ಕನಿಷ್ಠ 6 ಅಂಕೆಗಳು.',
     'Phone number maximum 16 digits.' => 'ಫೋನ್ ಸಂಖ್ಯೆ ಗರಿಷ್ಠ 16 ಅಂಕೆಗಳು.',

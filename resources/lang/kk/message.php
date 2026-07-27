@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Тек сандық деректерді енгізіңіз.',
     'Out date is required.' => 'Күні қажет.',
     'System name is required.' => 'Жүйе атауы қажет.',
-    'System name must be alphabets, numbers and space.' => 'Жүйелік атау алфавиттер, сандар және кеңістік болуы керек.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Жүйелік атау алфавиттер, сандар және кеңістік болуы керек.',
     'Phone number is required.' => 'Телефон нөмірі қажет.',
     'Phone number minimum 6 digits.' => 'Телефон нөмірі Ең аз 6 сан.',
     'Phone number maximum 16 digits.' => 'Телефон нөмірі Ең көбі 16 сан.',

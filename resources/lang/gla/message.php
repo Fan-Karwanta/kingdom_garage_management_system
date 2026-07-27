@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Cuir a-steach an aon dàta àireamhach.',
     'Out date is required.' => 'Feumar ceann-latha a-mach.',
     'System name is required.' => 'Feumar ainm an t-siostaim.',
-    'System name must be alphabets, numbers and space.' => 'Feumaidh ainm an t-siostaim a bhith nan aibideil, àireamhan agus àite.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Feumaidh ainm an t-siostaim a bhith nan aibideil, àireamhan agus àite.',
     'Phone number is required.' => 'Feumar àireamh fòn.',
     'Phone number minimum 6 digits.' => "Àireamh fòn aon àireamhan aig a 'char as lugha.",
     'Phone number maximum 16 digits.' => 'Àireamh fòn 16 àireamhan as àirde.',

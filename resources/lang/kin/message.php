@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Injira gusa amakuru gusa.',
     'Out date is required.' => 'Itariki irakenewe.',
     'System name is required.' => 'Izina rya sisitemu irakenewe.',
-    'System name must be alphabets, numbers and space.' => "Izina rya sisitemu rigomba kuba inyuguti, imibare n'umwanya.",
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => "Izina rya sisitemu rigomba kuba inyuguti, imibare n'umwanya.",
     'Phone number is required.' => 'Nimero ya terefone irakenewe.',
     'Phone number minimum 6 digits.' => 'Nimero ya terefone byibuze imibare 6.',
     'Phone number maximum 16 digits.' => 'Nimero ntarengwa 16.',

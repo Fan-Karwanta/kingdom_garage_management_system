@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'Ná cuir isteach ach sonraí uimhriúla.',
     'Out date is required.' => 'Tá an dáta amach ag teastáil.',
     'System name is required.' => 'Teastaíonn ainm an chórais.',
-    'System name must be alphabets, numbers and space.' => 'Caithfidh ainm an chórais a bheith ina aibítrí, uimhreacha agus spás.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Caithfidh ainm an chórais a bheith ina aibítrí, uimhreacha agus spás.',
     'Phone number is required.' => 'Teastaíonn uimhir theileafóin.',
     'Phone number minimum 6 digits.' => 'Uimhir theileafóin 6 dhigit ar a laghad.',
     'Phone number maximum 16 digits.' => 'Uimhir theileafóin uasta 16 dhigit.',

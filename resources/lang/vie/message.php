@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'Tên hệ thống là bắt buộc.',
-    'System name must be alphabets, numbers and space.' => 'Tên hệ thống phải là bảng chữ cái, số và dấu cách.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Tên hệ thống phải là bảng chữ cái, số và dấu cách.',
     'Phone number is required.' => 'Số điện thoại là bắt buộc.',
     'Phone number minimum 6 digits.' => 'Số điện thoại tối thiểu 6 chữ số.',
     'Phone number maximum 16 digits.' => 'Số điện thoại tối đa 16 chữ số.',

@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'ต้องระบุชื่อระบบ',
-    'System name must be alphabets, numbers and space.' => 'システム名は、アルファベット、数字、スペースである必要があります。',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'システム名は、アルファベット、数字、スペースである必要があります。',
     'Phone number is required.' => 'ต้องระบุหมายเลขโทรศัพท์',
     'Phone number minimum 6 digits.' => 'หมายเลขโทรศัพท์ขั้นต่ำ 6 หลัก',
     'Phone number maximum 16 digits.' => 'หมายเลขโทรศัพท์สูงสุด 16 หลัก',

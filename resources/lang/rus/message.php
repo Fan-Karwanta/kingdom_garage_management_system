@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'Требуется имя системы.',
-    'System name must be alphabets, numbers and space.' => 'Имя системы должно состоять из букв, цифр и пробела.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Имя системы должно состоять из букв, цифр и пробела.',
     'Phone number is required.' => 'Требуется номер телефона.',
     'Phone number minimum 6 digits.' => 'Номер телефона минимум 6 цифр.',
     'Phone number maximum 16 digits.' => 'Номер телефона максимум 16 цифр.',

@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Faka idatha yezinombolo kuphela.',
     'Out date is required.' => 'Usuku oluphumayo luyadingeka.',
     'System name is required.' => 'Kudingeka igama lesistimu.',
-    'System name must be alphabets, numbers and space.' => 'Igama lesistimu kumele kube yizinhlamvu, izinombolo nendawo.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Igama lesistimu kumele kube yizinhlamvu, izinombolo nendawo.',
     'Phone number is required.' => 'Inombolo yocingo iyadingeka.',
     'Phone number minimum 6 digits.' => 'Inombolo yefoni ubuncane benombolo engu-6.',
     'Phone number maximum 16 digits.' => 'Inombolo yocingo ephezulu ngamadijithi ayi-16.',

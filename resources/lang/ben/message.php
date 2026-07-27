@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'শুধুমাত্র সংখ্যার ডেটা লিখুন।',
     'Out date is required.' => 'আউট তারিখ প্রয়োজন।',
     'System name is required.' => 'সিস্টেমের নাম প্রয়োজন।',
-    'System name must be alphabets, numbers and space.' => 'সিস্টেমের নাম অবশ্যই বর্ণমালা, সংখ্যা এবং স্থান হতে হবে।',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'সিস্টেমের নাম অবশ্যই বর্ণমালা, সংখ্যা এবং স্থান হতে হবে।',
     'Phone number is required.' => 'ফোন নম্বর প্রয়োজন।',
     'Phone number minimum 6 digits.' => 'ফোন নম্বর সর্বনিম্ন 6 সংখ্যা।',
     'Phone number maximum 16 digits.' => 'ফোন নম্বর সর্বোচ্চ 16 সংখ্যা।',

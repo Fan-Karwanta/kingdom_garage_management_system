@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'संख्यात्मक डाटा मात्र प्रविष्ट गर्नुहोस्।',
     'Out date is required.' => 'बाहिर मिति आवश्यक छ।',
     'System name is required.' => 'प्रणाली नाम आवश्यक छ।',
-    'System name must be alphabets, numbers and space.' => 'प्रणाली नाम अक्षर, संख्या र स्पेस हुनु पर्छ।',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'प्रणाली नाम अक्षर, संख्या र स्पेस हुनु पर्छ।',
     'Phone number is required.' => 'फोन नम्बर आवश्यक छ।',
     'Phone number minimum 6 digits.' => 'फोन नम्बर न्यूनतम digit अंकहरू।',
     'Phone number maximum 16 digits.' => 'फोन नम्बर अधिकतम 1 digit अंकहरू।',

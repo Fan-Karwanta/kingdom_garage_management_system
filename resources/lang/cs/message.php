@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'Název systému je povinný.',
-    'System name must be alphabets, numbers and space.' => 'Název systému musí obsahovat abecedy, čísla a mezery.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Název systému musí obsahovat abecedy, čísla a mezery.',
     'Phone number is required.' => 'Telefonní číslo je povinné.',
     'Phone number minimum 6 digits.' => 'Telefonní číslo minimálně 6 číslic.',
     'Phone number maximum 16 digits.' => 'Telefonní číslo může mít maximálně 16 číslic.',

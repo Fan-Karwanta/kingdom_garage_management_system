@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Diňe san maglumatlary giriziň.',
     'Out date is required.' => 'Çykyş senesi talap edilýär.',
     'System name is required.' => 'Ulgamyň ady talap edilýär.',
-    'System name must be alphabets, numbers and space.' => 'Ulgamyň ady elipbiý bolmaly, sanlar we kosmos bolmaly.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Ulgamyň ady elipbiý bolmaly, sanlar we kosmos bolmaly.',
     'Phone number is required.' => 'Telefon belgisi talap edilýär.',
     'Phone number minimum 6 digits.' => 'Telefon belgisi iň pes 6 san.',
     'Phone number maximum 16 digits.' => 'Iň ýokary 16 san.',

@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Kenya lintlha tse ngata tsa lipalo.',
     'Out date is required.' => 'Ho hlokahala letsatsi la ho tsoa.',
     'System name is required.' => 'Ho hlokahala lebitso la sistimi.',
-    'System name must be alphabets, numbers and space.' => 'Lebitso la sistimi e tlameha ho ba li-alfabets, linomoro le sebaka.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Lebitso la sistimi e tlameha ho ba li-alfabets, linomoro le sebaka.',
     'Phone number is required.' => 'Nomoro ea mohala ea hlokahala.',
     'Phone number minimum 6 digits.' => 'Nomoro ea mohala bonyane linomoro tse 6.',
     'Phone number maximum 16 digits.' => 'Nomoro ea linomoro tsa mohala tse 16.',

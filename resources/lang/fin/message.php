@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'Järjestelmän nimi vaaditaan.',
-    'System name must be alphabets, numbers and space.' => 'Järjestelmän nimessä on oltava aakkoset, numerot ja välilyönti.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Järjestelmän nimessä on oltava aakkoset, numerot ja välilyönti.',
     'Phone number is required.' => 'Puhelinnumero vaaditaan.',
     'Phone number minimum 6 digits.' => 'Puhelinnumero vähintään 6 numeroa.',
     'Phone number maximum 16 digits.' => 'Puhelinnumero enintään 16 numeroa.',

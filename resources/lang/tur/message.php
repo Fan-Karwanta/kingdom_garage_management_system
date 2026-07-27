@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'Sistem adı gerekli.',
-    'System name must be alphabets, numbers and space.' => 'Sistem adı harf, sayı ve boşluk olmalıdır.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Sistem adı harf, sayı ve boşluk olmalıdır.',
     'Phone number is required.' => 'Telefon numarası gerekli.',
     'Phone number minimum 6 digits.' => 'Telefon numarası en az 6 haneli.',
     'Phone number maximum 16 digits.' => 'Telefon numarası maksimum 16 hanelidir.',

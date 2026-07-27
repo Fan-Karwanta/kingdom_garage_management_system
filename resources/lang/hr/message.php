@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'Naziv sustava je obavezan.',
-    'System name must be alphabets, numbers and space.' => 'Naziv sustava mora biti abeceda, brojevi i razmak.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Naziv sustava mora biti abeceda, brojevi i razmak.',
     'Phone number is required.' => 'Broj telefona je obavezan.',
     'Phone number minimum 6 digits.' => 'Telefonski broj najmanje 6 znamenki.',
     'Phone number maximum 16 digits.' => 'Telefonski broj ima najviše 16 znamenki.',

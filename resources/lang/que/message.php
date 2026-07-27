@@ -1259,7 +1259,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'System name is required.',
-    'System name must be alphabets, numbers and space.' => 'System name must be alphabets, numbers and space.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).',
     'Phone number is required.' => 'Phone number is required.',
     'Phone number minimum 6 digits.' => 'Phone number minimum 6 digits.',
     'Phone number maximum 16 digits.' => 'Phone number maximum 16 digits.',

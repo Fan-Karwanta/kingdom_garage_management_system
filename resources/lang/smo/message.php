@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Ulufale na o numera numera numera.',
     'Out date is required.' => 'O le aso e manaʻomia.',
     'System name is required.' => 'E manaʻomia le igoa o le igoa.',
-    'System name must be alphabets, numbers and space.' => 'System igoa e tatau ona mataʻitusi, numera ma le avanoa.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'System igoa e tatau ona mataʻitusi, numera ma le avanoa.',
     'Phone number is required.' => 'E manaʻomia le numera telefoni.',
     'Phone number minimum 6 digits.' => 'Telefoni numera numera 6 numera.',
     'Phone number maximum 16 digits.' => 'Telefoni numera maualuga 16 numera.',

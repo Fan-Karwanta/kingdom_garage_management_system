@@ -25,7 +25,7 @@ class StoreGeneralSettingEditFormRequest extends FormRequest
     {
         return [
             // 'System_Name' => 'required|regex:/^[a-zA-Z][a-zA-Z0-9\s]*$/',
-            'System_Name' => 'required|regex:/^[(a-zA-Z\s)\p{N}\p{L}]+$/u',
+            'System_Name' => 'required|regex:/^[\p{L}\p{N}\s|&._,\-()]+$/u',
             'Phone_Number' => 'required|min:6|max:16|regex:/^[- +()]*[0-9][- +()0-9]*$/',
             'Email' => 'required|email',
             'address' => 'required',
@@ -40,7 +40,7 @@ class StoreGeneralSettingEditFormRequest extends FormRequest
     {
         return [
             'System_Name.required' => trans('message.System name is required.'),
-            'System_Name.regex' => trans('message.System name must be alphabets, numbers and space.'),
+            'System_Name.regex' => trans('message.System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).'),
 
             'Phone_Number.required' => trans('message.Phone number is required.'),
             'Phone_Number.min' => trans('message.Phone number minimum 6 digits.'),

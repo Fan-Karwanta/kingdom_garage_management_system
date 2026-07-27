@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Tenê daneyên hejmarê binivîse.',
     'Out date is required.' => 'Date Date hewce ye.',
     'System name is required.' => 'Navê pergalê pêdivî ye.',
-    'System name must be alphabets, numbers and space.' => 'Navê pergalê divê alfabeyan, hejmar û cîh be.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Navê pergalê divê alfabeyan, hejmar û cîh be.',
     'Phone number is required.' => 'Hejmara têlefonê pêdivî ye.',
     'Phone number minimum 6 digits.' => 'Hejmara Telefonê kêmtirîn 6 hejmar.',
     'Phone number maximum 16 digits.' => 'Hejmara têlefonê herî zêde 16 hejmar.',

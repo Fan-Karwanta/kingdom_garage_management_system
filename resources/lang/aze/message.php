@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'Yalnız rəqəmli məlumatları daxil edin.',
     'Out date is required.' => 'Proqramı tələb olunur.',
     'System name is required.' => 'Sistem adı tələb olunur.',
-    'System name must be alphabets, numbers and space.' => 'Sistem adı əlifbalar, nömrələr və məkan olmalıdır.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Sistem adı əlifbalar, nömrələr və məkan olmalıdır.',
     'Phone number is required.' => 'Telefon nömrəsi tələb olunur.',
     'Phone number minimum 6 digits.' => 'Telefon nömrəsi minimum 6 rəqəm.',
     'Phone number maximum 16 digits.' => 'Telefon nömrəsi maksimum 16 rəqəm.',

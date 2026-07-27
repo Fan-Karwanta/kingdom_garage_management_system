@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Daħħal biss dejta numerika.',
     'Out date is required.' => 'Id-data barra hija meħtieġa.',
     'System name is required.' => 'Isem tas-sistema huwa meħtieġ.',
-    'System name must be alphabets, numbers and space.' => 'L-isem tas-sistema għandu jkun alfabeti, numri u spazju.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'L-isem tas-sistema għandu jkun alfabeti, numri u spazju.',
     'Phone number is required.' => 'Numru tat-telefon huwa meħtieġ.',
     'Phone number minimum 6 digits.' => "Numru tat-telefon minimu ta '6 ċifri.",
     'Phone number maximum 16 digits.' => 'Numru tat-telefon massimu 16-il ċifra.',

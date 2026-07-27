@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'Systemnavn er påkrevd.',
-    'System name must be alphabets, numbers and space.' => 'Systemnavnet må være alfabeter, tall og mellomrom.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Systemnavnet må være alfabeter, tall og mellomrom.',
     'Phone number is required.' => 'Telefonnummer er påkrevd.',
     'Phone number minimum 6 digits.' => 'Telefonnummer minimum 6 sifre.',
     'Phone number maximum 16 digits.' => 'Telefonnummer maksimalt 16 sifre.',

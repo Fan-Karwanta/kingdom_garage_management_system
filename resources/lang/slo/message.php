@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Zadajte iba číselné údaje.',
     'Out date is required.' => 'Vyžaduje sa dátum vonku.',
     'System name is required.' => 'Vyžaduje sa názov systému.',
-    'System name must be alphabets, numbers and space.' => 'Názov systému musí byť abecedy, čísla a priestor.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Názov systému musí byť abecedy, čísla a priestor.',
     'Phone number is required.' => 'Vyžaduje sa telefónne číslo.',
     'Phone number minimum 6 digits.' => 'Telefónne číslo minimálne 6 číslic.',
     'Phone number maximum 16 digits.' => 'Telefónne číslo maximálne 16 číslic.',

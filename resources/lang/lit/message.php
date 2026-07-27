@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'Būtinas sistemos pavadinimas.',
-    'System name must be alphabets, numbers and space.' => 'Sistemos pavadinimą turi sudaryti abėcėlė, skaičiai ir tarpas.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Sistemos pavadinimą turi sudaryti abėcėlė, skaičiai ir tarpas.',
     'Phone number is required.' => 'Reikalingas telefono numeris.',
     'Phone number minimum 6 digits.' => 'Telefono numeris mažiausiai 6 skaitmenys.',
     'Phone number maximum 16 digits.' => 'Telefono numeris daugiausia 16 skaitmenų.',

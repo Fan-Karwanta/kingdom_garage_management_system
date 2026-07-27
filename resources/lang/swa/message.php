@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Ingiza data ya nambari tu.',
     'Out date is required.' => 'Tarehe ya nje inahitajika.',
     'System name is required.' => 'Jina la mfumo linahitajika.',
-    'System name must be alphabets, numbers and space.' => 'Jina la mfumo lazima liwe alphabets, nambari na nafasi.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Jina la mfumo lazima liwe alphabets, nambari na nafasi.',
     'Phone number is required.' => 'Nambari ya simu inahitajika.',
     'Phone number minimum 6 digits.' => 'Nambari ya simu ya chini nambari 6.',
     'Phone number maximum 16 digits.' => 'Nambari ya simu upeo wa nambari 16.',

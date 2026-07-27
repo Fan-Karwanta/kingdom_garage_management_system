@@ -1034,7 +1034,7 @@ return [
     'Enter only numeric data.' => 'Voer slegs numeriese data in.',
     'Out date is required.' => 'Uitdatum is nodig.',
     'System name is required.' => 'Stelselnaam is nodig.',
-    'System name must be alphabets, numbers and space.' => 'Stelselnaam moet alfabet, getalle en ruimte wees.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Stelselnaam moet alfabet, getalle en ruimte wees.',
     'Phone number is required.' => 'Telefoonnommer is nodig.',
     'Phone number minimum 6 digits.' => 'Telefoonnommer minimum 6 syfers.',
     'Phone number maximum 16 digits.' => 'Telefoonnommer Maksimum 16 syfers.',

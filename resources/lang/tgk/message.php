@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Танҳо маълумоти рақамӣ ворид кунед.',
     'Out date is required.' => 'Таъмини сана лозим аст.',
     'System name is required.' => 'Номи система талаб карда мешавад.',
-    'System name must be alphabets, numbers and space.' => 'Номи система бояд алифбо, рақамҳо ва фазо бошад.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Номи система бояд алифбо, рақамҳо ва фазо бошад.',
     'Phone number is required.' => 'Рақами телефон лозим аст.',
     'Phone number minimum 6 digits.' => 'Рақами телефони телефонӣ 6 рақам.',
     'Phone number maximum 16 digits.' => 'Рақами телефони 1 рақам.',

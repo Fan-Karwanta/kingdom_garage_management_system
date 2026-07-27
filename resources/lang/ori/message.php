@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'କେବଳ ସାଂଖ୍ୟିକ ତଥ୍ୟ ପ୍ରବେଶ କରନ୍ତୁ |',
     'Out date is required.' => 'ପୁରୁଣା ତାରିଖ ଆବଶ୍ୟକ |',
     'System name is required.' => 'ସିଷ୍ଟମ୍ ନାମ ଆବଶ୍ୟକ |',
-    'System name must be alphabets, numbers and space.' => 'ସିଷ୍ଟମ୍ ନାମ ବର୍ଣ୍ଣମାଳା, ସଂଖ୍ୟା ଏବଂ ସ୍ଥାନ ହେବା ଜରୁରୀ |',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'ସିଷ୍ଟମ୍ ନାମ ବର୍ଣ୍ଣମାଳା, ସଂଖ୍ୟା ଏବଂ ସ୍ଥାନ ହେବା ଜରୁରୀ |',
     'Phone number is required.' => 'ଫୋନ୍ ନମ୍ବର ଆବଶ୍ୟକ |',
     'Phone number minimum 6 digits.' => 'ଫୋନ୍ ନମ୍ବର ସର୍ବନିମ୍ନ 6 ଅଙ୍କ |',
     'Phone number maximum 16 digits.' => 'ଫୋନ୍ ନମ୍ବର ସର୍ବାଧିକ 16 ଅଙ୍କ |',

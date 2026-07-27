@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'സംഖ്യാ ഡാറ്റ മാത്രം നൽകുക.',
     'Out date is required.' => 'Out ട്ട് തീയതി ആവശ്യമാണ്.',
     'System name is required.' => 'സിസ്റ്റം നാമം ആവശ്യമാണ്.',
-    'System name must be alphabets, numbers and space.' => 'സിസ്റ്റം നാമം അക്ഷരമാല, അക്കങ്ങൾ, ഇടം എന്നിവ ആയിരിക്കണം.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'സിസ്റ്റം നാമം അക്ഷരമാല, അക്കങ്ങൾ, ഇടം എന്നിവ ആയിരിക്കണം.',
     'Phone number is required.' => 'ഫോൺ നമ്പർ ആവശ്യമാണ്.',
     'Phone number minimum 6 digits.' => 'ഫോൺ നമ്പർ കുറഞ്ഞത് 6 അക്കങ്ങൾ.',
     'Phone number maximum 16 digits.' => 'ഫോൺ നമ്പർ പരമാവധി 16 അക്കങ്ങൾ.',

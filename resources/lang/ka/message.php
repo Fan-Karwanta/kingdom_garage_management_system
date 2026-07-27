@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'შეიყვანეთ მხოლოდ ციფრული მონაცემები.',
     'Out date is required.' => 'საჭირო თარიღია.',
     'System name is required.' => 'საჭიროა სისტემის სახელი.',
-    'System name must be alphabets, numbers and space.' => 'სისტემის სახელი უნდა იყოს ანბანი, რიცხვები და სივრცე.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'სისტემის სახელი უნდა იყოს ანბანი, რიცხვები და სივრცე.',
     'Phone number is required.' => 'საჭიროა ტელეფონის ნომერი.',
     'Phone number minimum 6 digits.' => 'ტელეფონის ნომერი მინიმალური 6 ციფრი.',
     'Phone number maximum 16 digits.' => 'ტელეფონის ნომერი მაქსიმალური 16 ციფრი.',

@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Ipasok lamang ang data na numero.',
     'Out date is required.' => 'Kinakailangan ang petsa ng labas.',
     'System name is required.' => 'Kinakailangan ang pangalan ng system.',
-    'System name must be alphabets, numbers and space.' => 'Ang pangalan ng system ay dapat na mga titik, numero at puwang.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Ang pangalan ng system ay dapat na mga titik, numero at puwang.',
     'Phone number is required.' => 'Kinakailangan ang numero ng telepono.',
     'Phone number minimum 6 digits.' => 'Numero ng Telepono Minimum 6 na numero.',
     'Phone number maximum 16 digits.' => 'Numero ng telepono ng maximum na 16 na numero.',

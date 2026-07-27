@@ -1032,7 +1032,7 @@ return [
     'Enter only numeric data.' => 'បញ្ចូលតែទិន្នន័យលេខប៉ុណ្ណោះ។',
     'Out date is required.' => 'កាលបរិច្ឆេទផុតកំណត់។',
     'System name is required.' => 'ឈ្មោះប្រព័ន្ធត្រូវបានទាមទារ។',
-    'System name must be alphabets, numbers and space.' => 'ឈ្មោះប្រព័ន្ធត្រូវតែមានអក្សរក្រមលេខនិងចន្លោះ។',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'ឈ្មោះប្រព័ន្ធត្រូវតែមានអក្សរក្រមលេខនិងចន្លោះ។',
     'Phone number is required.' => 'លេខទូរស័ព្ទត្រូវបានទាមទារ។',
     'Phone number minimum 6 digits.' => 'លេខទូរស័ព្ទអប្បបរមា 6 ខ្ទង់។',
     'Phone number maximum 16 digits.' => 'លេខទូរស័ព្ទអតិបរមា 16 ខ្ទង់។',

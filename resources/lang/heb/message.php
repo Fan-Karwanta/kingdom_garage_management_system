@@ -1249,7 +1249,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'נדרש שם מערכת.',
-    'System name must be alphabets, numbers and space.' => 'שם המערכת חייב להיות אלפבית, מספרים ורווח.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'שם המערכת חייב להיות אלפבית, מספרים ורווח.',
     'Phone number is required.' => 'נדרש מספר טלפון.',
     'Phone number minimum 6 digits.' => 'מספר טלפון מינימום 6 ספרות.',
     'Phone number maximum 16 digits.' => 'מספר טלפון מקסימום 16 ספרות.',

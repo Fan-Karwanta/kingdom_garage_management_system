@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'Unesite samo numeričke podatke.',
     'Out date is required.' => 'Odlazak je potreban datum.',
     'System name is required.' => 'Potrebno je ime sistema.',
-    'System name must be alphabets, numbers and space.' => 'Naziv sistema mora biti abecede, brojevi i prostor.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Naziv sistema mora biti abecede, brojevi i prostor.',
     'Phone number is required.' => 'Potreban je telefonski broj.',
     'Phone number minimum 6 digits.' => 'Broj telefona najmanje 6 cifara.',
     'Phone number maximum 16 digits.' => 'Telefonski broj maksimalno 16 cifara.',

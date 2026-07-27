@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'A rendszernév megadása kötelező.',
-    'System name must be alphabets, numbers and space.' => 'A rendszernévnek ábécéből, számokból és szóközből kell állnia.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'A rendszernévnek ábécéből, számokból és szóközből kell állnia.',
     'Phone number is required.' => 'Telefonszám megadása kötelező.',
     'Phone number minimum 6 digits.' => 'Telefonszám minimum 6 számjegy.',
     'Phone number maximum 16 digits.' => 'A telefonszám maximum 16 számjegyű.',

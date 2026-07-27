@@ -1247,7 +1247,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'システム名が必要です。',
-    'System name must be alphabets, numbers and space.' => 'システム名は、アルファベット、数字、スペースである必要があります。',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'システム名は、アルファベット、数字、スペースである必要があります。',
     'Phone number is required.' => '電話番号が必要です。',
     'Phone number minimum 6 digits.' => '電話番号は6桁以上。',
     'Phone number maximum 16 digits.' => '電話番号は最大16桁です。',

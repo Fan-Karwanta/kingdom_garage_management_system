@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'Rhowch ddata rhifol yn unig.',
     'Out date is required.' => 'Mae angen dyddiad allan.',
     'System name is required.' => "Mae angen enw'r system.",
-    'System name must be alphabets, numbers and space.' => "Rhaid i enw'r system fod yn wyddor, rhifau a gofod.",
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => "Rhaid i enw'r system fod yn wyddor, rhifau a gofod.",
     'Phone number is required.' => 'Mae angen rhif ffôn.',
     'Phone number minimum 6 digits.' => 'Rhif ffôn o leiaf 6 digid.',
     'Phone number maximum 16 digits.' => 'Rhif ffôn ar y mwyaf o 16 digid.',

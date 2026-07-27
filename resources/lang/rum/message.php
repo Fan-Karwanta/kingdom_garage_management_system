@@ -1248,7 +1248,7 @@ return [
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'Numele sistemului este obligatoriu.',
-    'System name must be alphabets, numbers and space.' => 'Numele sistemului trebuie să fie alfabet, numere și spațiu.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Numele sistemului trebuie să fie alfabet, numere și spațiu.',
     'Phone number is required.' => 'Numărul de telefon este obligatoriu.',
     'Phone number minimum 6 digits.' => 'Număr de telefon minim 6 cifre.',
     'Phone number maximum 16 digits.' => 'Număr de telefon maximum 16 cifre.',

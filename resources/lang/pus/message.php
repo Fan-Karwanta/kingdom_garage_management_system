@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'یوازې شمیره ډاټا دننه کړئ.',
     'Out date is required.' => 'د نیټې نیټه لازمي ده.',
     'System name is required.' => 'د سیسټم نوم اړین دی.',
-    'System name must be alphabets, numbers and space.' => 'د سیسټم نوم باید حرفونه، شمیرې او ځای وي.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'د سیسټم نوم باید حرفونه، شمیرې او ځای وي.',
     'Phone number is required.' => 'د تلیفون شمیره اړین ده.',
     'Phone number minimum 6 digits.' => 'د تلیفون شمیره لږترلږه 6 ګ digit ې.',
     'Phone number maximum 16 digits.' => 'د تلیفون شمیره 16 ګ digit ې.',

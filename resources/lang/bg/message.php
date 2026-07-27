@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'Въведете само цифрови данни.',
     'Out date is required.' => 'Изисква се дата навън.',
     'System name is required.' => 'Името на системата се изисква.',
-    'System name must be alphabets, numbers and space.' => 'Името на системата трябва да са азбуки, числа и пространство.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Името на системата трябва да са азбуки, числа и пространство.',
     'Phone number is required.' => 'Необходим е телефонен номер.',
     'Phone number minimum 6 digits.' => 'Телефонен номер минимум 6 цифри.',
     'Phone number maximum 16 digits.' => 'Телефонен номер Максимум 16 цифри.',

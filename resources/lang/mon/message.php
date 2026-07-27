@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Зөвхөн тоон мэдээллийг оруулна уу.',
     'Out date is required.' => 'Гарах огноо шаардлагатай байна.',
     'System name is required.' => 'Системийн нэр шаардлагатай байна.',
-    'System name must be alphabets, numbers and space.' => 'Системийн нэр нь цагаан толгой, тоо, орон зай байх ёстой.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Системийн нэр нь цагаан толгой, тоо, орон зай байх ёстой.',
     'Phone number is required.' => 'Утасны дугаар шаардлагатай байна.',
     'Phone number minimum 6 digits.' => 'Утасны дугаар хамгийн багадаа 6 оронтой тоо.',
     'Phone number maximum 16 digits.' => 'Утасны дугаар хамгийн ихдээ 16 оронтой тоо.',

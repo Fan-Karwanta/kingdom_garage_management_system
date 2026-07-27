@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Introduza só datos numéricos.',
     'Out date is required.' => 'É necesaria a data de saída.',
     'System name is required.' => 'É necesario o nome do sistema.',
-    'System name must be alphabets, numbers and space.' => 'O nome do sistema debe ser alfabetos, números e espazo.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'O nome do sistema debe ser alfabetos, números e espazo.',
     'Phone number is required.' => 'É necesario un número de teléfono.',
     'Phone number minimum 6 digits.' => 'Número de teléfono mínimo 6 díxitos.',
     'Phone number maximum 16 digits.' => 'Número de teléfono máximo 16 díxitos.',

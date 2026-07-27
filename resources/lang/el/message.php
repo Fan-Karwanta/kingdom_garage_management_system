@@ -1242,7 +1242,7 @@ return
 
     /********* Custom validation message translation (GeneralSetting Module) **********/
     'System name is required.' => 'Απαιτείται όνομα συστήματος.',
-    'System name must be alphabets, numbers and space.' => 'Το όνομα συστήματος πρέπει να είναι αλφάβητα, αριθμοί και κενό.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Το όνομα συστήματος πρέπει να είναι αλφάβητα, αριθμοί και κενό.',
     'Phone number is required.' => 'Απαιτείται αριθμός τηλεφώνου.',
     'Phone number minimum 6 digits.' => 'Αριθμός τηλεφώνου τουλάχιστον 6 ψηφία.',
     'Phone number maximum 16 digits.' => 'Αριθμός τηλεφώνου το πολύ 16 ψηφία.',

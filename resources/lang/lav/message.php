@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Ievadiet tikai ciparu datus.',
     'Out date is required.' => 'Nepieciešams datums.',
     'System name is required.' => 'Nepieciešams sistēmas nosaukums.',
-    'System name must be alphabets, numbers and space.' => 'Sistēmas nosaukumam jābūt alfabētiem, numuriem un telpai.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Sistēmas nosaukumam jābūt alfabētiem, numuriem un telpai.',
     'Phone number is required.' => 'Nepieciešams tālruņa numurs.',
     'Phone number minimum 6 digits.' => 'Tālruņa numurs vismaz 6 cipari.',
     'Phone number maximum 16 digits.' => 'Tālruņa numura maksimums 16 cipari.',

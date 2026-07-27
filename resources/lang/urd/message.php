@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'صرف عددی اعداد و شمار درج کریں۔',
     'Out date is required.' => 'آؤٹ تاریخ کی ضرورت ہے۔',
     'System name is required.' => 'سسٹم کا نام ضروری ہے۔',
-    'System name must be alphabets, numbers and space.' => 'سسٹم کا نام حروف تہجی ، نمبر اور جگہ ہونا چاہئے۔',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'سسٹم کا نام حروف تہجی ، نمبر اور جگہ ہونا چاہئے۔',
     'Phone number is required.' => 'فون نمبر ضروری ہے۔',
     'Phone number minimum 6 digits.' => 'فون نمبر کم از کم 6 ہندسے۔',
     'Phone number maximum 16 digits.' => 'فون نمبر زیادہ سے زیادہ 16 ہندسے۔',

@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'Tẹ data nọmba nọmba.',
     'Out date is required.' => 'Ọjọ ti a nilo.',
     'System name is required.' => 'Orukọ eto ni a nilo.',
-    'System name must be alphabets, numbers and space.' => 'Orukọ eto gbọdọ jẹ awọn lebebets, awọn nọmba ati aye.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Orukọ eto gbọdọ jẹ awọn lebebets, awọn nọmba ati aye.',
     'Phone number is required.' => 'A nilo nọmba foonu.',
     'Phone number minimum 6 digits.' => 'Nọmba foonu ti o kere ju 6 nọmba.',
     'Phone number maximum 16 digits.' => 'Nọmba foonu ti o pọju 16 nọmba.',

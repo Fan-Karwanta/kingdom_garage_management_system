@@ -1033,7 +1033,7 @@ return [
     'Enter only numeric data.' => 'Lowetsani chidziwitso cha manambala.',
     'Out date is required.' => 'Tsiku lomwe likufunika.',
     'System name is required.' => 'Dongosolo la Dongosolo limafunikira.',
-    'System name must be alphabets, numbers and space.' => 'Dongosolo la Dongosolo liyenera kukhala zilembo, manambala ndi malo.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Dongosolo la Dongosolo liyenera kukhala zilembo, manambala ndi malo.',
     'Phone number is required.' => 'Nambala yafoni ndiyofunikira.',
     'Phone number minimum 6 digits.' => 'Manambala osachepera 6.',
     'Phone number maximum 16 digits.' => 'Manambala manambala 16.',

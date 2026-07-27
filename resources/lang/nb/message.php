@@ -1030,7 +1030,7 @@ return [
     'Enter only numeric data.' => 'Angi bare numeriske data.',
     'Out date is required.' => 'Utdato er påkrevd.',
     'System name is required.' => 'Systemnavnet er påkrevd.',
-    'System name must be alphabets, numbers and space.' => 'Systemnavnet må være alfabet, tall og rom.',
+    'System name must be alphabets, numbers, space and special characters (|, &, ., _, -, comma, parentheses).' => 'Systemnavnet må være alfabet, tall og rom.',
     'Phone number is required.' => 'Telefonnummer er påkrevd.',
     'Phone number minimum 6 digits.' => 'Telefonnummer minimum 6 sifre.',
     'Phone number maximum 16 digits.' => 'Telefonnummer maksimalt 16 sifre.',
