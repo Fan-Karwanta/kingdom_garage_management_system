@@ -115,30 +115,30 @@ Route::group(['prefix' => 'purchase'], function () {
     Route::get('/add', ['as' => 'purchase/add', 'uses' => 'Purchasecontroller@index'])->middleware('can:purchase_add');
     Route::post('/store', ['as' => 'purchase/store', 'uses' => 'Purchasecontroller@store'])->middleware('can:purchase_add');
     Route::get('/list', ['as' => 'purchase/list', 'uses' => 'Purchasecontroller@listview'])->middleware('can:purchase_view');
-    Route::get('/list/pview/{id}', ['as' => 'purchase/list', 'uses' => 'Purchasecontroller@listview1'])->middleware('can:purchase_view');
+    Route::get('/list/pview/{id}', ['as' => 'purchase/list/pview', 'uses' => 'Purchasecontroller@listview1'])->middleware('can:purchase_view');
     Route::get('/list/edit/{id}', ['as' => 'purchase/list/edit', 'uses' => 'Purchasecontroller@editview'])->middleware('can:purchase_edit');
     Route::post('/list/edit/update/{id}', ['as' => 'list/edit/update/{id}', 'uses' => 'Purchasecontroller@update'])->middleware('can:purchase_edit');
 
-    Route::get('/list/delete/{id}', ['as' => 'purchase/list/edit', 'uses' => 'Purchasecontroller@destory'])->middleware('can:purchase_delete');
-    Route::post('/list/delete', ['as' => 'purchase/list/edit', 'uses' => 'Purchasecontroller@destoryMultiple'])->middleware('can:purchase_delete');
+    Route::get('/list/delete/{id}', ['as' => 'purchase/list/delete', 'uses' => 'Purchasecontroller@destory'])->middleware('can:purchase_delete');
+    Route::post('/list/delete', ['as' => 'purchase/list/delete/multiple', 'uses' => 'Purchasecontroller@destoryMultiple'])->middleware('can:purchase_delete');
     Route::get('/list/modalview', ['as' => '/purchase/list/modalview', 'uses' => 'Purchasecontroller@purchaseview'])->middleware('can:purchase_view');
 
-    Route::get('/add/getrecord', ['as' => 'purchase/list/edit', 'uses' => 'Purchasecontroller@getrecord']);
+    Route::get('/add/getrecord', ['as' => 'purchase/add/getrecord', 'uses' => 'Purchasecontroller@getrecord']);
     /* For purchase product time */
     Route::get('/producttype/name', ['as' => 'purchase/producttype/name', 'uses' => 'Purchasecontroller@productitem']);
 
     /* For add salespart time */
     Route::get('/producttype/names', ['as' => 'purchase/producttype/names', 'uses' => 'Purchasecontroller@productitems']);
 
-    Route::get('/add/getproduct', ['as' => 'purchase/list/edit', 'uses' => 'Purchasecontroller@getproduct']);
-    Route::get('/add/getqty', ['as' => 'purchase/list/edit', 'uses' => 'Purchasecontroller@getqty']);
+    Route::get('/add/getproduct', ['as' => 'purchase/add/getproduct', 'uses' => 'Purchasecontroller@getproduct']);
+    Route::get('/add/getqty', ['as' => 'purchase/add/getqty', 'uses' => 'Purchasecontroller@getqty']);
 
     Route::get('/add/getproductname', ['as' => 'add/getproductname', 'uses' => 'Purchasecontroller@getproductname']);
     Route::get('deleteproduct', ['as' => 'purchase/deleteproduct', 'uses' => 'Purchasecontroller@deleteproduct']);
     Route::get('sale_part/deleteproduct', 'Purchasecontroller@sale_part_destroy');
 
     /* New route for get first product data of selected product type */
-    Route::get('/add/getsupplierproduct', ['as' => 'purchase/list/edit', 'uses' => 'Purchasecontroller@getSupplierProduct']);
+    Route::get('/add/getsupplierproduct', ['as' => 'purchase/add/getsupplierproduct', 'uses' => 'Purchasecontroller@getSupplierProduct']);
 
     Route::get('/getfirstproductdata', 'Purchasecontroller@getFirstProductData');
 });
@@ -248,16 +248,16 @@ Route::group(['prefix' => 'vehicletype'], function () {
     Route::get('/list/delete/{id}', ['as' => '/vehical/list/delete/{id}', 'uses' => 'VehicaltypesControler@destory'])->middleware('can:vehicletype_delete');
     Route::post('/list/delete', ['as' => '/vehical/list/delete', 'uses' => 'VehicaltypesControler@destroyMultiple'])->middleware('can:vehicletype_delete');
     Route::get('/list/edit/{id}', ['as' => '/vehical/list/edit/{id}', 'uses' => 'VehicaltypesControler@editvehicaltype'])->middleware('can:vehicletype_edit');
-    Route::post('/list/edit/update/{id}', ['as' => '/vehical/list/edit/update/{id}', 'uses' => 'VehicaltypesControler@updatevehicaltype'])->middleware('can:vehicletype_edit');
+    Route::post('/list/edit/update/{id}', ['as' => '/vehicletype/list/edit/update/{id}', 'uses' => 'VehicaltypesControler@updatevehicaltype'])->middleware('can:vehicletype_edit');
 });
 
 /* vehical brand */
 Route::group(['prefix' => 'vehiclebrand'], function () {
     Route::get('/list', ['as' => '/vehicalbrand/list', 'uses' => 'VehicalbransControler@listvehicalbrand'])->middleware('can:vehiclebrand_view');
-    Route::get('/add', ['as' => '/vehicalbrand/list', 'uses' => 'VehicalbransControler@index'])->middleware('can:vehiclebrand_add');
+    Route::get('/add', ['as' => '/vehicalbrand/add', 'uses' => 'VehicalbransControler@index'])->middleware('can:vehiclebrand_add');
     Route::post('/store', ['as' => '/vehicalbrand/store', 'uses' => 'VehicalbransControler@store'])->middleware('can:vehiclebrand_add');
     Route::get('/list/delete/{id}', ['as' => '/vehicalbrand/list/delete', 'uses' => 'VehicalbransControler@destory'])->middleware('can:vehiclebrand_delete');
-    Route::post('/list/delete', ['as' => '/vehicalbrand/list/delete', 'uses' => 'VehicalbransControler@destroyMultiple'])->middleware('can:vehiclebrand_delete');
+    Route::post('/list/delete', ['as' => '/vehicalbrand/list/delete/multiple', 'uses' => 'VehicalbransControler@destroyMultiple'])->middleware('can:vehiclebrand_delete');
     Route::get('/list/edit/{id}', ['as' => '/vehicalbrand/list/edit/{id}', 'uses' => 'VehicalbransControler@editbrand'])->middleware('can:vehiclebrand_edit');
     Route::post('/list/edit/update/{id}', ['as' => '/vehicalbrand/list/edit/update{id}', 'uses' => 'VehicalbransControler@brandupdate'])->middleware('can:vehiclebrand_edit');
 });
@@ -265,18 +265,18 @@ Route::group(['prefix' => 'vehiclebrand'], function () {
 /* vehical model */
 Route::group(['prefix' => 'vehicalmodel'], function () {
     Route::get('/list', ['as' => '/vehicalmodel/list', 'uses' => 'VehicalmodelController@listvehicalmodel'])->middleware('can:vehiclemodel_view');
-    Route::get('/add', ['as' => '/vehicalmodel/list', 'uses' => 'VehicalmodelController@index'])->middleware('can:vehiclemodel_add');
+    Route::get('/add', ['as' => '/vehicalmodel/add', 'uses' => 'VehicalmodelController@index'])->middleware('can:vehiclemodel_add');
     Route::post('/store', ['as' => '/vehicalmodel/store', 'uses' => 'VehicalmodelController@store'])->middleware('can:vehiclemodel_add');
     Route::get('/list/delete/{id}', ['as' => '/vehicalmodel/list/delete', 'uses' => 'VehicalmodelController@destory'])->middleware('can:vehiclemodel_delete');
-    Route::post('/list/delete', ['as' => '/vehicalmodel/list/delete', 'uses' => 'VehicalmodelController@destroyMultiple'])->middleware('can:vehiclemodel_delete');
+    Route::post('/list/delete', ['as' => '/vehicalmodel/list/delete/multiple', 'uses' => 'VehicalmodelController@destroyMultiple'])->middleware('can:vehiclemodel_delete');
     Route::get('/list/edit/{id}', ['as' => '/vehicalmodel/list/edit/{id}', 'uses' => 'VehicalmodelController@editmodel'])->middleware('can:vehiclemodel_edit');
     Route::post('/list/edit/update/{id}', ['as' => '/vehicalmodel/list/edit/update{id}', 'uses' => 'VehicalmodelController@modelupdate'])->middleware('can:vehiclemodel_edit');
 });
 
 /* Vehical Discriptions */
 Route::group(['prefix' => 'vehicaldiscriptions', 'middleware' => 'auth'], function () {
-    Route::get('/add', ['as' => '/vehicaldiscriptions/list', 'uses' => 'VehicalDiscriptionsControler@index']);
-    Route::post('/store', ['as' => '/vehicaldiscriptions/list', 'uses' => 'VehicalDiscriptionsControler@vehicalstore']);
+    Route::get('/add', ['as' => '/vehicaldiscriptions/add', 'uses' => 'VehicalDiscriptionsControler@index']);
+    Route::post('/store', ['as' => '/vehicaldiscriptions/store', 'uses' => 'VehicalDiscriptionsControler@vehicalstore']);
     Route::get('/list', ['as' => '/vehicaldiscriptions/list', 'uses' => 'VehicalDiscriptionsControler@vehicaldeslist']);
     Route::get('/list/delete/{id}', ['as' => '/vehicaldiscriptions/list/delete/{id}', 'uses' => 'VehicalDiscriptionsControler@destory']);
     Route::get('/list/edit/{id}', ['as' => '/vehicaldiscriptions/list/edit/{id}', 'uses' => 'VehicalDiscriptionsControler@editdescription']);
@@ -318,7 +318,7 @@ Route::group(['prefix' => 'service'], function () {
     Route::post('add_jobcard', 'ServicesControler@add_jobcard')->middleware('can:service_add');
 
     Route::get('list/view', ['as' => 'service/list/view', 'uses' => 'ServicesControler@serviceview']);
-    Route::get('get_vehi_name', ['as' => 'service/add', 'uses' => 'ServicesControler@get_vehicle_name']);
+    Route::get('get_vehi_name', ['as' => 'service/get_vehi_name', 'uses' => 'ServicesControler@get_vehicle_name']);
     Route::get('select_checkpt', 'ServicesControler@select_checkpt');
     Route::get('get_obs', 'ServicesControler@Get_Observation_Pts');
     Route::get('used_coupon_data', 'ServicesControler@Used_Coupon_Data');
@@ -443,11 +443,11 @@ Route::group(['prefix' => 'setting'], function () {
     Route::post('/timezone/store', ['as' => 'storetimezone', 'uses' => 'Timezonecontroller@store']);
 
     // stripe setting routes
-    Route::get('/stripe/list', ['as' => 'timezonelist', 'uses' => 'Timezonecontroller@stripeList'])->middleware('can:stripesetting_view');
-    Route::post('/stripe/store', ['as' => 'storetimezone', 'uses' => 'Timezonecontroller@stripeStore'])->middleware('can:stripesetting_edit');
+    Route::get('/stripe/list', ['as' => 'stripe/list', 'uses' => 'Timezonecontroller@stripeList'])->middleware('can:stripesetting_view');
+    Route::post('/stripe/store', ['as' => 'stripe/store', 'uses' => 'Timezonecontroller@stripeStore'])->middleware('can:stripesetting_edit');
 
     // stripe setting routes
-    Route::post('/date/store', ['as' => 'storetimezone', 'uses' => 'Timezonecontroller@datestore']);
+    Route::post('/date/store', ['as' => 'date/store', 'uses' => 'Timezonecontroller@datestore']);
 
     // language
     Route::get('language/direction/list', ['as' => 'listlanguagedirection', 'uses' => 'Languagecontroller@index1']);
@@ -539,12 +539,12 @@ Route::group(['prefix' => 'supportstaff'], function () {
     Route::get('/list', ['as' => 'listsupportstaff', 'uses' => 'Supportstaffcontroller@index'])->middleware('can:supportstaff_view');
     Route::get('/list/{id}', ['as' => 'supportstaff/list/{id}', 'uses' => 'Supportstaffcontroller@supportstaff_show'])->middleware('can:supportstaff_view');
     Route::get('/add', ['as' => 'supportstaff', 'uses' => 'Supportstaffcontroller@supportstaffadd'])->middleware('can:supportstaff_add');
-    Route::post('/store', ['as' => 'supportstaff', 'uses' => 'Supportstaffcontroller@store_supportstaff'])->middleware('can:supportstaff_add');
+    Route::post('/store', ['as' => 'supportstaff/store', 'uses' => 'Supportstaffcontroller@store_supportstaff'])->middleware('can:supportstaff_add');
 
     /*Route::get('list/edit/{id}',['as'=>'supportstaff','uses'=>'Supportstaffcontroller@edit'])->middleware('canany:supportstaff_edit');
     Route::post('/list/edit/update/{id}',['as'=>'supportstaff/list/edit/update/{id}','uses'=>'Supportstaffcontroller@update'])->middleware('can:supportstaff_edit');*/
 
-    Route::get('list/edit/{id}', ['as' => 'supportstaff', 'uses' => 'Supportstaffcontroller@edit']);
+    Route::get('list/edit/{id}', ['as' => 'supportstaff/edit', 'uses' => 'Supportstaffcontroller@edit']);
     Route::post('/list/edit/update/{id}', ['as' => 'supportstaff/list/edit/update/{id}', 'uses' => 'Supportstaffcontroller@update']);
 
     Route::get('/list/delete/{id}', ['as' => '/supportstaff/list/delete/{id}', 'uses' => 'Supportstaffcontroller@destory'])->middleware('can:supportstaff_delete');
@@ -554,13 +554,13 @@ Route::group(['prefix' => 'supportstaff'], function () {
 // Product List Module
 Route::group(['prefix' => 'product'], function () {
     Route::get('/list', ['as' => 'listproduct', 'uses' => 'Productcontroller@index'])->middleware('can:product_view');
-    Route::get('/list/{id}', ['as' => 'listproduct', 'uses' => 'Productcontroller@indexid'])->middleware('can:product_view');
+    Route::get('/list/{id}', ['as' => 'listproduct/{id}', 'uses' => 'Productcontroller@indexid'])->middleware('can:product_view');
     Route::get('/add', ['as' => 'addproduct', 'uses' => 'Productcontroller@addproduct'])->middleware('can:product_add');
     Route::post('/store', ['as' => 'storeproduct', 'uses' => 'Productcontroller@store'])->middleware('can:product_add');
     Route::get('/list/edit/{id}', ['as' => 'editproduct', 'uses' => 'Productcontroller@edit'])->middleware('can:product_edit');
     Route::post('/list/edit/update/{id}', ['as' => 'updateproduct', 'uses' => 'Productcontroller@update'])->middleware('can:product_edit');
     Route::get('/list/delete/{id}', ['as' => 'deleteproduct', 'uses' => 'Productcontroller@destroy'])->middleware('can:product_delete');
-    Route::post('/list/delete', ['as' => 'deleteproduct', 'uses' => 'Productcontroller@destroyMultiple'])->middleware('can:product_delete');
+    Route::post('/list/delete', ['as' => 'deleteproduct/multiple', 'uses' => 'Productcontroller@destroyMultiple'])->middleware('can:product_delete');
 
     Route::get('/unit', ['as' => 'product/unit', 'uses' => 'Productcontroller@unitadd']);
     Route::get('/unitdelete', ['as' => 'product/unitdelete', 'uses' => 'Productcontroller@unitdelete']);
@@ -607,7 +607,7 @@ Route::group(['prefix' => 'mail'], function () {
     Route::get('/mail', ['as' => 'usermail', 'uses' => 'MailController@index'])->middleware('can:emailtemplate_view');
     Route::post('/mail/emailformat/{id}', ['as' => '/emailformat/{id}', 'uses' => 'MailController@emailupadte'])->middleware('can:emailtemplate_edit');
 
-    Route::get('/user', ['as' => 'usermail', 'uses' => 'MailController@user']);
+    Route::get('/user', ['as' => 'usermail/user', 'uses' => 'MailController@user']);
     Route::get('/sales', ['as' => 'salesmail', 'uses' => 'MailController@sales']);
     Route::get('/services', ['as' => 'servicessmail', 'uses' => 'MailController@services']);
 });
@@ -645,14 +645,14 @@ Route::group(['prefix' => 'sales'], function () {
 Route::group(['prefix' => 'jobcard'], function () {
     Route::get('/list', ['as' => 'list/jobcard', 'uses' => 'JobCardcontroller@index'])->middleware('can:jobcard_view'); /* Get Jobcard Listing Page */
     Route::get('/list/jview/{id}', ['as' => 'list/jview', 'uses' => 'JobCardcontroller@indexid']);
-    Route::get('/invoice', ['as' => 'list/invoice', 'uses' => 'JobCardcontroller@invoice']);
+    Route::get('/invoice', ['as' => 'jobcard/list/invoice', 'uses' => 'JobCardcontroller@invoice']);
 
     /* Display ProcessJob Form and Store data of this form */
     Route::get('/list/{id}', ['as' => 'viewjobcard', 'uses' => 'JobCardcontroller@view'])->middleware('can:jobcard_edit'); /* Display ProcessJob Form(If click on ProcessJob Button on Listing Page) */
     Route::post('/store', ['as' => 'jobcard/store', 'uses' => 'JobCardcontroller@store'])->middleware('can:jobcard_edit'); /* Store ProcessJob data */
 
     /* Display Completed Jobcard */
-    Route::get('/complete/{id}', ['as' => 'viewjobcard', 'uses' => 'JobCardcontroller@viewcomplete'])->middleware('can:jobcard_edit'); /* Display ProcessJob Form(If click on ProcessJob Button on Listing Page) */
+    Route::get('/complete/{id}', ['as' => 'viewjobcard/complete', 'uses' => 'JobCardcontroller@viewcomplete'])->middleware('can:jobcard_edit'); /* Display ProcessJob Form(If click on ProcessJob Button on Listing Page) */
 
     /* This is redirect from Jobcard page to Service Module */
     Route::get('/add', ['as' => 'addjobcard', 'uses' => 'JobCardcontroller@jobcard_add'])->middleware('can:jobcard_add');
@@ -703,8 +703,8 @@ Route::get('/jobcard/complete_process_status', 'JobCardcontroller@complete_proce
 // getpass
 Route::group(['prefix' => 'gatepass'], function () {
     Route::get('/list', ['as' => 'gatepass/list', 'uses' => 'Getpasscontroller@index'])->middleware('can:gatepass_view');
-    Route::get('/add', ['as' => 'gatepass/list', 'uses' => 'Getpasscontroller@addgatepass'])->middleware('can:gatepass_add');
-    Route::post('/store', ['as' => 'gatepass/list', 'uses' => 'Getpasscontroller@store'])->middleware('can:gatepass_add');
+    Route::get('/add', ['as' => 'gatepass/add', 'uses' => 'Getpasscontroller@addgatepass'])->middleware('can:gatepass_add');
+    Route::post('/store', ['as' => 'gatepass/store', 'uses' => 'Getpasscontroller@store'])->middleware('can:gatepass_add');
     Route::get('/list/delete/{id}', ['as' => '/gatepass/list/delete/{id}', 'uses' => 'Getpasscontroller@delete'])->middleware('can:gatepass_delete');
     Route::post('/list/delete', ['as' => '/gatepass/list/delete', 'uses' => 'Getpasscontroller@destroyMultiple'])->middleware('can:gatepass_delete');
     Route::get('/list/edit/{id}', ['as' => '/gatepass/list/edit/', 'uses' => 'Getpasscontroller@edit'])->middleware('can:gatepass_edit');
@@ -719,7 +719,7 @@ Route::group(['prefix' => 'gatepass'], function () {
 Route::group(['prefix' => 'observation_type'], function () {
     Route::get('/list', ['as' => 'listobservationtype', 'uses' => 'ObservationTypecontroller@index']);
     Route::get('/add', ['as' => 'addobservationtype', 'uses' => 'ObservationTypecontroller@addobservation']);
-    Route::post('/store', ['as' => 'storerto', 'uses' => 'ObservationTypecontroller@store']);
+    Route::post('/store', ['as' => 'observationtype/store', 'uses' => 'ObservationTypecontroller@store']);
     Route::get('/list/delete/{id}', 'ObservationTypecontroller@destroy');
     Route::get('/list/edit/{id}', 'ObservationTypecontroller@edit');
     Route::post('/list/edit/update/{id}', 'ObservationTypecontroller@update');
@@ -729,7 +729,7 @@ Route::group(['prefix' => 'observation_type'], function () {
 Route::group(['prefix' => 'observation_point'], function () {
     Route::get('/list', ['as' => 'listobservation', 'uses' => 'ObservationPointcontroller@index']);
     Route::get('/add', ['as' => 'addobservation', 'uses' => 'ObservationPointcontroller@addobservation']);
-    Route::post('/store', ['as' => 'storerto', 'uses' => 'ObservationPointcontroller@store']);
+    Route::post('/store', ['as' => 'observationpoint/store', 'uses' => 'ObservationPointcontroller@store']);
     Route::get('/list/delete/{id}', 'ObservationPointcontroller@destroy');
     Route::get('/list/edit/{id}', 'ObservationPointcontroller@edit');
     Route::post('/list/edit/update/{id}', 'ObservationPointcontroller@update');
@@ -867,9 +867,9 @@ Route::group(['prefix' => 'branchadmin'], function () {
     Route::get('/list', ['as' => 'listbranchadmin', 'uses' => 'BranchAdminController@index'])->middleware('can:branchAdmin_view');
     Route::get('/list/{id}', ['as' => 'branchadmin/list/{id}', 'uses' => 'BranchAdminController@branchAdmminShow'])->middleware('can:branchAdmin_view');
     Route::get('/add', ['as' => 'branchadmin', 'uses' => 'BranchAdminController@addBranchAdmin'])->middleware('can:branchAdmin_add');
-    Route::post('/store', ['as' => 'branchadmin', 'uses' => 'BranchAdminController@storeBranchAdmin'])->middleware('can:branchAdmin_add');
+    Route::post('/store', ['as' => 'branchadmin/store', 'uses' => 'BranchAdminController@storeBranchAdmin'])->middleware('can:branchAdmin_add');
 
-    Route::get('list/edit/{id}', ['as' => 'branchadmin', 'uses' => 'BranchAdminController@branchAdminEdit']);
+    Route::get('list/edit/{id}', ['as' => 'branchadmin/edit', 'uses' => 'BranchAdminController@branchAdminEdit']);
     Route::post('/list/edit/update/{id}', ['as' => 'branchadmin/list/edit/update/{id}', 'uses' => 'BranchAdminController@branchAdminUpdate']);
 
     Route::get('/list/delete/{id}', ['as' => '/branchadmin/list/delete/{id}', 'uses' => 'BranchAdminController@destroy'])->middleware('can:branchAdmin_delete');
