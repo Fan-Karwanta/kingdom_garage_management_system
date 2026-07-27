@@ -34,9 +34,6 @@
           <ul class="nav nav-tabs bar_tabs"
             role="tablist">
             <li role="presentation"
-              class=""><a href="{!! url('setting/list') !!}"><span class="visible-xs"><i
-                    class="ti-info-alt"></i></span>{{ trans('message.Change Language') }}</span></a></li>
-            <li role="presentation"
               class=""><a href="{!! url('setting/timezone/list') !!}"><span class="visible-xs"><i
                     class="ti-info-alt"></i></span>{{ trans('message.Change Timezone') }}</span></a></li>
             <li role="presentation"

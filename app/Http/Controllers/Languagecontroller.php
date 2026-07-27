@@ -37,30 +37,4 @@ class Languagecontroller extends Controller
 
         return redirect('/setting/language/direction/list')->with('message', 'Successfully Updated');
     }
-
-    // language store
-    public function store(Request $request)
-    {
-        $request->validate([
-            'language' => 'required|string|max:10',
-        ]);
-        $lang = $request->language;
-
-        $id = Auth::user()->id;
-        $users = DB::table('users')->where('id', '=', $id)->first();
-        $language = $users->language;
-        DB::table('users')->where('id', $id)->update(['language' => $lang]);
-
-        if ($lang == 'ar') {
-            $dire_table = DB::table('tbl_language_directions')->orderBy('id', 'desc')->first();
-            $id = $dire_table->id;
-            DB::table('tbl_language_directions')->where('id', $id)->update(['direction' => 'rtl']);
-        } else {
-            $dire_table = DB::table('tbl_language_directions')->orderBy('id', 'desc')->first();
-            $id = $dire_table->id;
-            DB::table('tbl_language_directions')->where('id', $id)->update(['direction' => 'ltr']);
-        }
-
-        return redirect('/setting/timezone/list')->with('message', 'Successfully Updated');
-    }
 }

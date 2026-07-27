@@ -32,9 +32,6 @@
           <ul class="nav nav-tabs bar_tabs"
             role="tablist">
             <li role="presentation"
-              class="active"><a href="{!! url('setting/list') !!}"><span class="visible-xs"><i
-                    class="ti-info-alt"></i></span> {{ trans('message.Change Language') }}</a></li>
-            <li role="presentation"
               class=""><a href="{!! url('setting/timezone/list') !!}"><span class="visible-xs"><i
                     class="ti-info-alt"></i></span> {{ trans('message.Change Timezone') }}</a></li>
             <li role="presentation"
@@ -54,92 +51,9 @@
             <div class="x_panel">
 
               <div class="x_content">
-
-
-                <form method="post"
-                  action="{{ url('setting/language/store') }}"
-                  enctype="multipart/form-data"
-                  class="form-horizontal upperform">
-
-
-
-                  <div class="form-group has-feedback">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                      for="Country">{{ trans('message.Select Language') }} </label>
-                    <div class="col-md-5 col-sm-5 col-xs-12">
-                      <select class="form-control col-md-9 col-xs-12"
-                        name="language"> 
-
-                        <option value="en"
-                          <?php if ($user->language == 'en') {
-                              echo 'selected';
-                          } ?>>English</option>
-                        <option value="es"
-                          <?php if ($user->language == 'es') {
-                              echo 'selected';
-                          } ?>>Spanish</option>
-                        <option value="el"
-                          <?php if ($user->language == 'el') {
-                              echo 'selected';
-                          } ?>>Greek</option>
-                        <option value="ara"
-                          <?php if ($user->language == 'ara') {
-                              echo 'selected';
-                          } ?>>Arabic</option>
-                        <option value="de"
-                          <?php if ($user->language == 'de') {
-                              echo 'selected';
-                          } ?>>German</option>
-                        <option value="por"
-                          <?php if ($user->language == 'por') {
-                              echo 'selected';
-                          } ?>>Portuguese</option>
-                        <option value="fr"
-                          <?php if ($user->language == 'fr') {
-                              echo 'selected';
-                          } ?>>french</option>
-                        <option value="it"
-                          <?php if ($user->language == 'it') {
-                              echo 'selected';
-                          } ?>>Italian</option>
-                        <option value="swe"
-                          <?php if ($user->language == 'swe') {
-                              echo 'selected';
-                          } ?>>Swedish</option>
-                        <option value="dut"
-                          <?php if ($user->language == 'dut') {
-                              echo 'selected';
-                          } ?>>Dutch</option>
-                        <option value="hi"
-                          <?php if ($user->language == 'hi') {
-                              echo 'selected'; 
-                          } ?>>Hindi</option>
-                        <option value="zh" 
-                          <?php if ($user->language == 'zh') {
-                              echo 'selected';
-                          } ?>>Chinese (Simplified)</option>
-                      </select>
-
-
-                    </div>
-                  </div>
-
-
-
-
-                  <input type="hidden"
-                    name="_token"
-                    value="{{ csrf_token() }}">
-
-                  <div class="form-group">
-                    <div class="col-md-5 col-sm-5 col-xs-12 col-md-offset-3">
-
-                      <button type="submit"
-                        class="btn btn-success">{{ trans('message.Submit') }}</button>
-                    </div>
-                  </div>
-
-                </form>
+                <div class="alert alert-info" style="margin: 20px;">
+                  <strong>English</strong> is the only supported language for this application.
+                </div>
               </div>
             </div>
           </div>

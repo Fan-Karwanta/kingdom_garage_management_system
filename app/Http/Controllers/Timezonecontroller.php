@@ -38,21 +38,6 @@ class Timezonecontroller extends Controller
         $users = DB::table('users')->where('id', '=', $id)->first();
         DB::table('users')->where('id', $id)->update(['timezone' => $time]);
 
-        $lang = $request->language;
-
-        $id = Auth::user()->id;
-        $users = DB::table('users')->where('id', '=', $id)->first();
-        $language = $users->language;
-        DB::table('users')->where('id', $id)->update(['language' => $lang]);
-
-        if ($lang == 'ar') {
-            $id = Auth::user()->id;
-            DB::table('users')->where('id', $id)->update(['gst_no' => 'rtl']);
-        } else {
-            $id = Auth::user()->id;
-            DB::table('users')->where('id', $id)->update(['gst_no' => 'ltr']);
-        }
-
         $date = $request->dateformat;
         if (! empty($date)) {
             $dateformat = DB::table('tbl_settings')->first();

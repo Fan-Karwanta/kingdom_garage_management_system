@@ -496,7 +496,12 @@ margin-left: -15px;
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <link rel="icon" href="{{ URL::asset('fevicol.png') }}" type="image/gif" sizes="16x16">
+  <link rel="icon" type="image/x-icon" href="{{ URL::asset('garragelogo/favicons_kingdom/favicon.ico') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ URL::asset('garragelogo/favicons_kingdom/favicon-16x16.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ URL::asset('garragelogo/favicons_kingdom/favicon-32x32.png') }}">
+  <link rel="apple-touch-icon" href="{{ URL::asset('garragelogo/favicons_kingdom/apple-touch-icon.png') }}">
+  <link rel="manifest" href="{{ URL::asset('garragelogo/favicons_kingdom/site.webmanifest') }}">
+  <meta name="theme-color" content="#ffffff">
   <title>{{ getNameSystem() }}</title>
 
   <!-- Bootstrap -->

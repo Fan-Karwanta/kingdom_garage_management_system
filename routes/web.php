@@ -435,9 +435,8 @@ Route::group(['prefix' => 'setting'], function () {
         return view('payment_gateway_setting.payment_gateway_setting');
     })->middleware('auth');
 
-    // For Language
+    // For Language (English only - no selection)
     Route::get('/list', ['as' => 'listlanguage', 'uses' => 'Languagecontroller@index'])->middleware('can:timezone_view');
-    Route::post('/language/store', ['as' => 'storelanguage', 'uses' => 'Languagecontroller@store'])->middleware('can:timezone_edit');
 
     // For Timezone
     Route::get('/timezone/list', ['as' => 'timezonelist', 'uses' => 'Timezonecontroller@index']);
