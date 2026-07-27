@@ -27,4 +27,8 @@ jobs:
             php artisan view:cache
             chmod -R 775 storage bootstrap/cache
             touch ~/domains/drivebyautocare.com/public_html/installed.txt
+            cd ~/domains/drivebyautocare.com/public_html
+            rm -f build vendors
+            ln -s /home/u753303520/garage_app/garage/build build
+            ln -s /home/u753303520/garage_app/garage/vendors vendors
             echo "Deploy completed at $(date)"
