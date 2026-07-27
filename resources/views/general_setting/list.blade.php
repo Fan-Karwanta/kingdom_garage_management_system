@@ -249,8 +249,6 @@
   </div>
 </div>
 
-<script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/dist/jquery.min.js') }}"></script>
-
 <script nonce="{{ $cspNonce }}">
   $(document).ready(function() {
 

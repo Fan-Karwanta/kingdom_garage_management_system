@@ -25,7 +25,7 @@ class StoreGeneralSettingEditFormRequest extends FormRequest
     {
         return [
             // 'System_Name' => 'required|regex:/^[a-zA-Z][a-zA-Z0-9\s]*$/',
-            'System_Name' => 'required|regex:/^[a-zA-Z0-9\s|&._,\-()]+$/',
+            'System_Name' => ['required', 'regex:/^[a-zA-Z0-9\s|&._,\-()]+$/'],
             'Phone_Number' => 'required|min:6|max:16|regex:/^[- +()]*[0-9][- +()0-9]*$/',
             'Email' => 'required|email',
             'address' => 'required',
