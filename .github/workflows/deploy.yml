@@ -16,6 +16,8 @@ jobs:
           username: ${{ secrets.HOSTINGER_USER }}
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           port: ${{ secrets.HOSTINGER_PORT }}
+          timeout: 60s
+          command_timeout: 30m
           script: |
             cd ~/garage_app/garage
             git pull origin main
