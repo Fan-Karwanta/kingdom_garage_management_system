@@ -89,8 +89,8 @@ Route::get('/deleteNote/{id}', 'Suppliercontroller@deleteNote');
 Route::get('/domain', 'DomainController@domain')->name('domain');
 Route::post('/update_domain', 'DomainController@update_domain');
 
-// Dashboard
-Route::get('/', ['uses' => 'HomeController@dashboard'])->middleware('can:dashboard_view')->name('dashboard');
+// Public front-facing landing page for guests; dashboard for authenticated users
+Route::get('/', ['uses' => 'FrontendController@index'])->name('dashboard');
 
 Route::get('/dashboard/openservice', ['as' => '/dashboard/openservice', 'uses' => 'HomeController@openservice']);
 Route::get('/dashboard/closeservice', ['as' => '/dashboard/closeservice', 'uses' => 'HomeController@closeservice']);

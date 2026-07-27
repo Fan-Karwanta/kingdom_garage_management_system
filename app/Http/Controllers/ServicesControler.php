@@ -1709,7 +1709,7 @@ class ServicesControler extends Controller
         // Check if email already exists
         $existingEmail = User::where('email', $request->email)->where('soft_delete', 0)->exists();
         if ($existingEmail) {
-            return redirect('/service/frontendBook')->with('message', 'Email you entered is already registered.');
+            return redirect('/')->with('message', 'Email you entered is already registered.');
         }
 
         // Check if number plate already exists
@@ -1717,7 +1717,7 @@ class ServicesControler extends Controller
 
         if ($existingNumberPlate) {
 
-            return redirect('/service/frontendBook')->with('message', 'Number Plate you entered is already registered.');
+            return redirect('/')->with('message', 'Number Plate you entered is already registered.');
         }
 
         // Get user role id from Role table
@@ -1858,6 +1858,6 @@ class ServicesControler extends Controller
         $tbl_jobcard_details->in_date = $s_date;
         $tbl_jobcard_details->save();
 
-        return redirect('/service/frontendBook')->with('message', 'Service Booked Successfully');
+        return redirect('/')->with('message', 'Service Booked Successfully');
     }
 }
