@@ -359,7 +359,7 @@
     </div>
 </div>
 <!-- /page content --><!-- Scripts starting -->
-<script nonce="{{ $cspNonce }}" type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 
 <script nonce="{{ $cspNonce }}">
     $(document).ready(function() {

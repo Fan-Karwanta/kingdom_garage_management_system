@@ -448,7 +448,6 @@
 
 
 
-<script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/jquery-3.7.1.min.js') }}"></script>
 
 <script nonce="{{ $cspNonce }}">
  /* script */

@@ -127,7 +127,6 @@
 <!-- page content end -->
 
 <!-- Load jQuery first -->
-<script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/jquery-3.7.1.min.js') }}"></script>
 
 <!-- Load Quill library -->
 <script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/quill/quill.min.js') }}"></script>

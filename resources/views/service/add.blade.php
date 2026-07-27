@@ -1273,7 +1273,6 @@
 <!-- /page content -->
 
 
-<script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/jquery-3.7.1.min.js') }}"></script>
 <script nonce="{{ $cspNonce }}">
     document.getElementById('step2Btn').addEventListener('click', function () {
     // Trigger the form's submit button

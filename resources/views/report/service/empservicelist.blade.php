@@ -289,7 +289,7 @@ foreach ($service as $services) {
 </div>
 <!-- Page content end -->
 
-<script nonce="{{ $cspNonce }}" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script nonce="{{ $cspNonce }}" type="text/javascript" src="{{ URL::asset('public/js/loader.min.js') }}"></script>
 
 

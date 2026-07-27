@@ -1002,6 +1002,24 @@ $currentRoute = str_replace($baseUrl, "", $currentUrl);
   <!-- DateJS for theme default js-->
   <script nonce="{{ $cspNonce }}"src="{{ URL::asset('vendors/DateJS/build/date.js') }}" defer="defer"></script>
 
+  <!-- Compatibility shim: Bootstrap 5 removed the jQuery popover/tooltip plugins that the
+       gentelella custom theme (custom.min.js) still references. Provide harmless stubs so the
+       theme script does not throw "Cannot read properties of undefined (reading 'Constructor')". -->
+  <script nonce="{{ $cspNonce }}">
+    (function () {
+      if (!window.jQuery) return;
+      ['popover', 'tooltip'].forEach(function (name) {
+        if (typeof jQuery.fn[name] === 'undefined') {
+          var stub = function () { return this; };
+          stub.Constructor = { prototype: {} };
+          jQuery.fn[name] = stub;
+        } else if (jQuery.fn[name] && !jQuery.fn[name].Constructor) {
+          jQuery.fn[name].Constructor = { prototype: {} };
+        }
+      });
+    })();
+  </script>
+
   <!-- Custom Theme Scripts -->
   <script nonce="{{ $cspNonce }}"src="{{ URL::asset('build/js/custom.min.js') }}" defer="defer"></script>
   <script nonce="{{ $cspNonce }}"src="{{ URL::asset('vendors/sweetalert/dist/sweetalert.min.js') }}" defer="defer"></script>

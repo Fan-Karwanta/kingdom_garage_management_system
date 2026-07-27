@@ -49,7 +49,6 @@
 
 
 <!-- Scripts starting -->
-<script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/jquery-3.7.1.min.js') }}"></script>
 
 <!-- For form field validate -->
 {!! JsValidator::formRequest('App\Http\Requests\StorePaymentMethodRequest', '#paymet-method-add-form') !!}

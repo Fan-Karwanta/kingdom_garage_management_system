@@ -204,7 +204,6 @@
 <input type="hidden" name="page_action" id="page_action" value="">
 <!-- Scripts starting -->
 <script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/dist/jquery.min.js') }}"></script>
-<script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/jquery-3.7.1.min.js') }}"></script>
 
 <script nonce="{{ $cspNonce }}">
   document.addEventListener('DOMContentLoaded', function () {

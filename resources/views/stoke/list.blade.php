@@ -140,7 +140,7 @@
 
 <!-- Scripts starting -->
 <script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/jquery.min.js') }}"></script>
-<script nonce="{{ $cspNonce }}" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
 
 <script nonce="{{ $cspNonce }}">
     $(document).ready(function() {

@@ -1468,7 +1468,6 @@
 </div>
 <!-- /page content -->
 <!-- Scripts starting -->
-<script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/jquery-3.7.1.min.js') }}"></script>
 <script nonce="{{ $cspNonce }}">
     $(document).ready(function() {
         // Initialize Select2 on the dropdown

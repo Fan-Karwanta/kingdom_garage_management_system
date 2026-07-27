@@ -865,7 +865,6 @@
 
 <!-- Scripts starting -->
 <!-- <script nonce="{{ $cspNonce }}" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-<script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/jquery-3.7.1.min.js') }}"></script>
 <script nonce="{{ $cspNonce }}">
     var msg35 = "{{ trans('message.OK') }}";
     $(document).ready(function() {
@@ -2582,7 +2581,6 @@
 </script>
 
 <!-- <script nonce="{{ $cspNonce }}" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-<script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/jquery-3.7.1.min.js') }}"></script>
 <script nonce="{{ $cspNonce }}">
     $(document).ready(function() {
         // Show the customer field initially

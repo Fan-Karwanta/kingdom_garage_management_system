@@ -115,10 +115,8 @@
     </div>
   </div>
 
-  <script nonce="{{ $cspNonce }}" type="text/javascript"
-    src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
   <!-- <script nonce="{{ $cspNonce }}" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-  <script nonce="{{ $cspNonce }}" src="{{ URL::asset('vendors/jquery/jquery-3.7.1.min.js') }}"></script>
   <!-- Form submit at a time only one -->
   <script nonce="{{ $cspNonce }}" type="text/javascript">
     $(document).ready(function() {
