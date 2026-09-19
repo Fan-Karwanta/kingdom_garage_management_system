@@ -679,7 +679,7 @@
                 <!-- Login Tabs -->
                 <div class="login-tabs">
                   <button type="button" class="tab-button active" id="email-tab">
-                    📧 Email Login
+                    📧 Username or Email
                   </button>
                   <button type="button" class="tab-button" id="mobile-tab">
                     📱 Mobile Login
@@ -693,8 +693,8 @@
                   <input type="hidden" name="_token" value="ng6dqKQpcfVoWUABxW33aHAYV681V6asws3AxuZ0">
                   {{ csrf_field() }}
                   <p class="login-demo">
-                    <label for="user_login"> {{trans('message.Email')}} </label>
-                    <input type="text" name="email" id="user_login" autocomplete="off" class="input" value="" size="20">
+                    <label for="user_login"> {{trans('message.Username or Email')}} </label>
+                    <input type="text" name="email" id="user_login" autocomplete="username" class="input" value="" size="20">
                     @if ($errors->has('email'))
                     <span class="help-block text-danger mt-1" style="width: 280px;">
                       <strong>{{ $errors->first('email') }}</strong>

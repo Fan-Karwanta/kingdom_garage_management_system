@@ -26,7 +26,7 @@ class FrontendServiceFormRequest extends FormRequest
         return [
             'firstname' => 'required|regex:/^[\p{L}\p{M}\s\-\'\.]+$/u|max:50',
             'lastname' => 'required|regex:/^[\p{L}\p{M}\s\-\'\.]+$/u|max:50',
-            'email' => 'required|email|custom_email|unique:users,email',
+            'email' => 'nullable|email|custom_email|unique:users,email',
             'mobile' => 'required|min:6|max:16|regex:/^[- +()]*[0-9][- +()0-9]*$/',
             'country_id' => 'nullable',
             'psgc_code' => 'nullable|string|max:20',

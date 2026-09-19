@@ -436,7 +436,7 @@ class employeecontroller extends Controller
 
         if ($email != $emails) {
             $this->validate($request, [
-                'email' => 'required|email|custom_email|unique:users',
+                'email' => 'nullable|email|custom_email|unique:users,email,'.$id.',id,soft_delete,0',
             ]);
         }
 

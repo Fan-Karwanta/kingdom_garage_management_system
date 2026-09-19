@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 
 if (! function_exists('getVersionNumber')) {
     function getVersionNumber()
@@ -3919,5 +3920,40 @@ if (! function_exists('getVehicleNumberPlateFromSale')) {
 
         } catch (\Exception $e) {
         }
+    }
+}
+
+if (! function_exists('generateUniqueUsername')) {
+    /**
+     * Generate a unique login username for a user.
+     *
+     * Email is optional for users, so every account gets a username that can
+     * be used on the "Username or Email" login field. Based on the user's
+     * name ("Juan Dela Cruz" -> "juan.dela.cruz"), falling back to the email
+     * local part and then to "user". A numeric suffix is appended until the
+     * username is unique across the users table.
+     */
+    function generateUniqueUsername(?string $firstname = null, ?string $lastname = null, ?string $email = null)
+    {
+        $base = Str::slug(trim(($firstname ?? '').' '.($lastname ?? '')), '.');
+
+        if ($base === '') {
+            $base = Str::slug((string) strtok((string) $email, '@'), '.');
+        }
+        if ($base === '') {
+            $base = 'user';
+        }
+
+        // Leave room for a numeric suffix within the varchar(100) column.
+        $base = substr($base, 0, 90);
+
+        $username = $base;
+        $counter = 2;
+        while (DB::table('users')->where('username', $username)->exists()) {
+            $username = $base.$counter;
+            $counter++;
+        }
+
+        return $username;
     }
 }

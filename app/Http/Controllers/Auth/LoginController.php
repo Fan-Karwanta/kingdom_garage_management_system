@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 
 class LoginController extends Controller
 {
@@ -64,10 +65,16 @@ class LoginController extends Controller
 
             return $this->sendLockoutResponse($request);
         }
-        $users = User::where('email', '=', $request->email)->get();
+        // The "email" field on the login form accepts a username or an email.
+        $login = $request->email;
+        $userQuery = User::where('email', '=', $login);
+        if (Schema::hasColumn('users', 'username')) {
+            $userQuery->orWhere('username', '=', $login);
+        }
+        $users = $userQuery->get();
         foreach ($users as $user) {
             if ($user->soft_delete !== 1) {
-                if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'soft_delete' => 0])) {
+                if (Auth::attempt(['id' => $user->id, 'password' => $request->password])) {
                     if ($request->hasSession()) {
                         $request->session()->put('auth.password_confirmed_at', time());
                     }

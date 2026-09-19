@@ -55973,6 +55973,7 @@ CREATE TABLE `users` (
   `gender` tinyint(1) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
   `contact_person` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `mobile_no` varchar(255) DEFAULT NULL,
@@ -56582,7 +56583,8 @@ ALTER TABLE `updatekey`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_username_unique` (`username`);
 
 --
 -- Indexes for table `vehicle_mot_test_reports`

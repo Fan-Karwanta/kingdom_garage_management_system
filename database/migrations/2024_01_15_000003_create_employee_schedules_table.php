@@ -8,6 +8,10 @@ class CreateEmployeeSchedulesTable extends Migration
 {
     public function up()
     {
+        if (Schema::hasTable('employee_schedules')) {
+            return;
+        }
+
         Schema::create('employee_schedules', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id');

@@ -8,6 +8,10 @@ class CreateEmployeeSalariesTable extends Migration
 {
     public function up()
     {
+        if (Schema::hasTable('employee_salaries')) {
+            return;
+        }
+
         Schema::create('employee_salaries', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id');

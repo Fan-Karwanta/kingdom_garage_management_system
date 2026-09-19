@@ -664,8 +664,8 @@
                                     <span class="color-danger" id="errorlmobile"></span>
                                 </div>
                                 <div>
-                                    <label class="field-label" for="email">{{ trans('message.Email') }} <span class="color-danger">*</span></label>
-                                    <input type="text" id="email" name="email" placeholder="{{ trans('message.Enter Email') }}" value="{{ old('email') }}" class="form-control" maxlength="50" required>
+                                    <label class="field-label" for="email">{{ trans('message.Email') }}</label>
+                                    <input type="text" id="email" name="email" placeholder="{{ trans('message.Enter Email') }}" value="{{ old('email') }}" class="form-control" maxlength="50">
                                     <span class="color-danger" id="errorlemail"></span>
                                 </div>
 

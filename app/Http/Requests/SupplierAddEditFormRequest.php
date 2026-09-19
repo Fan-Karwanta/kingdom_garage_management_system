@@ -27,7 +27,7 @@ class SupplierAddEditFormRequest extends FormRequest
             'firstname' => 'required|regex:/^[\p{L}\p{M}\s\-\'\.]+$/u|max:50',
             'lastname' => 'required|regex:/^[\p{L}\p{M}\s\-\'\.]+$/u|max:50',
             'displayname' => 'required|max:100|regex:/^[\p{L}\p{M}\s\-\'\.]+$/u',
-            'email' => 'required|email|custom_email|unique:users,email,NULL,id,soft_delete,0'.$this->id,
+            'email' => 'nullable|email|custom_email|unique:users,email,NULL,id,soft_delete,0'.$this->id,
             'mobile' => 'required|min:6|max:16|regex:/^[- +()]*[0-9][- +()0-9]*$/',
             'landlineno' => 'nullable|min:6|max:16|regex:/^[- +()]*[0-9][- +()0-9]*$/',
             'image' => 'nullable|mimes:jpg,png,jpeg',

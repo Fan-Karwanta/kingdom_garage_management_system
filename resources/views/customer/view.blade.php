@@ -281,6 +281,9 @@
                 <div class="d-lg-inline">
                   <i class=" fa fa-envelope"></i> {{ $customer->email }}
                 </div>
+                <div class="d-lg-inline">
+                  <i class=" fa fa-user"></i> {{ trans('message.Username') }}: {{ $customer->username ?? '' }}
+                </div>
               </div>
               <div class="col-xl-12 col-md-12 col-sm-12 heading_view mt-3" style="width: 90%;">
                 <i class="fa-solid fa-location-dot"></i>

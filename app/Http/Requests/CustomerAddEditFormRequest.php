@@ -40,19 +40,20 @@ class CustomerAddEditFormRequest extends FormRequest
         $settings = Setting::find(1);
 
         if ($settings && $settings->customer_login == 1) {
-            // Login enabled
+            // Login enabled: a password is always required so the customer can
+            // sign in. Email is optional - a unique username is auto-generated
+            // when it is blank, and customers log in via "Username or Email".
+            $rules['email'] = 'nullable|email|custom_email|unique:users,email,NULL,id,soft_delete,0'.$this->id;
+            $rules['password'] = ($this->id)
+                ? 'nullable|min:6|max:12|regex:/^(?=.*[a-zA-Z\p{L}])(?=.*\d).+$/u'
+                : 'required|min:6|max:12|regex:/^(?=.*[a-zA-Z\p{L}])(?=.*\d).+$/u';
+            $rules['password_confirmation'] = ($this->id)
+                ? 'same:password'
+                : 'required|same:password';
+
             if ($settings->is_mobile == 0) {
-                // Mobile login selected, email and password not required
+                // Mobile (OTP) login mode still requires a mobile number
                 $rules['mobile'] = 'required|min:6|max:16|regex:/^[- +()]*[0-9][- +()0-9]*$/';
-            } else {
-                // Email login selected, email and password required
-                $rules['email'] = 'required|email|custom_email|unique:users,email,NULL,id,soft_delete,0'.$this->id;
-                $rules['password'] = ($this->id)
-                    ? 'nullable|min:6|max:12|regex:/^(?=.*[a-zA-Z\p{L}])(?=.*\d).+$/u'
-                    : 'required|min:6|max:12|regex:/^(?=.*[a-zA-Z\p{L}])(?=.*\d).+$/u';
-                $rules['password_confirmation'] = ($this->id)
-                    ? 'same:password'
-                    : 'required|same:password';
             }
         } else {
             // Login not enabled, nothing is required

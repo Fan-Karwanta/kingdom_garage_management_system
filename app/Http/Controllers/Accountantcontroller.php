@@ -179,7 +179,8 @@ class Accountantcontroller extends Controller
         }
 
         // email format
-        try {
+        if (! empty($email)) {
+            try {
             $logo = DB::table('tbl_settings')->first();
             $systemname = $logo->system_name;
             $emailformats = DB::table('tbl_mail_notifications')->where('notification_for', '=', 'User_registration')->first();
@@ -232,7 +233,8 @@ class Accountantcontroller extends Controller
                     $emailLog->save();
                 }
             }
-        } catch (\Exception $e) {
+            } catch (\Exception $e) {
+            }
         }
 
         return redirect('/accountant/list')->with('message', 'Accountant Added Successfully');
@@ -365,7 +367,7 @@ class Accountantcontroller extends Controller
 
         if ($email != $emails) {
             $this->validate($request, [
-                'email' => 'required|email|custom_email|unique:users',
+                'email' => 'nullable|email|custom_email|unique:users,email,'.$id.',id,soft_delete,0',
             ]);
         }
 
@@ -384,7 +386,7 @@ class Accountantcontroller extends Controller
         $accountant->display_name = $displayname;
         $accountant->gender = $gender;
         $accountant->birth_date = $dob;
-        $accountant->email = $email;
+        $accountant->email = $emails;
 
         if (! empty($password)) {
             $accountant->password = bcrypt($password);

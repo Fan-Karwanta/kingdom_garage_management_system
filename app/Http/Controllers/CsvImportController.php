@@ -90,7 +90,7 @@ class CsvImportController extends Controller
                 $gender = trim($record[$headerMap['gender']] ?? '');
                 $address = trim($record[$headerMap['address']] ?? '');
 
-                if (empty($firstname) || empty($lastname) || empty($email) || empty($password) || empty($role)) {
+                if (empty($firstname) || empty($lastname) || empty($password) || empty($role)) {
                     $errors[] = "Line $line: Required fields cannot be empty";
                     $line++;
 
@@ -137,19 +137,22 @@ class CsvImportController extends Controller
 
                 $roleId = $roleMapping[(int) $role];
 
-                if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $errors[] = "Line $line: Invalid email format: $email";
-                    $line++;
+                // Email is optional - a unique username is generated when blank
+                if (! empty($email)) {
+                    if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $errors[] = "Line $line: Invalid email format: $email";
+                        $line++;
 
-                    continue;
-                }
+                        continue;
+                    }
 
-                $emailExists = DB::table('users')->where('soft_delete', 0)->where('email', $email)->exists();
-                if ($emailExists) {
-                    $errors[] = "Line $line: Email already exists: $email";
-                    $line++;
+                    $emailExists = DB::table('users')->where('soft_delete', 0)->where('email', $email)->exists();
+                    if ($emailExists) {
+                        $errors[] = "Line $line: Email already exists: $email";
+                        $line++;
 
-                    continue;
+                        continue;
+                    }
                 }
 
                 if (! empty($mobile)) {
@@ -173,7 +176,7 @@ class CsvImportController extends Controller
                     'name' => $firstname,
                     'lastname' => $lastname,
                     'gender' => $genderValue,
-                    'email' => $email,
+                    'email' => ! empty($email) ? $email : null,
                     'password' => bcrypt($password),
                     'mobile_no' => $mobile,
                     'address' => $address,
@@ -193,8 +196,13 @@ class CsvImportController extends Controller
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
-                // Send registration email
-                try {
+                // Assign a generated username (guarded for the pre-migration window)
+                if (\Schema::hasColumn('users', 'username')) {
+                    $userData['username'] = generateUniqueUsername($firstname, $lastname, $email ?: null);
+                }
+                // Send registration email (only when the user has an email)
+                if (! empty($userData['email'])) {
+                    try {
                     $logo = DB::table('tbl_settings')->first();
                     $systemname = $logo->system_name;
                     $emailformats = DB::table('tbl_mail_notifications')->where('notification_for', '=', 'User_registration')->first();
@@ -246,6 +254,7 @@ class CsvImportController extends Controller
                 } catch (\Exception $e) {
                     Log::error('Email sending failed for user '.$userData['email'].': '.$e->getMessage());
                     // Continue with the next user even if email fails
+                }
                 }
 
                 $validUsers[] = $userData;

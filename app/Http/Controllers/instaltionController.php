@@ -54731,6 +54731,7 @@ class instaltionController extends Controller
 			`gender` tinyint(1) DEFAULT NULL,
 			`birth_date` date DEFAULT NULL,
 			`email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+			`username` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
 			`contact_person` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
 			`password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
 			`mobile_no` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -54767,6 +54768,21 @@ class instaltionController extends Controller
         $sql = "INSERT IGNORE INTO `users` (`id`, `name`, `lastname`, `display_name`, `gender`, `birth_date`, `email`, `contact_person`, `password`, `mobile_no`, `landline_no`, `address`, `image`, `join_date`, `designation`, `left_date`, `account_no`, `ifs_code`, `branch_name`, `tin_no`, `pan_no`, `gst_no`, `country_id`, `state_id`, `city_id`, `role`, `role_id`, `language`, `timezone`, `custom_field`, `soft_delete`,`branch_id`, `remember_token`, `created_at`, `updated_at`) VALUES
 		(1,'$f_name', '$l_name', '', 0, NULL, '$email', '','$password', '', '','$address', 'system_m.png', NULL, '', NULL, '', '', '', '', '', '', 0, 0, 0, 'admin', 1, 'en', 'UTC', '', 0,1, 'Qe5y0kobcAwv9jk22AMyfKGBIT4Til3P9l8vSBpvx0zl8XVpuhzujpbPbpSq', NULL, NULL)";
         $data = $conn->exec($sql);
+
+        // Make sure the username column exists (it may be missing when the
+        // users table already existed), then backfill missing usernames so
+        // every user can log in via "Username or Email".
+        $sqlCheckUsername = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'users' AND COLUMN_NAME = 'username'";
+        if ($conn->query($sqlCheckUsername)->rowCount() == 0) {
+            $conn->exec("ALTER TABLE `users` ADD COLUMN `username` VARCHAR(100) DEFAULT NULL COLLATE 'utf8_unicode_ci' AFTER `email`");
+            $conn->exec('ALTER TABLE `users` ADD UNIQUE KEY `users_username_unique` (`username`)');
+        }
+        $usersNoUsername = $conn->query("SELECT `id`, `name`, `lastname`, `email` FROM `users` WHERE `username` IS NULL OR `username` = ''");
+        foreach ($usersNoUsername as $noUsernameUser) {
+            $uname = generateUniqueUsername($noUsernameUser['name'], $noUsernameUser['lastname'], $noUsernameUser['email']);
+            $stmtUname = $conn->prepare('UPDATE `users` SET `username` = ? WHERE `id` = ?');
+            $stmtUname->execute([$uname, $noUsernameUser['id']]);
+        }
 
         // Branch Table
         $sql = "CREATE TABLE IF NOT EXISTS `branches` (
@@ -55697,6 +55713,27 @@ class instaltionController extends Controller
             $sql = 'ALTER TABLE `tbl_settings` 
 						ADD COLUMN `customer_login` TINYINT(1) DEFAULT 1 AFTER `is_mobile`;';
             $conn->exec($sql);
+        }
+
+        // Add username column in users (for "Username or Email" login when a
+        // user has no email address)
+        $sqlCheck = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'users' AND COLUMN_NAME = 'username'";
+        $result = $conn->query($sqlCheck);
+
+        if ($result->rowCount() == 0) {
+            $sql = 'ALTER TABLE `users` 
+						ADD COLUMN `username` VARCHAR(100) DEFAULT NULL COLLATE "utf8_unicode_ci" AFTER `email`;';
+            $conn->exec($sql);
+            $sql = 'ALTER TABLE `users` ADD UNIQUE KEY `users_username_unique` (`username`);';
+            $conn->exec($sql);
+        }
+
+        // Backfill usernames for users that do not have one yet
+        $usersNoUsername = $conn->query("SELECT `id`, `name`, `lastname`, `email` FROM `users` WHERE `username` IS NULL OR `username` = ''");
+        foreach ($usersNoUsername as $noUsernameUser) {
+            $uname = generateUniqueUsername($noUsernameUser['name'], $noUsernameUser['lastname'], $noUsernameUser['email']);
+            $stmtUname = $conn->prepare('UPDATE `users` SET `username` = ? WHERE `id` = ?');
+            $stmtUname->execute([$uname, $noUsernameUser['id']]);
         }
 
         // Check if the notification already exists in tbl_mail_notifications

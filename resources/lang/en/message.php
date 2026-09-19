@@ -2471,5 +2471,10 @@ return [
     "Enter Product Margin"=>"Enter Product Margin",
     "Enter Product Cost"=>"Enter Product Cost",
     "Help Document"=>"Help Document",
+
+    // Username login (email is optional; every user gets a username)
+    'Username' => 'Username',
+    'Username or Email' => 'Username or Email',
+    'Used to log in when no email is set' => 'Used to log in when no email is set',
 ];
 // English en

@@ -171,6 +171,7 @@
           <th>{{ trans('message.First Name') }}</th>
           <th>{{ trans('message.Last Name') }}</th>
           <th>{{ trans('message.Email') }}</th>
+          <th>{{ trans('message.Username') }}</th>
           <th>{{ trans('message.Mobile Number') }}</th>
           <th>{{ trans('message.Vehicle List') }}</th>
           <th>{{ trans('message.Action') }}</th>
@@ -276,6 +277,10 @@
         {
             data: 'email',
             name: 'email'
+        },
+        {
+            data: 'username',
+            name: 'username'
         },
         {
             data: 'mobile_no',

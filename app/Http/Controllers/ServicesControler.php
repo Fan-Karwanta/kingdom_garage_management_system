@@ -1710,10 +1710,12 @@ class ServicesControler extends Controller
         $email = $request->email;
         $password = $logo->default_password;
 
-        // Check if email already exists
-        $existingEmail = User::where('email', $request->email)->where('soft_delete', 0)->exists();
-        if ($existingEmail) {
-            return redirect('/')->with('message', 'Email you entered is already registered.');
+        // Check if email already exists (email is optional)
+        if (! empty($email)) {
+            $existingEmail = User::where('email', $email)->where('soft_delete', 0)->exists();
+            if ($existingEmail) {
+                return redirect('/')->with('message', 'Email you entered is already registered.');
+            }
         }
 
         // Check if number plate already exists

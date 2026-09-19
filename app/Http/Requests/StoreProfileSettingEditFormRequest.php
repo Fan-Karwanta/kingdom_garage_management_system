@@ -26,7 +26,7 @@ class StoreProfileSettingEditFormRequest extends FormRequest
         return [
             'firstname' => 'required|regex:/^[\p{L}\p{M}\s\-\'\.]+$/u|max:50',
             'lastname' => 'required|regex:/^[\p{L}\p{M}\s\-\'\.]+$/u|max:50',
-            'email' => 'required|email|custom_email|unique:users,email,NULL,id,soft_delete,0'.$this->id,
+            'email' => 'nullable|email|custom_email|unique:users,email,NULL,id,soft_delete,0'.$this->id,
             'password' => ($this->id) ? 'nullable|min:6|max:12|regex:/^(?=.*[a-zA-Z\p{L}])(?=.*\d).+$/u' : 'min:6|max:12|regex:/^(?=.*[a-zA-Z\p{L}])(?=.*\d).+$/u',
             'password_confirmation' => ($this->id) ? 'same:password' : 'same:password',
             'mobile' => 'nullable|min:6|max:16|regex:/^[- +()]*[0-9][- +()0-9]*$/',

@@ -163,7 +163,8 @@ class BranchAdminController extends Controller
         }
 
         // email format
-        try {
+        if (! empty($email)) {
+            try {
             $logo = DB::table('tbl_settings')->first();
             $systemname = $logo->system_name;
             $emailformats = DB::table('tbl_mail_notifications')->where('notification_for', '=', 'User_registration')->first();
@@ -216,7 +217,8 @@ class BranchAdminController extends Controller
                     $emailLog->save();
                 }
             }
-        } catch (\Exception $e) {
+            } catch (\Exception $e) {
+            }
         }
 
         return redirect('/branchadmin/list')->with('message', 'Branch Admin Added Successfully');

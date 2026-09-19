@@ -247,7 +247,7 @@ class Customercontroller extends Controller
             }
         }
 
-        return redirect('/customer/list')->with('message', 'Customer Added Successfully');
+        return redirect('/customer/list')->with('message', 'Customer Added Successfully. Login username: '.$customer->username);
     }
 
     // customer list
@@ -277,10 +277,14 @@ class Customercontroller extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
+            $hasUsernameColumn = \Schema::hasColumn('users', 'username');
             $query = User::query()
                 ->where('role', '=', 'Customer')
                 ->where('soft_delete', '=', 0)
                 ->select('id', 'name', 'lastname', 'email', 'mobile_no', 'image');
+            if ($hasUsernameColumn) {
+                $query->addSelect('username');
+            }
 
             // Roles based filtering
             if (! isAdmin(Auth::User()->role_id)) {
@@ -299,11 +303,14 @@ class Customercontroller extends Controller
             // Search functionality
             $searchValue = $request->input('search.value');
             if ($searchValue) {
-                $query->where(function ($q) use ($searchValue) {
+                $query->where(function ($q) use ($searchValue, $hasUsernameColumn) {
                     $q->where('name', 'LIKE', "%{$searchValue}%")
                         ->orWhere('lastname', 'LIKE', "%{$searchValue}%")
                         ->orWhere('email', 'LIKE', "%{$searchValue}%")
                         ->orWhere('mobile_no', 'LIKE', "%{$searchValue}%");
+                    if ($hasUsernameColumn) {
+                        $q->orWhere('username', 'LIKE', "%{$searchValue}%");
+                    }
                 });
             }
 
@@ -311,7 +318,11 @@ class Customercontroller extends Controller
             $filteredRecords = $query->count();
 
             // Pagination and ordering
-            $columns = ['id', 'name', 'lastname', 'email', 'mobile_no', 'vehicle_list', 'image'];
+            $columns = ['id', 'name', 'lastname', 'email', 'username', 'mobile_no', 'vehicle_list', 'image'];
+            if (! $hasUsernameColumn) {
+                // Until the username migration runs, fall back to sorting by id.
+                $columns[4] = 'id';
+            }
             $data = $query->orderBy(
                 $columns[$request->input('order.0.column', 0)],
                 $request->input('order.0.dir', 'asc')
@@ -334,6 +345,7 @@ class Customercontroller extends Controller
                         'image' => '<img src="'.url('public/customer/'.$customer->image).'" width="50px" height="50px" class="datatable_img">',
                         'vehicle_list' => getVehiclesdata($customer->id),
                         'email' => $customer->email,
+                        'username' => $customer->username,
                         'mobile_no' => $customer->mobile_no,
                         'action' => '<div class="dropdown_toggle">
                                     <img src="'.asset('public/img/list/dots.png').'" class="btn dropdown-toggle border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -763,12 +775,10 @@ class Customercontroller extends Controller
 
         $usimgdtaa = DB::table('users')->where('id', '=', $id)->first();
         $email = $usimgdtaa->email;
-        if (! empty($email)) {
-            if ($email != $updated_email) {
-                $this->validate($request, [
-                    'email' => 'required|email|custom_email|unique:users',
-                ]);
-            }
+        if (! empty($updated_email) && $email != $updated_email) {
+            $this->validate($request, [
+                'email' => 'nullable|email|custom_email|unique:users,email,'.$id.',id,soft_delete,0',
+            ]);
         }
 
         $dob = null;

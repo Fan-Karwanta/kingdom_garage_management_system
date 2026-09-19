@@ -248,7 +248,8 @@ class Supportstaffcontroller extends Controller
         }
 
         // email format
-        try {
+        if (! empty($email)) {
+            try {
             $logo = DB::table('tbl_settings')->first();
             $systemname = $logo->system_name;
             $emailformats = DB::table('tbl_mail_notifications')->where('notification_for', '=', 'User_registration')->first();
@@ -301,7 +302,8 @@ class Supportstaffcontroller extends Controller
                     $emailLog->save();
                 }
             }
-        } catch (\Exception $e) {
+            } catch (\Exception $e) {
+            }
         }
 
         return redirect('/supportstaff/list')->with('message', 'Supportstaff Added Successfully');

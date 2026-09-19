@@ -18,11 +18,23 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
+        // The "email" parameter accepts a username or an email.
+        $login = $credentials['email'];
+        $userQuery = User::where('email', '=', $login);
+        if (\Schema::hasColumn('users', 'username')) {
+            $userQuery->orWhere('username', '=', $login);
+        }
+        $matchedUser = $userQuery->get()
+            ->first(function ($user) use ($credentials) {
+                return Auth::validate(['id' => $user->id, 'password' => $credentials['password']]);
+            });
+
+        if ($matchedUser) {
+            Auth::login($matchedUser);
             $user = Auth::user();
 
             if ($user->soft_delete == 1) {
