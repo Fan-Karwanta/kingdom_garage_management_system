@@ -13,6 +13,12 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        // The web installer creates this table via raw SQL, so guard the
+        // create to keep `php artisan migrate` safe on installed databases.
+        if (Schema::hasTable('users')) {
+            return;
+        }
+
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
