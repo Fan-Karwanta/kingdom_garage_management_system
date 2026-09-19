@@ -142,6 +142,8 @@ class Suppliercontroller extends Controller
         $country_id = $request->country_id;
         $state = $request->state;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
         $image = $request->image;
 
         $user = new User;
@@ -167,6 +169,8 @@ class Suppliercontroller extends Controller
         $user->country_id = $country_id;
         $user->state_id = $state;
         $user->city_id = $city;
+        $user->psgc_code = $psgc_code;
+        $user->full_address = $full_address;
         $user->role = 'Supplier';
         $user->language = 'en';
         $user->timezone = 'UTC';
@@ -296,6 +300,8 @@ class Suppliercontroller extends Controller
         $country_id = $request->country_id;
         $state = $request->state;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
 
         $user = User::find($id);
         $user->name = $firstname;
@@ -317,6 +323,8 @@ class Suppliercontroller extends Controller
         $user->country_id = $country_id;
         $user->state_id = $state;
         $user->city_id = $city;
+        $user->psgc_code = $psgc_code;
+        $user->full_address = $full_address;
         $user->role = 'Supplier';
         $user->language = 'en';
         $user->timezone = 'UTC';

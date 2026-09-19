@@ -44,10 +44,7 @@
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <p>
                     <?php
-                    echo $logo->address . ' ';
-                    echo '<br>' . getCityName($logo->city_id);
-                    echo ', ' . getStateName($logo->state_id);
-                    echo ', ' . getCountryName($logo->country_id);
+                    echo getFullAddress($logo);
                     echo '<br>' . $logo->email;
                     echo '<br>' . $logo->phone_number;
                     ?>
@@ -64,11 +61,7 @@
                 </tr>
                 <tr>
                     <th class="cname">{{ trans('message.Address:') }} </th>
-                    <td class="cname"> <?php echo $customer->address;
-                    echo ', &nbsp;';
-                    echo getCityName("$customer->city_id"); ?><?php echo ','; ?><?php echo getStateName("$customer->state_id,");
-                    echo ', &nbsp;';
-                    echo getCountryName($customer->country_id); ?></td>
+                    <td class="cname"> <?php echo getFullAddress($customer); ?></td>
                 </tr>
                 <tr>
                     <th class="cname">{{ trans('message.Contact:') }} </th>

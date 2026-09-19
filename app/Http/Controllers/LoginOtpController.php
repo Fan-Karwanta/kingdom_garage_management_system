@@ -20,11 +20,15 @@ class LoginOtpController extends Controller
         ]);
 
         $admin = DB::table('users')->where('id', 1)->first(); // or use role/admin logic
-        $countryCode = DB::table('tbl_countries')->where('id', $admin->country_id)->value('phonecode');
+        // Use the configured PH phone country code instead of the old
+        // tbl_countries.phonecode lookup (which was coupled to country_id).
+        $countryCode = config('services.psgc.phone_country_code', '+63');
+        // Strip leading "+" — we re-add it below for the full E.164 format.
+        $countryCode = ltrim($countryCode, '+');
 
         \Log::info($countryCode);
         if (! $countryCode) {
-            return back()->withErrors(['mobile_no' => 'Admin country phone code not found.']);
+            return back()->withErrors(['mobile_no' => 'Phone country code not configured.']);
         }
 
         $userExists = DB::table('users')->where('mobile_no', $request->mobile_no)->exists();

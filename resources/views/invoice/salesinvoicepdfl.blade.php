@@ -230,10 +230,7 @@
                 }
 
                 //echo $logo->address ? ', <br>' : '';
-                echo $logo->address . ' ';
-                echo ' ' . getCityName($logo->city_id);
-                echo ', ' . getStateName($logo->state_id);
-                echo ', ' . getCountryName($logo->country_id);
+                echo getFullAddress($logo);
 
                 if ($taxName !== null && $taxNumber !== null) {
                   echo '<br> ' .  $taxName  . ':- ' . $taxNumber;
@@ -257,9 +254,7 @@
           </tr>
           <tr>
             <td valign="top" width="60%" align="left">
-              <img src="{{ base_path() }}/public/img/icons/Vector (14).png" class="addr_img"> <?php echo getCustomerAddress($sales->customer_id); ?><br /><?php echo getCustomerCity($sales->customer_id) != null ? getCustomerCity("$sales->customer_id") . ', ' : ''; ?><?php echo getCustomerState("$sales->customer_id,");
-                                                                                                                                                                                                                                                                            echo ', ';
-                                                                                                                                                                                                                                                                            echo getCustomerCountry($sales->customer_id); ?>
+              <img src="{{ base_path() }}/public/img/icons/Vector (14).png" class="addr_img"> <?php echo getCustomerFullAddress($sales->customer_id); ?>
             </td>
             <td valign="top" width="30%" align="left">
               <b><img src="{{ base_path() }}/public/img/icons/user_img.png" class="user_img"> </b> <?php echo getCustomerName($sales->customer_id); ?><br>

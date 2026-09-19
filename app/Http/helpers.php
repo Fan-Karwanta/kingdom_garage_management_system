@@ -244,14 +244,15 @@ if (! function_exists('getMobileNoWithCode')) {
             return null; // Return null if user or mobile number not found
         }
 
-        // Get country phone code
-        $mo_code = DB::table('tbl_countries')->where('id', $user->country_id)->value('phonecode');
+        // Use the configured PH phone country code instead of the old
+        // tbl_countries.phonecode lookup (which was coupled to country_id).
+        $mo_code = config('services.psgc.phone_country_code', '+63');
         if (! $mo_code) {
             return $user->mobile_no; // Return mobile number as is if no country code is found
         }
 
-        // Format country code
-        $mo_code = '+'.$mo_code;
+        // Ensure leading "+".
+        $mo_code = '+'.ltrim($mo_code, '+');
 
         // Check if mobile number already contains the country code
         if (strpos($user->mobile_no, $mo_code) === 0) {
@@ -261,6 +262,120 @@ if (! function_exists('getMobileNoWithCode')) {
         return $mo_code.$user->mobile_no; // Append country code if not present
     }
 }
+
+// Get the full address for a user.
+// Used by invoice, jobcard, quotation, and dashboard display views.
+//
+// With the single-field design, the address column contains the full address
+// (street + PSGC). We just return it. For legacy rows that only have
+// country_id/state_id/city_id (no full_address), we fall back to resolving
+// those to names.
+if (! function_exists('getFullAddress')) {
+    function getFullAddress($user)
+    {
+        if (! $user) {
+            return '';
+        }
+
+        // New single-field design: address contains the full text.
+        // If full_address is set, the row was saved with PSGC — the address
+        // column already has everything, so just return it.
+        if (! empty($user->full_address)) {
+            $address = trim($user->address ?? '');
+            if ($address !== '') {
+                return $address;
+            }
+            // Edge case: full_address set but address empty — return full_address.
+            return $user->full_address;
+        }
+
+        // Legacy fallback: resolve country_id/state_id/city_id to names.
+        $parts = [];
+        if (! empty($user->address)) {
+            $parts[] = trim($user->address);
+        }
+        if (! empty($user->city_id)) {
+            $cityName = getCityName($user->city_id);
+            if ($cityName) {
+                $parts[] = $cityName;
+            }
+        }
+        if (! empty($user->state_id)) {
+            $stateName = getStateName($user->state_id);
+            if ($stateName) {
+                $parts[] = $stateName;
+            }
+        }
+        if (! empty($user->country_id)) {
+            $countryName = getCountryName($user->country_id);
+            if ($countryName) {
+                $parts[] = $countryName;
+            }
+        }
+
+        return implode(', ', $parts);
+    }
+}
+
+// Get the full address for a branch (uses branch_address instead of address).
+if (! function_exists('getBranchFullAddress')) {
+    function getBranchFullAddress($branch)
+    {
+        if (! $branch) {
+            return '';
+        }
+
+        // New single-field design: branch_address contains the full text.
+        if (! empty($branch->full_address)) {
+            $address = trim($branch->branch_address ?? '');
+            if ($address !== '') {
+                return $address;
+            }
+            return $branch->full_address;
+        }
+
+        // Legacy fallback.
+        $parts = [];
+        if (! empty($branch->branch_address)) {
+            $parts[] = trim($branch->branch_address);
+        }
+        if (! empty($branch->city_id)) {
+            $cityName = getCityName($branch->city_id);
+            if ($cityName) {
+                $parts[] = $cityName;
+            }
+        }
+        if (! empty($branch->state_id)) {
+            $stateName = getStateName($branch->state_id);
+            if ($stateName) {
+                $parts[] = $stateName;
+            }
+        }
+        if (! empty($branch->country_id)) {
+            $countryName = getCountryName($branch->country_id);
+            if ($countryName) {
+                $parts[] = $countryName;
+            }
+        }
+
+        return implode(', ', $parts);
+    }
+}
+
+// Customer full address by customer ID (used in sales invoice views)
+if (! function_exists('getCustomerFullAddress')) {
+    function getCustomerFullAddress($id)
+    {
+        $customer = DB::table('users')->where([['id', '=', $id], ['role', '=', 'Customer']])->first();
+
+        if (! $customer) {
+            return '';
+        }
+
+        return getFullAddress($customer);
+    }
+}
+
 // Get getCellProduct
 if (! function_exists('getTotalProduct')) {
     function getTotalProduct($id, $s_date, $e_date)
@@ -1181,18 +1296,20 @@ if (! function_exists('getAssignedName')) {
     }
 }
 
-// Customer Address in View of Sales module
+// Customer Address in View of Sales module.
+// With the single-field design, the address column contains the full address
+// (street + PSGC). For legacy rows, fall back to getFullAddress() to include
+// city/state/country from the old country_id/state_id/city_id columns.
 if (! function_exists('getCustomerAddress')) {
     function getCustomerAddress($id)
     {
-
         $customer = DB::table('users')->where([['id', '=', $id], ['role', '=', 'Customer']])->first();
 
         if (! empty($customer)) {
-            $customer_address = $customer->address;
-
-            return $customer_address;
+            return getFullAddress($customer);
         }
+
+        return '';
     }
 }
 

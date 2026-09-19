@@ -250,10 +250,7 @@
                                     <div class="col-md-7 col-lg-7 col-xl-7 col-xxl-7 col-sm-7 col-xs-7 garrageadd mt-4" valign="top">
                                         <img src="{{ url::asset('public/img/icons/Vector (14).png') }}">&nbsp;
                                         <?php
-                                        echo $logo->address . ' ';
-                                        echo ',' . getCityName($logo->city_id);
-                                        echo ',' . getStateName($logo->state_id);
-                                        echo ', ' . getCountryName($logo->country_id);
+                                        echo getFullAddress($logo);
                                         ?>
                                         <br>
                                         <img src="{{ URL::asset('public/img/icons/Vector (15).png') }}">

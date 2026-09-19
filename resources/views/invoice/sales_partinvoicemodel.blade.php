@@ -92,10 +92,7 @@
                                 }
                             }
 
-                            echo $logo->address . ' ';
-                            echo ', ' . getCityName($logo->city_id);
-                            echo ', ' . getStateName($logo->state_id);
-                            echo ', ' . getCountryName($logo->country_id);
+                            echo getFullAddress($logo);
                             ?>
                         </div>
                     </div>
@@ -160,10 +157,7 @@
                             <h4>{{ trans('message.Payment To,') }} </h4>
                             <div class="col-10">
                                 <img src="{{ URL::asset('public/img/icons/Vector (14).png') }}">
-                                <?php echo getCustomerAddress($sales->customer_id);
-                                echo ', '; ?> <?php echo getCustomerCity($sales->customer_id) != null ? getCustomerCity("$sales->customer_id") . ',' : ''; ?><?php echo getCustomerState("$sales->customer_id,");
-                                                                                                                                                                echo ', ';
-                                                                                                                                                                echo getCustomerCountry($sales->customer_id); ?>
+                                <?php echo getCustomerFullAddress($sales->customer_id); ?>
                             </div>
                         </div>
                         <div class="col-md-5 col-sm-5 col-xs-5 bill_to me-4">

@@ -32,6 +32,24 @@
     <link href="{{ URL::asset('build/css/own.css') }} " rel="stylesheet">
     <link href="{{ URL::asset('build/css/roboto.css') }} " rel="stylesheet">
 
+    <!-- Password show/hide toggle (eye icon)
+         Extra right offset/padding leaves room for the browser's own
+         built-in password icons (e.g. Chrome's leaked/weak password
+         warning), which would otherwise overlap our custom toggle icon.
+         !important is used to beat Bootstrap's .has-feedback .form-control
+         rule which sets padding-right: 42.5px with higher specificity. -->
+    <style>
+      .password-input-wrap { position: relative; }
+      .password-input-wrap input.form-control,
+      .password-input-wrap input { padding-right: 52px !important; }
+      .password-toggle-btn {
+        position: absolute; right: 26px; top: 50%; transform: translateY(-50%);
+        cursor: pointer; color: #888; font-size: 15px; line-height: 1;
+        user-select: none; z-index: 3;
+      }
+      .password-toggle-btn:hover { color: #EA6B00; }
+    </style>
+
     <!-- sweetalert -->
     {{-- <link href="{{ URL::asset('vendors/sweetalert/sweetalert.css') }}"
     rel="stylesheet"
@@ -505,7 +523,10 @@
                                 <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
                                     <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="Password">{{ trans('message.Password') }} <label class="color-danger">*</label></label>
                                     <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
+                                        <div class="password-input-wrap">
                                         <input type="password" id="password" name="password" placeholder="{{ trans('message.Enter Password') }}" class="form-control col-md-7 col-xs-12" maxlength="20" required>
+                                        <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
+                                        </div>
                                         <span class="color-danger" id="errorlpassword"></span>
                                     </div>
                                 </div>
@@ -515,7 +536,10 @@
                                     <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4 currency p-0 ps-2 px-5" for="Password">{{ trans('message.Confirm Password') }}
                                         <label class="color-danger">*</label></label>
                                     <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
+                                        <div class="password-input-wrap">
                                         <input type="password" id="password_confirmation" name="password_confirmation" placeholder="{{ trans('message.Enter Confirm Password') }}" class="form-control col-md-7 col-xs-12" maxlength="20" required>
+                                        <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
+                                        </div>
                                         <span class="color-danger" id="errorlpassword_confirmation"></span>
                                     </div>
                                 </div>
@@ -568,47 +592,9 @@
                                 <h4><b>{{ trans('message.ADDRESS') }}</b></h4>
                                 <p class="col-md-12 col-lg-12 col-xl-12 col-xxl-12 col-sm-12 col-xs-12 ln_solid"></p>
                             </div>
-                            <div class="row mt-3">
-                                <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group has-feedback">
-                                    <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="Country">{{ trans('message.Country') }} <label class="color-danger">*</label></label>
-                                    <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
-                                        <select class="form-control select_country form-select" id="country_id" name="country_id" countryurl="{!! url('/getstatefromcountry') !!}" required>
-                                            <option value="">{{ trans('message.Select Country') }}</option>
-                                            @foreach ($country as $countrys)
-                                            <option value="{{ $countrys->id }}">{{ $countrys->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <span class="color-danger" id="errorlcountry_id"></span>
-                                    </div>
-                                </div>
-
-                                <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group has-feedback">
-                                    <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="State ">{{ trans('message.State') }} </label>
-                                    <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
-                                        <select class="form-control state_of_country form-select" id="state_id" name="state_id" stateurl="{!! url('/getcityfromstate') !!}">
-                                            <option value="">{{ trans('message.Select State') }}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group has-feedback">
-                                    <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="Town/City">{{ trans('message.Town/City') }}</label>
-                                    <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
-                                        <select class="form-control city_of_state form-select" id="city" name="city">
-                                            <option value="">{{ trans('message.Select City') }}</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group has-feedback">
-                                    <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="Address">{{ trans('message.Address') }} <label class="color-danger">*</label></label>
-                                    <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
-                                        <textarea class="form-control" id="address" name="address" maxlength="100" required>{{ old('address') }}</textarea>
-                                        <span class="color-danger" id="errorladdress"></span>
-                                    </div>
-                                </div>
-                            </div>
+          <div class="row row-mb-0">
+            @include('partials._psgc_address')
+          </div>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                 <div class="col-md-12 col-sm-12 col-xs-12 text-center">
@@ -1581,39 +1567,6 @@
             }
         }));
 
-
-        /*customer model state to city*/
-        $('.select_country').change(function() {
-            countryid = $(this).val();
-            var url = $(this).attr('countryurl');
-            $.ajax({
-                type: 'GET',
-                url: url,
-                data: {
-                    countryid: countryid
-                },
-                success: function(response) {
-                    $('.state_of_country').html(response);
-                }
-            });
-        });
-
-
-        $('body').on('change', '.state_of_country', function() {
-            stateid = $(this).val();
-
-            var url = $(this).attr('stateurl');
-            $.ajax({
-                type: 'GET',
-                url: url,
-                data: {
-                    stateid: stateid
-                },
-                success: function(response) {
-                    $('.city_of_state').html(response);
-                }
-            });
-        });
 
         /*vehical Type from brand*/
         $('.select_vehicaltype').change(function() {
@@ -3948,6 +3901,38 @@
             }
         });
     }
+</script>
+
+<!-- Password show/hide toggle (eye icon) - CSP-safe event delegation -->
+<script nonce="{{ $cspNonce }}">
+    (function () {
+        function toggle(btn) {
+            var wrap = btn.closest('.password-input-wrap');
+            var input = wrap ? wrap.querySelector('input') : null;
+            var icon = btn.querySelector('i');
+            if (!input || !icon) return;
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+        function init() {
+            document.addEventListener('click', function (e) {
+                var btn = e.target.closest ? e.target.closest('.password-toggle-btn') : null;
+                if (btn) { e.preventDefault(); toggle(btn); }
+            });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
 </script>
 
 </html>

@@ -84,8 +84,7 @@
               <div class="col-xl-12 col-md-12 col-sm-12 heading_view mt-3" style="width: 90%;">
                 <i class="fa-solid fa-location-dot"></i>
                 <lable class="">
-                  {{ $user->address }}
-                  <!-- , <?php echo getCityName($user->city_id) != null ? getCityName($user->city_id) . ',' : ''; ?>{{ getStateName($user->state_id) }}, {{ getCountryName($user->country_id) }}. -->
+                  {{ getFullAddress($user) }}
                 </lable>
               </div>
             </div>

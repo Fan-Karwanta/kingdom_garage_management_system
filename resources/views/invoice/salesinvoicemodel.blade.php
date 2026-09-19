@@ -75,10 +75,7 @@
                                 }
                             }
 
-                            echo $logo->address . ' ';
-                            echo '' . getCityName($logo->city_id);
-                            echo ', ' . getStateName($logo->state_id);
-                            echo ', ' . getCountryName($logo->country_id);
+                            echo getFullAddress($logo);
                             ?>
 
                             <?php
@@ -140,10 +137,7 @@
                         <td valign="top" align="left" class="ps-3">
 
                             <img src="{{ URL::asset('public/img/icons/Vector (14).png') }}">
-                            <?php echo getCustomerAddress($sales->customer_id); ?><br /><?php echo getCustomerCity($sales->customer_id) != null ? getCustomerCity("$sales->customer_id") . ', ' : ''; ?>
-                            <?php echo getCustomerState("$sales->customer_id,");
-                            echo ', ';
-                            echo getCustomerCountry($sales->customer_id); ?>
+                            <?php echo getCustomerFullAddress($sales->customer_id); ?>
 
                         </td>
                     </div>

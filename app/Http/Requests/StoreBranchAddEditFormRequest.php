@@ -30,8 +30,10 @@ class StoreBranchAddEditFormRequest extends FormRequest
             // 'email' => 'required|email|custom_email|custom_email|unique:branches,branch_email,'.$this->id,
             'email' => 'required|email|custom_email|',
             'image' => 'nullable|mimes:jpg,png,jpeg',
-            'country_id' => 'required',
-            'address' => 'required|max:200|regex:/^[(a-zA-Z0-9\s)\p{L}]+$/u',
+            'country_id' => 'nullable',
+            'psgc_code' => 'nullable|string|max:20',
+            'full_address' => 'nullable|string|max:500',
+            'address' => 'required|max:200|regex:/^[(a-zA-Z0-9\s,)\p{L}]+$/u',
         ];
     }
 

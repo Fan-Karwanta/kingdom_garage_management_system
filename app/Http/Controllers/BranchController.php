@@ -47,6 +47,8 @@ class BranchController extends Controller
         $country_id = $request->country_id;
         $state_id = $request->state_id;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
 
         $branch = new Branch;
         $branch->branch_name = $branchname;
@@ -56,6 +58,8 @@ class BranchController extends Controller
         $branch->country_id = $country_id;
         $branch->state_id = $state_id;
         $branch->city_id = $city;
+        $branch->psgc_code = $psgc_code;
+        $branch->full_address = $full_address;
 
         if (! empty($image)) {
             $file = $image;
@@ -147,6 +151,8 @@ class BranchController extends Controller
         $country_id = $request->country_id;
         $state_id = $request->state_id;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
 
         $branch = Branch::find($id);
         $branch->branch_name = $branchname;
@@ -156,6 +162,8 @@ class BranchController extends Controller
         $branch->country_id = $country_id;
         $branch->state_id = $state_id;
         $branch->city_id = $city;
+        $branch->psgc_code = $psgc_code;
+        $branch->full_address = $full_address;
 
         if (! empty($image)) {
             $file = $image;

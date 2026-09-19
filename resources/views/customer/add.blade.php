@@ -123,7 +123,10 @@
             <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group my-form-group has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
               <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="password">{{ trans('message.Password') }}  @if($settings->customer_login == 1)  <label class="color-danger">*</label> @endif </label>
               <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
+                <div class="password-input-wrap">
                 <input type="password" name="password" placeholder="{{ trans('message.Enter Password') }}" class="form-control col-md-7 col-xs-12" maxlength="20">
+                <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
+                </div>
                 @if ($errors->has('password'))
                 <span class="help-block">
                   <strong>{{ $errors->first('password') }}</strong>
@@ -137,7 +140,10 @@
             <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group my-form-group has-feedback {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
               <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4 currency" style="" for="password_confirmation">{{ trans('message.Confirm Password') }}  @if($settings->customer_login == 1) <label class="color-danger">*</label>@endif</label>
               <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
+                <div class="password-input-wrap">
                 <input type="password" name="password_confirmation" placeholder="{{ trans('message.Enter Confirm Password') }}" class="form-control col-md-7 col-xs-12" maxlength="20">
+                <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
+                </div>
                 @if ($errors->has('password_confirmation'))
                 <span class="help-block">
                   <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -235,55 +241,7 @@
           </div>
 
           <div class="row row-mb-0">
-            <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group my-form-group has-feedback {{ $errors->has('country_id') ? ' has-error' : '' }}">
-              <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="country_id">{{ trans('message.Country') }} <label class="color-danger">*</label></label>
-              <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
-                <select class="form-control select_country form-select" name="country_id" countryurl="{!! url('/getstatefromcountry') !!}">
-                  <option value="">{{ trans('message.Select Country') }}</option>
-                  @foreach ($country as $countrys)
-                  <option value="{{ $countrys->id }}">{{ $countrys->name }}</option>
-                  @endforeach
-                </select>
-                @if ($errors->has('country_id'))
-                <span class="help-block">
-                  <strong>{{ $errors->first('country_id') }}</strong>
-                </span>
-                @endif
-              </div>
-            </div>
-
-            <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group has-feedback">
-              <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="state_id">{{ trans('message.State') }} </label>
-              <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
-                <select class="form-control state_of_country form-select" name="state_id" stateurl="{!! url('/getcityfromstate') !!}">
-                  <option value="">{{ trans('message.Select State') }}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group has-feedback">
-              <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="city">{{ trans('message.Town/City') }}</label>
-              <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
-                <select class="form-control city_of_state form-select" name="city">
-                  <option value="">{{ trans('message.Select City') }}</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group my-form-group has-feedback {{ $errors->has('address') ? ' has-error' : '' }}">
-              <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="address">{{ trans('message.Address') }} <label class="color-danger">*</label></label>
-              <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
-                <textarea class="form-control addressTextarea" id="address" name="address" maxlength="100">{{ old('address') }}</textarea>
-
-                @if ($errors->has('address'))
-                <span class="help-block">
-                  <strong>{{ $errors->first('address') }}</strong>
-                </span>
-                @endif
-              </div>
-            </div>
+            @include('partials._psgc_address')
           </div>
 
           <!-- Note Functionality -->
@@ -444,38 +402,7 @@
       language: "{{ getLangCode() }}",
     });
     // $('.datepicker').datetimepicker["ru"];
-    // var dateLang = 
-    $('.select_country').change(function() {
-      countryid = $(this).val();
-      var url = $(this).attr('countryurl');
-      $.ajax({
-        type: 'GET',
-        url: url,
-        data: {
-          countryid: countryid
-        },
-        success: function(response) {
-          $('.state_of_country').html(response);
-        }
-      });
-    });
-
-    $('body').on('change', '.state_of_country', function() {
-      stateid = $(this).val();
-
-      var url = $(this).attr('stateurl');
-      $.ajax({
-        type: 'GET',
-        url: url,
-        data: {
-          stateid: stateid
-        },
-        success: function(response) {
-          $('.city_of_state').html(response);
-        }
-      });
-    });
-
+    // var dateLang =
 
     $("#image").change(function() {
       readUrl(this);

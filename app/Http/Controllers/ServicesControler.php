@@ -329,6 +329,8 @@ class ServicesControler extends Controller
         $country = $request->country_id;
         $state = $request->state_id;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
         $company_name = $request->company_name;
 
         $dobs = $request->dob;
@@ -355,6 +357,8 @@ class ServicesControler extends Controller
         $customer->country_id = $country;
         $customer->state_id = $state;
         $customer->city_id = $city;
+        $customer->psgc_code = $psgc_code;
+        $customer->full_address = $full_address;
         $customer->company_name = $company_name;
 
         $images = $request->image;
@@ -1733,6 +1737,8 @@ class ServicesControler extends Controller
         $customer->country_id = $request->country_id;
         $customer->state_id = $request->state_id;
         $customer->city_id = $request->city;
+        $customer->psgc_code = $request->psgc_code;
+        $customer->full_address = $request->full_address;
         $customer->role = 'Customer';
         $customer->role_id = $getRoleId->id; /* Store Role table User Role Id */
         $customer->language = 'en';

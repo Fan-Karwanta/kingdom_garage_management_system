@@ -31,7 +31,9 @@ class CustomerAddEditFormRequest extends FormRequest
             'company_name' => 'nullable|max:100|regex:/^[(a-zA-Z\s)\p{N}\p{L}]+$/u',
             'landlineno' => 'nullable|min:6|max:16|regex:/^[- +()]*[0-9][- +()0-9]*$/',
             'image' => 'nullable|mimes:jpg,png,jpeg',
-            'country_id' => 'required',
+            'country_id' => 'nullable',
+            'psgc_code' => 'nullable|string|max:20',
+            'full_address' => 'nullable|string|max:500',
             'address' => 'required',
         ];
 

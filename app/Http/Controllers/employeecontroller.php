@@ -248,9 +248,14 @@ class employeecontroller extends Controller
         $user->join_date = $join_date;
         $user->designation = $request->designation;
         $user->left_date = $left_date;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
+
         $user->country_id = $request->country_id;
         $user->state_id = $request->state;
         $user->city_id = $request->city;
+        $user->psgc_code = $psgc_code;
+        $user->full_address = $full_address;
         $user->role = 'employee';
 
         $user->role_id = $getRoleId->id; /* Store Role table User Role Id */
@@ -489,9 +494,14 @@ class employeecontroller extends Controller
             $user->image = $filename;
         }
 
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
+
         $user->country_id = $request->country_id;
         $user->state_id = $request->state;
         $user->city_id = $request->city;
+        $user->psgc_code = $psgc_code;
+        $user->full_address = $full_address;
         $user->join_date = $join_date;
         $user->designation = $request->designation;
         $user->left_date = $left_date;

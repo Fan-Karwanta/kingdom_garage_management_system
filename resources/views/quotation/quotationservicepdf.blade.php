@@ -206,11 +206,7 @@
                 <b><img src="{{ base_path() }}/public/img/icons/user_img.png" class="user_img"></b><?php echo getCustomerName($tbl_services->customer_id); ?>
                
                 <br>
-                <b><img src="{{ base_path() }}/public/img/icons/Vector (14).png" class="addr_img"></b> <?php echo $customer->address;
-                                                                                                        echo ' ,';
-                                                                                                        echo getCityName("$customer->city_id"); ?><?php echo ''; ?><?php echo getStateName("$customer->state_id,");
-                                                                                                                                                                    echo ' ,';
-                                                                                                                                                                    echo getCountryName($customer->country_id); ?>
+                <b><img src="{{ base_path() }}/public/img/icons/Vector (14).png" class="addr_img"></b> <?php echo getFullAddress($customer); ?>
                 <br>
                 <b><img src="{{ base_path() }}/public/img/icons/phoneimg1.png" class="phoneimg"></b> <?php echo "$customer->mobile_no"; ?>
                 <br>
@@ -254,10 +250,7 @@
                 <div class="col-12 d-flex align-items-start" style="margin-top: 2px;">
                   <img src="{{ base_path() }}/public/img/icons/Vector (14).png" class="addr_img">
                   <?php
-                  echo ' ' . $logo->address . ' ';
-                  echo ' ' . getCityName($logo->city_id);
-                  echo ', ' . getStateName($logo->state_id);
-                  echo ', ' . getCountryName($logo->country_id);
+                  echo ' ' . getFullAddress($logo);
                   ?>
 
                 </div>

@@ -190,11 +190,7 @@
             <span style="float:right; class=" cust_addr_details">
               <b><img src="{{ base_path() }}/public/img/icons/user_img.png" class="user_img"></b> <?php echo getCustomerName($tbl_invoices->customer_id); ?>
               <br>
-              <b><img src="{{ base_path() }}/public/img/icons/Vector (14).png" class="addr_img"></b> <?php echo $customer->address;
-                                                                                                      echo ', ';
-                                                                                                      echo getCityName("$customer->city_id") != null ? getCityName("$customer->city_id") . ', ' : ''; ?><?php echo getStateName("$customer->state_id,");
-                                                                                                                                                                                                        echo ', ';
-                                                                                                                                                                                                        echo getCountryName($customer->country_id); ?>
+              <b><img src="{{ base_path() }}/public/img/icons/Vector (14).png" class="addr_img"></b> <?php echo getFullAddress($customer); ?>
               <br>
               <b><img src="{{ base_path() }}/public/img/icons/phoneimg1.png" class="phoneimg"></b> <?php echo "$customer->mobile_no"; ?>
               <br>
@@ -254,10 +250,7 @@
                 }
 
                 //echo $logo->address ? ', <br>' : '';
-                echo  $invoice_pdf->branch->branch_address. ' ';       //   $logo->address
-                echo ' ' . getCityName($invoice_pdf->branch->city_id);    //$logo->city_id
-                echo ', ' . getStateName($invoice_pdf->branch->state_id);   //$logo->state_id
-                echo ', ' . getCountryName($invoice_pdf->branch->country_id);  //$logo->country_id
+                echo getBranchFullAddress($invoice_pdf->branch);
 
                 // if ($taxName !== null && $taxNumber !== null) {
                 //   echo '<br> ' . $taxName . ':- ' . $taxNumber;

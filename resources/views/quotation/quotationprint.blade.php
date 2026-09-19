@@ -59,10 +59,7 @@ table.table.table-bordered.quotation_total {
                                     <img src="{{ URL::asset('public/img/icons/Vector (14).png') }}" class="m-1">
                                     <div class="col mx-2">
                                         <?php
-                                        echo '&nbsp;' . $logo->address . ' ';
-                                        echo ' ' . getCityName($logo->city_id);
-                                        echo ',&nbsp;' . getStateName($logo->state_id);
-                                        echo ',&nbsp;' . getCountryName($logo->country_id);
+                                        echo '&nbsp;' . getFullAddress($logo);
                                         ?>
                                     </div>
                                 </div>
@@ -94,12 +91,12 @@ table.table.table-bordered.quotation_total {
                                                 <p class="fw-bold mb-0"><img src="{{ URL::asset('public/img/icons/Vector (14).png') }}"></p>
                                             </div>
                                             <div class="col-md-11 col-sm-11 col-xs-11">
-                                                <p class="cname mb-0"><?php echo getCustomerAddress($custo_info->id) . ', '; ?> <?php echo getCityName($custo_info->city_id) != null ? getCityName($custo_info->city_id) . ', ' : ''; ?> <?php echo getStateName($custo_info->state_id) . ', ' . getCountryName($custo_info->country_id); ?></p>
+                                                <p class="cname mb-0"><?php echo getFullAddress($custo_info); ?></p>
                                             </div>
                                         </div>
                                         <!-- <tr>
                                         <th>{{ trans('message.Address') }} :</th>
-                                        <td class="cname"><?php echo getCustomerAddress($custo_info->id) . ', '; ?> <?php echo getCityName($custo_info->city_id) != null ? getCityName($custo_info->city_id) . ', ' : ''; ?> <?php echo getStateName($custo_info->state_id) . ', ' . getCountryName($custo_info->country_id); ?>
+                                        <td class="cname"><?php echo getFullAddress($custo_info); ?>
                                         </td>
                                     </tr> -->
                                         <div class="row">

@@ -61,11 +61,7 @@
             <img src="{{ URL::asset('public/img/icons/Vector (14).png') }}" class="m-1">
             <div class="col system_address mx-2">
             <?php
-            echo $logo->address . ' ';
-            echo '<br>' . getCityName($logo->city_id);
-            echo ', ' . getStateName($logo->state_id);
-            echo ', ' . getCountryName($logo->country_id);
-          
+            echo getFullAddress($logo);
             ?>
             </div>
             </div>
@@ -90,11 +86,7 @@
             </div>
             <div class="col-md-9 col-sm-9 col-xs-9">
               <p class="cname mb-0">
-                <?php echo $customer->address;
-                echo ' ,';
-                echo getCityName("$customer->city_id"); ?><?php echo ','; ?><?php echo getStateName("$customer->state_id,");
-                echo ' ,';
-                echo getCountryName($customer->country_id); ?>
+                <?php echo getFullAddress($customer); ?>
               </p>
             </div>
           </div>

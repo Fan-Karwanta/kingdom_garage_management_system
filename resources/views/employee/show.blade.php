@@ -119,8 +119,7 @@
               <div class="col-xl-12 col-md-12 col-sm-12 heading_view mt-3" style="width: 90%;">
                 <i class="fa-solid fa-location-dot"></i>
                 <lable class="">
-                  {{ $user->address }}
-                  <!-- , <?php echo getCityName($user->city_id) != null ? getCityName($user->city_id) . ',' : ''; ?>{{ getStateName($user->state_id) }}, {{ getCountryName($user->country_id) }}. -->
+                  {{ getFullAddress($user) }}
                 </lable>
               </div>
             </div>
@@ -263,22 +262,10 @@
           <div class="guardian_div mb-1">
             <p class="fw-bold overflow-visible h5"> {{ trans('message.Address Details') }} </p>
             <div class="row">
-              <div class="col-xl-6 col-md-6 col-sm-12 mt-1">
-                <label class=""> {{ trans('message.Country') }}: </label>
-                <label class="fw-bold">
-                  {{ getCountryName($user->country_id) }}
-                </label>
-              </div>
-              <div class="col-xl-6 col-md-6 col-sm-12 mt-1">
-                <label class=""> {{ trans('message.State') }}: </label>
-                <label class="fw-bold">
-                  {{ getStateName($user->state_id)  ?? trans('message.Not Added') }}
-                </label>
-              </div>
               <div class="col-xl-12 col-md-12 col-sm-12 mt-1">
-                <label class=""> {{ trans('message.Town/City') }}: </label>
+                <label class=""> {{ trans('message.Address') }}: </label>
                 <label class="fw-bold">
-                  {{ getCityName($user->city_id)  ?? trans('message.Not Added') }}
+                  {{ getFullAddress($user) }}
                 </label>
               </div>
               <!-- <div class="col-xl-6 col-md-6 col-sm-12 mt-1">

@@ -70,6 +70,8 @@ class Customercontroller extends Controller
         $country_id = $request->country_id;
         $state_id = $request->state_id;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
         $company_name = $request->company_name;
         $branch_id = $request->branch;
         $image = $request->image;
@@ -107,6 +109,8 @@ class Customercontroller extends Controller
         $customer->country_id = $country_id;
         $customer->state_id = $state_id;
         $customer->city_id = $city;
+        $customer->psgc_code = $psgc_code;
+        $customer->full_address = $full_address;
         $customer->branch_id = $branch_id;
         $customer->company_name = $company_name;
         $customer->tax_id = $tax_id;
@@ -749,6 +753,8 @@ class Customercontroller extends Controller
         $country = $request->country_id;
         $state = $request->state_id;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
         $companyName = $request->company_name;
         $branch_id = $request->branch;
         $updated_email = $request->email;
@@ -793,6 +799,8 @@ class Customercontroller extends Controller
         $customer->country_id = $country;
         $customer->state_id = $state;
         $customer->city_id = $city;
+        $customer->psgc_code = $psgc_code;
+        $customer->full_address = $full_address;
         $customer->branch_id = $branch_id;
         $customer->tax_id = $tax_id;
 

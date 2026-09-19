@@ -670,31 +670,7 @@
                                 </div>
 
                                 <div>
-                                    <label class="field-label" for="country_id">{{ trans('message.Country') }} <span class="color-danger">*</span></label>
-                                    <select class="form-control select_country form-select" id="country_id" name="country_id" countryurl="{!! url('/getstatefromcountry') !!}" required>
-                                        <option value="">{{ trans('message.Select Country') }}</option>
-                                        @foreach ($country as $countrys)
-                                            <option value="{{ $countrys->id }}">{{ $countrys->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <span class="color-danger" id="errorlcountry_id"></span>
-                                </div>
-                                <div>
-                                    <label class="field-label" for="state_id">{{ trans('message.State') }}</label>
-                                    <select class="form-control state_of_country form-select" id="state_id" name="state_id" stateurl="{!! url('/getcityfromstate') !!}">
-                                        <option value="">{{ trans('message.Select State') }}</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label class="field-label" for="city">{{ trans('message.Town/City') }}</label>
-                                    <select class="form-control city_of_state form-select" id="city" name="city">
-                                        <option value="">{{ trans('message.Select City') }}</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="field-label" for="address">{{ trans('message.Address') }} <span class="color-danger">*</span></label>
-                                    <textarea class="form-control" id="address" name="address" maxlength="100" placeholder="{{ trans('message.Address') }}" required>{{ old('address') }}</textarea>
+                                    @include('partials._psgc_address')
                                     <span class="color-danger" id="errorladdress"></span>
                                 </div>
                             </div>
@@ -936,18 +912,6 @@
                 $.ajax({ type: 'GET', url: url, data: { id: id }, success: function (response) { $('.model_addname').html(response); } });
             });
 
-            $('.select_country').change(function () {
-                var countryid = $(this).val();
-                var url = $(this).attr('countryurl');
-                $.ajax({ type: 'GET', url: url, data: { countryid: countryid }, success: function (response) { $('.state_of_country').html(response); } });
-            });
-
-            $('body').on('change', '.state_of_country', function () {
-                var stateid = $(this).val();
-                var url = $(this).attr('stateurl');
-                $.ajax({ type: 'GET', url: url, data: { stateid: stateid }, success: function (response) { $('.city_of_state').html(response); } });
-            });
-
             $('.datepicker').datetimepicker({
                 format: "<?php echo getDateTimepicker(); ?>",
                 todayBtn: true,
@@ -964,6 +928,7 @@
                 }
             });
         @endif
+
     </script>
 
 </body>

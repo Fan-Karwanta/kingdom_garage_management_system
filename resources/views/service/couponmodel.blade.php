@@ -39,10 +39,7 @@
       <div class="col-md-6 col-sm-12 col-xs-12 ">
         <p>
           <?php
-          echo $logo->address . ' ';
-          echo '<br>' . getCityName($logo->city_id);
-          echo ', ' . getStateName($logo->state_id);
-          echo ', ' . getCountryName($logo->country_id);
+          echo getFullAddress($logo);
           echo '<br>' . $logo->email;
           echo '<br>' . $logo->phone_number;
           ?>
@@ -58,7 +55,7 @@
           </tr>
           <tr>
             <th>{{ trans('message.Address:') }}</th>
-            <td class="cname"><?php echo getCustomerAddress($used_cpn_data->customer_id) . ',' . getCityName($city) . ',' . getStateName($state) . ', ' . getCountryName($country); ?></td>
+            <td class="cname"><?php echo getFullAddress($custo_info); ?></td>
           </tr>
           <tr>
             <th>{{ trans('message.Contact:') }}</th>

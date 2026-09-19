@@ -104,6 +104,8 @@ class Accountantcontroller extends Controller
         $country = $request->country_id;
         $state = $request->state_id;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
         $image = $request->image;
 
         // Get user role id from Role table
@@ -123,6 +125,8 @@ class Accountantcontroller extends Controller
         $accountant->country_id = $country;
         $accountant->state_id = $state;
         $accountant->city_id = $city;
+        $accountant->psgc_code = $psgc_code;
+        $accountant->full_address = $full_address;
         $accountant->branch_id = $request->branch;
         $accountant->create_by = Auth::User()->id;
 
@@ -352,6 +356,8 @@ class Accountantcontroller extends Controller
         $country = $request->country_id;
         $state = $request->state_id;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
         $birth_date = $request->dob;
 
         $usimgdtaa = DB::table('users')->where('id', '=', $id)->first();
@@ -390,6 +396,8 @@ class Accountantcontroller extends Controller
         $accountant->country_id = $country;
         $accountant->state_id = $state;
         $accountant->city_id = $city;
+        $accountant->psgc_code = $psgc_code;
+        $accountant->full_address = $full_address;
         $accountant->branch_id = $request->branch;
 
         $image = $request->image;

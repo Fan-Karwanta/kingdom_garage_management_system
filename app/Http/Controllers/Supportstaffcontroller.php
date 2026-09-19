@@ -163,6 +163,8 @@ class Supportstaffcontroller extends Controller
         $country = $request->country_id;
         $state = $request->state_id;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
 
         $dob = null;
         if (! empty($birthdate)) {
@@ -190,6 +192,8 @@ class Supportstaffcontroller extends Controller
         $supportstaff->country_id = $country;
         $supportstaff->state_id = $state;
         $supportstaff->city_id = $city;
+        $supportstaff->psgc_code = $psgc_code;
+        $supportstaff->full_address = $full_address;
         $supportstaff->branch_id = $request->branch;
         $supportstaff->create_by = Auth::User()->id;
 
@@ -422,6 +426,8 @@ class Supportstaffcontroller extends Controller
         $country = $request->country_id;
         $state = $request->state_id;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
         $birtDate = $request->dob;
 
         $dob = null;
@@ -451,6 +457,8 @@ class Supportstaffcontroller extends Controller
         $supportstaff->country_id = $country;
         $supportstaff->state_id = $state;
         $supportstaff->city_id = $city;
+        $supportstaff->psgc_code = $psgc_code;
+        $supportstaff->full_address = $full_address;
         $supportstaff->branch_id = $request->branch;
 
         $image = $request->image;

@@ -156,10 +156,7 @@ if(
                                             <div class="col-md-7 col-sm-12 col-xs-12 garrageadd" valign="top">
 
                                                 <?php
-                                                echo $logo->address . ' ';
-                                                echo '<br>' . getCityName($logo->city_id);
-                                                echo ', ' . getStateName($logo->state_id);
-                                                echo ', ' . getCountryName($logo->country_id);
+                                                echo getFullAddress($logo);
                                                 echo '<br>' . $logo->email;
                                                 echo '<br>' . $logo->phone_number;
                                                 ?>

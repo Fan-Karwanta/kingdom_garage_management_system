@@ -218,8 +218,7 @@
                                         <div class="col-xl-12 col-md-12 col-sm-12 heading_view mt-3" style="width: 90%;">
                                             <i class="fa-solid fa-location-dot"></i>
                                             <lable class="">
-                                                {{ $customer->address }}
-                                                <?php echo getCityName($customer->city_id) != null ? getCityName($customer->city_id) . ',' : ''; ?>{{ getStateName($customer->state_id) }}, {{ getCountryName($customer->country_id) }}
+                                                {{ getFullAddress($customer) }}
                                             </lable>
                                         </div>
                                     </div>
@@ -321,7 +320,7 @@
                                     <div class="col-xl-12 col-md-12 col-sm-12 mt-1">
                                         <img src="{{ URL::asset('public/img/icons/Vector (14).png') }}">&nbsp;
                                         <label class="fw-bold d-inline">
-                                            {{ $logo->address }} {{ getCityName($logo->city_id) }} {{ getStateName($logo->state_id) }} {{ getCountryName($logo->country_id) }}
+                                            {{ getFullAddress($logo) }}
                                         </label>
                                     </div>
                                     <hr> -->

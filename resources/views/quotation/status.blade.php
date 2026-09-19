@@ -56,10 +56,7 @@
                                             <img src="{{ URL::asset('public/img/icons/Vector (14).png') }}" class="m-1">
                                             <div class="col mx-2">
                                                 <?php
-                                                echo '&nbsp;' . $logo->address . ' ';
-                                                echo ' ' . getCityName($logo->city_id);
-                                                echo ',&nbsp;' . getStateName($logo->state_id);
-                                                echo ',&nbsp;' . getCountryName($logo->country_id);
+                                                echo '&nbsp;' . getFullAddress($logo);
                                                 ?>
                                             </div>
                                         </div>
@@ -86,7 +83,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12 col-xs-12 d-inline-flex">
                                                         <p class="fw-bold mb-0"><img src="{{ URL::asset('public/img/icons/Vector (14).png') }}"></p>
-                                                        <p class="cname mb-0 ps-2"><?php echo getCustomerAddress($customer->id) . ', '; ?> <?php echo getCityName($customer->city_id) != null ? getCityName($customer->city_id) . ', ' : ''; ?> <?php echo getStateName($customer->state_id) . ', ' . getCountryName($customer->country_id); ?></p>
+                                                        <p class="cname mb-0 ps-2"><?php echo getFullAddress($customer); ?></p>
                                                     </div>
                                                 </div>
 

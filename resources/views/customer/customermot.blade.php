@@ -292,7 +292,7 @@
                                     <div class="col-md-12">
                                         <i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;
                                         <lable class="">
-                                            {{ $customer->address }}, <?php echo getCityName($customer->city_id) != null ? getCityName($customer->city_id) . ',' : ''; ?>{{ getStateName($customer->state_id) }}, {{ getCountryName($customer->country_id) }}.
+                                            {{ getFullAddress($customer) }}
                                         </lable>
                                     </div>
                                 </div>

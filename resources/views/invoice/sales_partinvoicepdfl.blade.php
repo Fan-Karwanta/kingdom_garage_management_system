@@ -242,10 +242,7 @@
                   }
                 }
 
-                echo $logo->address . ' ';
-                echo ' ' . getCityName($logo->city_id);
-                echo ', ' . getStateName($logo->state_id);
-                echo ', ' . getCountryName($logo->country_id);
+                echo getFullAddress($logo);
 
                 if ($taxName !== null && $taxNumber !== null) {
                   echo '<br> ' .  $taxName  . ': ' . $taxNumber;
@@ -273,11 +270,7 @@
           <div class="d-flex flex-wordwrap">
            <img src="{{ base_path() }}/public/img/icons/Vector (14).png" class="mail_img" style="vertical-align: middle; margin-right: 5px;">
             <?php
-                echo getCustomerAddress($salespart->customer_id);
-                echo ', ';
-                echo getCustomerCity($salespart->customer_id) != null ? getCustomerCity($salespart->customer_id) . ', ' : '';
-                echo getCustomerState($salespart->customer_id) . ', ';
-                echo getCustomerCountry($salespart->customer_id);
+                echo getCustomerFullAddress($salespart->customer_id);
             ?>
           </div>
  

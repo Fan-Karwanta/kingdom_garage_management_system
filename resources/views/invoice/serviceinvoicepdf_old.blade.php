@@ -179,10 +179,7 @@
                 }
                 
                 //echo $logo->address ? ', <br>' : '';
-                echo $logo->address . ' ';
-                echo '<br>' . getCityName($logo->city_id);
-                echo ', ' . getStateName($logo->state_id);
-                echo ', ' . getCountryName($logo->country_id);
+                echo getFullAddress($logo);
                 echo '<br>' . $logo->email;
                 echo '<br>' . $logo->phone_number;
                 if ($taxName !== null && $taxNumber !== null) {
@@ -197,11 +194,7 @@
               width="50%">
               <b>{{ trans('message.Name:') }}</b> <?php echo getCustomerName($tbl_invoices->customer_id);
               echo '<hr/>'; ?>
-              <b>{{ trans('message.Address:') }}</b> <?php echo $customer->address;
-              echo ', ';
-              echo getCityName("$customer->city_id") != null ? getCityName("$customer->city_id") . ', ' : ''; ?><?php echo getStateName("$customer->state_id,");
-              echo ', ';
-              echo getCountryName($customer->country_id);
+              <b>{{ trans('message.Address:') }}</b> <?php echo getFullAddress($customer);
               echo '<hr/>'; ?>
               <b>{{ trans('message.Contact:') }}</b> <?php echo "$customer->mobile_no";
               echo '<hr/>'; ?>

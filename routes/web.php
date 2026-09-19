@@ -516,6 +516,9 @@ Route::get('custom_field/delete_checkbox_label_data', 'Customcontroller@checkbox
 Route::get('/getstatefromcountry', 'CountryAjaxcontroller@getstate')->withoutMiddleware(['auth']);
 Route::get('/getcityfromstate', 'CountryAjaxcontroller@getcity')->withoutMiddleware(['auth']);
 
+// PSGC address autocomplete (PH-only). Served from local tbl_psgc_barangays.
+Route::get('/psgc/search', 'PsgcController@search')->withoutMiddleware(['auth'])->name('psgc.search');
+
 // employee module
 Route::group(['prefix' => 'employee'], function () {
     Route::get('/list', ['as' => 'listemployeee', 'uses' => 'employeecontroller@employeelist'])->middleware('can:employee_view');

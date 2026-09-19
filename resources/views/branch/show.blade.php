@@ -73,8 +73,7 @@
                             <div class="col-xl-12 col-md-12 col-sm-12 heading_view mt-3" style="width: 90%;">
                                 <i class="fa-solid fa-location-dot"></i>
                                 <lable class="">
-                                    {{ $branchData->branch_address }}
-                                    <!-- , <?php echo getCityName($branchData->city_id) != null ? getCityName($branchData->city_id) . ',' : ''; ?>{{ getStateName($branchData->state_id) }}, {{ getCountryName($branchData->country_id) }}. -->
+                                    {{ getBranchFullAddress($branchData) }}
                                 </lable>
                             </div>
                         </div>
@@ -155,22 +154,10 @@
                     <div class="guardian_div mb-1">
                         <h2><label class="text-dark fw-bold"> {{ trans('message.Address Details') }} </label></h2>
                         <div class="row">
-                            <div class="col-xl-6 col-md-6 col-sm-12 mt-1">
-                                <label class=""> {{ trans('message.Country') }}: </label>
-                                <label class="fw-bold">
-                                    {{ getCountryName($branchData->country_id) }}
-                                </label>
-                            </div>
-                            <div class="col-xl-6 col-md-6 col-sm-12 mt-1">
-                                <label class=""> {{ trans('message.State') }}: </label>
+                            <div class="col-xl-12 col-md-12 col-sm-12 mt-1">
+                                <label class=""> {{ trans('message.Address') }}: </label>
                                 <label class="text-dark fw-bold">
-                                    {{ getStateName($branchData->state_id)  ?? trans('message.Not Added') }}
-                                </label>
-                            </div>
-                            <div class="col-xl-6 col-md-6 col-sm-12 mt-1">
-                                <label class=""> {{ trans('message.Town/City') }}: </label>
-                                <label class="text-dark fw-bold">
-                                    {{ getCityName($branchData->city_id)  ?? trans('message.Not Added') }}
+                                    {{ getBranchFullAddress($branchData) }}
                                 </label>
                             </div>
                             <!-- <div class="col-xl-6 col-md-6 col-sm-12 mt-1">

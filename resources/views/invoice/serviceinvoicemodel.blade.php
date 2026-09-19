@@ -112,10 +112,7 @@
                                             
                                             <div class="col mx-2">
                                                 <?php
-                                                    echo $invoice->branch->branch_address.' ';
-                                                    echo ', ' . getCityName($invoice->branch->city_id);
-                                                    echo ', ' . getStateName($invoice->branch->state_id);
-                                                    echo ', ' . getCountryName($invoice->branch->country_id);
+                                                    echo getBranchFullAddress($invoice->branch);
                                                 ?>
                                             
                                             </div>
@@ -147,11 +144,7 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12 d-inline-flex">
                                         <p class="fw-bold mb-0"><img src="{{ URL::asset('public/img/icons/Vector (14).png') }}"></p>
-                                        <p class="cname mb-0 ps-2"><?php echo $customer->address;
-                                                                    echo ', ';
-                                                                    echo getCityName("$customer->city_id") != null ? getCityName("$customer->city_id") . ', ' : ''; ?><?php echo getStateName("$customer->state_id,");
-                                                                                                                                                                        echo ', ';
-                                                                                                                                                                        echo getCountryName($customer->country_id); ?></p>
+                                        <p class="cname mb-0 ps-2"><?php echo getFullAddress($customer); ?></p>
                                     </div>
                                 </div>
 

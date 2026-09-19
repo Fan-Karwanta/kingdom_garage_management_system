@@ -82,7 +82,10 @@
                 <label class="control-label col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-sm-2 col-xs-2 text-end" for="Phone_Number">{{ trans('message.Password') }} <label class="color-danger">*</label>
                 </label>
                 <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4">
+                  <div class="password-input-wrap">
                   <input type="password" name="MAIL_PASSWORD" id="MAIL_PASSWORD" class="form-control" placeholder="{{ trans('message.Enter Password') }}" value="{{ $configData['MAIL_PASSWORD'] }}" required>
+                  <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
+                  </div>
                 </div>
                 <div class="control-label col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6"><a data-toggle="tooltip" data-placement="bottom" title="Information" class="text-primary"><i class="fa fa-info-circle" style="color:#D9D9D9"></i></a> {{ trans('message.Provide your email account password. Keep it confidential') }} </div>
               </div>

@@ -62,7 +62,7 @@ class ImportdataController extends Controller
         //     DB::table($tableName)->insert($data);
         // }
 
-        $selectedColumns = ['name', 'lastname', 'gender', 'email', 'password', 'mobile_no', 'address', 'join_date', 'designation', 'country_id', 'role', 'role_id'];
+        $selectedColumns = ['name', 'lastname', 'gender', 'email', 'password', 'mobile_no', 'address', 'join_date', 'designation', 'country_id', 'role', 'role_id', 'psgc_code', 'full_address'];
 
         foreach ($csv as $record) {
             $data = [];

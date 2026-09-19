@@ -397,8 +397,11 @@ $mail == "Pass" ? $passCount++ : $failCount++;
         <div class="form-group">
           <label class="control-label col-md-3">Database Password</label>
           <div class="col-md-5">
-            <div class="input text">
-              <input type="password" name="db_pass" class="form-control">
+            <div class="input text" style="position: relative;">
+              <input type="password" id="db_pass" name="db_pass" class="form-control" style="padding-right: 38px;">
+               <span class="password-toggle-icon" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; z-index: 10;">
+                  <i class="fa fa-eye" id="db_pass-eye"></i>
+               </span>
             </div>
           </div>
         </div>
@@ -561,6 +564,7 @@ $mail == "Pass" ? $passCount++ : $failCount++;
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('password-eye')?.addEventListener('click', () => togglePassword('password'));
     document.getElementById('confirm-eye')?.addEventListener('click', () => togglePassword('confirm'));
+    document.getElementById('db_pass-eye')?.addEventListener('click', () => togglePassword('db_pass'));
 });
 function togglePassword(fieldId) {
     const passwordField = document.getElementById(fieldId);

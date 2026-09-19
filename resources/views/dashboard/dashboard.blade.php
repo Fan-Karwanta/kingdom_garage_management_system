@@ -1567,64 +1567,8 @@
                         </div>
 
                         <div class="row row-mb-0">
-                                <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group has-feedback display-content">
-                                    <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4 width-100" for="Country">{{ trans('message.Country') }} <label class="color-danger">*</label></label>
-                                    <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8 width-100">
-                                        <select class="form-control select_country form-select" id="country_id" name="country_id" countryurl="{!! url('/getstatefromcountry') !!}" required>
-                                            <option value="">{{ trans('message.Select Country') }}</option>
-                                            @foreach ($country as $countrys)
-                                            <option value="{{ $countrys->id }}" <?php if(!empty($Customer_detail->country_id)){if($Customer_detail->country_id ==$countrys->id){ echo 'selected';}} ?>>{{ $countrys->name }} </option>
-                                            @endforeach
-                                        </select>
-                                        <span class="color-danger" id="errorlcountry_id"></span>
-                                    </div>
-                                </div>
-
-                                <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group has-feedback display-content">
-                                    <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4 width-100" for="State ">{{ trans('message.State') }} </label>
-                                    <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8 width-100">
-                                        <select class="form-control state_of_country form-select" id="state_id" name="state_id" stateurl="{!! url('/getcityfromstate') !!}">
-                                            <option value="">{{ trans('message.Select State') }}</option>
-                                            @if ($state != null)
-                                            @foreach ($state as $states)
-                                            <option value="{!! $states->id !!}" <?php if(!empty($Customer_detail->state_id)){if ($Customer_detail->state_id == $states->id) {
-                                                                                    echo 'selected';
-                                                                                } }?>>{!! $states->name !!}</option>
-                                            @endforeach
-                                            @else
-                                            <option value=""></option>
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group has-feedback display-content">
-                                    <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4 width-100" for="Town/City">{{ trans('message.Town/City') }}</label>
-                                    <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8 width-100">
-                                        <select class="form-control city_of_state form-select" id="city" name="city">
-                                            <option value="">{{ trans('message.Select City') }}</option>
-                                            @if ($city != null)
-                                        @foreach ($city as $citys)
-                                        <option value="{!! $citys->id !!}" <?php if(!empty($Customer_detail->city_id)){if ($Customer_detail->city_id == $citys->id) {
-                                                                                echo 'selected';
-                                                                            } }?>>{!! $citys->name !!}</option>
-                                        @endforeach
-                                        @else
-                                        <option value=""></option>
-                                        @endif
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 form-group has-feedback display-content">
-                                    <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4 width-100" for="Address">{{ trans('message.Address') }} <label class="color-danger">*</label></label>
-                                    <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8 width-100">
-                                        <textarea class="form-control" id="address" name="address" maxlength="100" required>{{ $Customer_detail->address ?? '' }}</textarea>
-                                        <span class="color-danger" id="errorladdress"></span>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('partials._psgc_address', ['model' => $Customer_detail ?? null])
+                        </div>
 
                         <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12 col-sm-12 col-xs-12 space pb-4 ps-0">
                             <h4><b>{{ strtoupper(trans('message.Vehicle Details')) }}</b></h4>
@@ -2105,39 +2049,6 @@
                 },
                 success: function(response) {
                     $('.model_addname').html(response);
-                }
-            });
-        });
-
-        /*customer model state to city*/
-        $('.select_country').change(function() {
-            countryid = $(this).val();
-            var url = $(this).attr('countryurl');
-            $.ajax({
-                type: 'GET',
-                url: url,
-                data: {
-                    countryid: countryid
-                },
-                success: function(response) {
-                    $('.state_of_country').html(response);
-                }
-            });
-        });
-
-
-        $('body').on('change', '.state_of_country', function() {
-            stateid = $(this).val();
-
-            var url = $(this).attr('stateurl');
-            $.ajax({
-                type: 'GET',
-                url: url,
-                data: {
-                    stateid: stateid
-                },
-                success: function(response) {
-                    $('.city_of_state').html(response);
                 }
             });
         });

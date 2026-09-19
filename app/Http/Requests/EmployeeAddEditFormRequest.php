@@ -36,7 +36,9 @@ class EmployeeAddEditFormRequest extends FormRequest
             'join_date' => 'required',
             'designation' => 'required|regex:/^[\p{L}\p{M}\s\-\'\.]+$/u|max:50',
             'image' => 'nullable|mimes:jpg,png,jpeg',
-            'country_id' => 'required',
+            'country_id' => 'nullable',
+            'psgc_code' => 'nullable|string|max:20',
+            'full_address' => 'nullable|string|max:500',
             'address' => 'required',
             'branch' => 'required',
 

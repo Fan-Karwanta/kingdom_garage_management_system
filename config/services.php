@@ -40,4 +40,26 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Philippine Standard Geographic Code (PSGC) Address Service
+    |--------------------------------------------------------------------------
+    |
+    | The system is PH-only. The PSA PSGC dataset is imported into a local
+    | table (tbl_psgc_barangays) so address autocomplete never depends on an
+    | external API at runtime.
+    |
+    | phone_country_code is the constant used for OTP/SMS login instead of the
+    | old tbl_countries.phonecode lookup (which was coupled to country_id).
+    |
+    */
+
+    'psgc' => [
+        'phone_country_code' => env('PHONE_COUNTRY_CODE', '+63'),
+        'search_limit' => (int) env('PSGC_SEARCH_LIMIT', 20),
+        'min_query_length' => (int) env('PSGC_MIN_QUERY_LENGTH', 2),
+        // Source URL for the import command (PSGC JSON dump).
+        'import_url' => env('PSGC_IMPORT_URL', 'https://psgc.cloud/api/v2/barangays?per_page=500'),
+    ],
+
 ];

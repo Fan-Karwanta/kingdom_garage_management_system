@@ -96,6 +96,8 @@ class GeneralController extends Controller
         $coutry = $request->country_id;
         $state = $request->state_id;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
         $paypal_id = $request->Paypal_Id ?? null;
         $address = $request->address;
 
@@ -108,6 +110,8 @@ class GeneralController extends Controller
         $data->city_id = $city;
         $data->state_id = $state;
         $data->country_id = $coutry;
+        $data->psgc_code = $psgc_code;
+        $data->full_address = $full_address;
 
         $useradmin = User::find(1);      // update admin mobile & country in user table for use mobile login
         $useradmin->mobile_no = $ph_no;
@@ -144,6 +148,8 @@ class GeneralController extends Controller
         $branch->country_id = $coutry;
         $branch->state_id = $state;
         $branch->city_id = $city;
+        $branch->psgc_code = $psgc_code;
+        $branch->full_address = $full_address;
         if ($Logo_Image) {
             $branch->branch_image = $filename;
         }

@@ -9,6 +9,42 @@ use Illuminate\Support\Str;
     border-color: red;
   }
 
+  /* ===== Password show/hide toggle (eye icon) =====
+     Extra right offset/padding leaves room for the browser's own
+     built-in password icons (e.g. Chrome's leaked/weak password
+     warning), which are rendered at the far right edge of the field
+     and would otherwise overlap our custom toggle icon.
+     !important is used to beat Bootstrap's .has-feedback .form-control
+     rule which sets padding-right: 42.5px with higher specificity. */
+  .password-input-wrap {
+    position: relative;
+  }
+  .password-input-wrap input.form-control,
+  .password-input-wrap input {
+    padding-right: 52px !important;
+  }
+  .password-toggle-btn {
+    position: absolute;
+    right: 26px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+    font-size: 15px;
+    line-height: 1;
+    user-select: none;
+    z-index: 3;
+  }
+  .password-toggle-btn:hover {
+    color: #EA6B00;
+  }
+  @media (max-width: 480px) {
+    .password-toggle-btn {
+      right: 24px;
+      font-size: 14px;
+    }
+  }
+
   /* active dropdown */
 
   .dropdown {
@@ -984,6 +1020,40 @@ $currentRoute = str_replace($baseUrl, "", $currentUrl);
     'internal_notes' => trans('message.Internal Notes'),
   ]);
 </script>
+  <!-- Password show/hide toggle (eye icon) - CSP-safe event delegation -->
+  <script nonce="{{ $cspNonce }}">
+    (function () {
+      function toggle(btn) {
+        var wrap = btn.closest('.password-input-wrap');
+        var input = wrap ? wrap.querySelector('input') : null;
+        var icon = btn.querySelector('i');
+        if (!input || !icon) return;
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.classList.remove('fa-eye');
+          icon.classList.add('fa-eye-slash');
+        } else {
+          input.type = 'password';
+          icon.classList.remove('fa-eye-slash');
+          icon.classList.add('fa-eye');
+        }
+      }
+      function init() {
+        document.addEventListener('click', function (e) {
+          var btn = e.target.closest ? e.target.closest('.password-toggle-btn') : null;
+          if (btn) {
+            e.preventDefault();
+            toggle(btn);
+          }
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
   <!-- <script nonce="{{ $cspNonce }}"src="{{ URL::asset('build/js/jquery-ui.js') }}" defer="defer"></script> -->
 
 

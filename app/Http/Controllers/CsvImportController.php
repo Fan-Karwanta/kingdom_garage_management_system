@@ -164,6 +164,11 @@ class CsvImportController extends Controller
 
                 $genderValue = strtolower($gender) === 'female' ? 1 : 0;
                 $rolename = $roleId == 2 ? 'customer' : ($roleId == 3 ? 'employee' : ($roleId == 4 ? 'supportstaff' : 'accountant'));
+
+                // Support optional PSGC columns in the CSV import.
+                $psgcCode = trim($record[$headerMap['psgc_code']] ?? '');
+                $fullAddress = trim($record[$headerMap['full_address']] ?? '');
+
                 $userData = [
                     'name' => $firstname,
                     'lastname' => $lastname,
@@ -183,6 +188,8 @@ class CsvImportController extends Controller
                     'soft_delete' => 0,
                     'branch_id' => ($roleId == 2) ? null : 1,
                     'create_by' => 1,
+                    'psgc_code' => ! empty($psgcCode) ? $psgcCode : null,
+                    'full_address' => ! empty($fullAddress) ? $fullAddress : null,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];

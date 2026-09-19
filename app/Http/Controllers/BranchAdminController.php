@@ -79,6 +79,8 @@ class BranchAdminController extends Controller
         $country = $request->country_id;
         $state = $request->state_id;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
 
         $dob = null;
         if (! empty($birthdate)) {
@@ -106,6 +108,8 @@ class BranchAdminController extends Controller
         $branchadmin->country_id = $country;
         $branchadmin->state_id = $state;
         $branchadmin->city_id = $city;
+        $branchadmin->psgc_code = $psgc_code;
+        $branchadmin->full_address = $full_address;
         $branchadmin->branch_id = $request->branch;
         $branchadmin->create_by = Auth::User()->id;
 
@@ -317,6 +321,8 @@ class BranchAdminController extends Controller
         $country = $request->country_id;
         $state = $request->state_id;
         $city = $request->city;
+        $psgc_code = $request->psgc_code;
+        $full_address = $request->full_address;
         $birtDate = $request->dob;
 
         $dob = null;
@@ -346,6 +352,8 @@ class BranchAdminController extends Controller
         $branchadmin->country_id = $country;
         $branchadmin->state_id = $state;
         $branchadmin->city_id = $city;
+        $branchadmin->psgc_code = $psgc_code;
+        $branchadmin->full_address = $full_address;
         $branchadmin->branch_id = $request->branch;
 
         $image = $request->image;

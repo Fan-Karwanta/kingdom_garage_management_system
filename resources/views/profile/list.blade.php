@@ -170,7 +170,10 @@
                             <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4 checkpointtext text-end" for="Password">{{ trans('message.New Password') }} </label>
                                 <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
+                                    <div class="password-input-wrap">
                                     <input type="password" name="password" placeholder="{{ trans('message.Enter Password') }}" maxlength="20" class="form-control col-md-7 col-xs-12">
+                                    <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
+                                    </div>
                                     @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -184,7 +187,10 @@
                                 <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4 checkpointtext text-end" for="Password">
                                     {{ trans('message.Confirm Password') }}</label>
                                 <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
+                                    <div class="password-input-wrap">
                                     <input type="password" name="password_confirmation" placeholder="{{ trans('message.Enter Confirm Password') }}" maxlength="20" class="form-control col-md-7 col-xs-12">
+                                    <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
+                                    </div>
                                     @if ($errors->has('password_confirmation'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>

@@ -250,6 +250,7 @@ return [
     'Country' => 'Country',
     'State' => 'State',
     'Town/City' => 'Town/City',
+    'Select City/Barangay' => 'Type to search city/barangay...',
     'Image' => 'Image',
     'Account No' => 'Account No',
     'IFS Code' => 'IFS Code',

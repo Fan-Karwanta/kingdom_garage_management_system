@@ -95,63 +95,8 @@
                 <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3 col-sm-3 col-xs-3"></div>
               </div>
 
-              <div class="row row-mb-0 has-feedback">
-                <label class="control-label col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-sm-2 col-xs-2 checkpointtext text-end" for="address">{{ trans('message.Address') }} <label class="color-danger">*</label>
-                </label>
-                <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4">
-                  <textarea name="address" class="form-control addressTextarea" rows="4" placeholder="{{ trans('message.Enter Address') }}" maxlength="100" required>{{ $settings_data->address }}</textarea>
-                </div>
-                <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3 col-sm-3 col-xs-3"></div>
-              </div>
-
-              <div class="row row-mb-0 has-feedback">
-                <label class="control-label col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-sm-2 col-xs-2 checkpointtext text-end" for="Country">{{ trans('message.Country') }} <label class="color-danger">*</label>
-                </label>
-                <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4">
-                  <select class="form-control select_country form-select" name="country_id" countryurl="{!! url('/getstatefromcountry') !!}" required>
-                    <option value="">{{ trans('message.Select Country') }}</option>
-                    @foreach ($country as $countrys)
-                    <option value="{{ $countrys->id }}" <?php if ($settings_data->country_id == $countrys->id) {
-                                                          echo 'selected';
-                                                        } ?>>{{ $countrys->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
-                <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3 col-sm-3 col-xs-3"></div>
-              </div>
-
-              <div class="row row-mb-0 has-feedback">
-                <label class="control-label col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-sm-2 col-xs-2 checkpointtext text-end" for="state">{{ trans('message.State') }}</label>
-                <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4">
-                  <select class="form-control state_of_country form-select" name="state_id" stateurl="{!! url('/getcityfromstate') !!}">
-                    <!-- <option value="">Select State</option> -->
-                    @if (count($state) > 0)
-                    @foreach ($state as $states)
-                    <option value="{!! $states->id !!}" <?php if ($settings_data->state_id == $states->id) {
-                                                          echo 'selected';
-                                                        } ?>>{!! $states->name !!}</option>
-                    @endforeach
-                    @endif
-                  </select>
-                </div>
-                <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3 col-sm-3 col-xs-3"></div>
-              </div>
-
-              <div class="row row-mb-0 has-feedback">
-                <label class="control-label col-md-2 col-lg-2 col-xl-2 col-xxl-2 col-sm-2 col-xs-2 checkpointtext text-end" for="city">{{ trans('message.City') }} </label>
-                <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4">
-                  <select class="form-control city_of_state form-select" name="city">
-                    <!-- <option value="">Select City</option> -->
-                    @if (count($city) > 0)
-                    @foreach ($city as $citys)
-                    <option value="{!! $citys->id !!}" <?php if ($settings_data->city_id == $citys->id) {
-                                                          echo 'selected';
-                                                        } ?>>{!! $citys->name !!}</option>
-                    @endforeach
-                    @endif
-                  </select>
-                </div>
-                <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3 col-sm-3 col-xs-3"></div>
+              <div class="row row-mb-0">
+                @include('partials._psgc_address', ['model' => $settings_data])
               </div>
               <?php
               if (isAdmin(Auth::User()->role_id)) {
@@ -252,40 +197,6 @@
 <script nonce="{{ $cspNonce }}">
   $(document).ready(function() {
 
-    $('.select_country').change(function() {
-
-      countryid = $(this).val();
-      var url = $(this).attr('countryurl');
-
-      $.ajax({
-        type: 'GET',
-        url: url,
-        data: {
-          countryid: countryid
-        },
-        success: function(response) {
-          $('.state_of_country').html(response);
-        }
-      });
-    });
-
-    $('body').on('change', '.state_of_country', function() {
-      stateid = $(this).val();
-
-      var url = $(this).attr('stateurl');
-      $.ajax({
-        type: 'GET',
-        url: url,
-        data: {
-          stateid: stateid
-        },
-        success: function(response) {
-          $('.city_of_state').html(response);
-        }
-      });
-    });
-
-
     /*datetimepicker in starting_year*/
     $('.datepicker1').datetimepicker({
       format: "yyyy",
@@ -349,6 +260,7 @@
       }
     });
   });
+
 </script>
 
 <!-- Form field validation -->

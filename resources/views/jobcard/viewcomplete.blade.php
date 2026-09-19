@@ -127,10 +127,7 @@
                                                 <br>
                                                 <img src="{{ url::asset('public/img/icons/Vector (14).png') }}" class="p-1">&nbsp;
                                                 <?php
-                                                echo $logo->address . ' ';
-                                                echo ', ' . getCityName($logo->city_id);
-                                                echo ', ' . getStateName($logo->state_id);
-                                                echo ', ' . getCountryName($logo->country_id);
+                                                echo getFullAddress($logo);
                                                 ?>
                                                 <br>
 

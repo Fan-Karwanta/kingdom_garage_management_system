@@ -296,7 +296,10 @@
 
                                     <p class="login-demo mt-3">
                                         <label for="email_reset"> Enter New Password </label>
-                                        <input type="password" name="password" id="email_reset" autocomplete="off" class="input" required>
+                                        <span style="position: relative; display: block;">
+                                        <input type="password" name="password" id="email_reset" autocomplete="off" class="input" style="padding-right: 52px;" required>
+                                        <span class="password-toggle-btn" style="position: absolute; right: 26px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #888; font-size: 15px; line-height: 1; user-select: none; z-index: 3;"><i class="fa fa-eye"></i></span>
+                                        </span>
 
                                         @if ($errors->has('password'))
                                         <span class="help-block text-danger">
@@ -307,7 +310,10 @@
 
                                     <p class="login-demo mt-3">
                                         <label for="email_reset"> Confirm Password </label>
-                                        <input type="password" name="password_confirmation" id="email_reset" autocomplete="off" class="input" required>
+                                        <span style="position: relative; display: block;">
+                                        <input type="password" name="password_confirmation" id="email_reset" autocomplete="off" class="input" style="padding-right: 52px;" required>
+                                        <span class="password-toggle-btn" style="position: absolute; right: 26px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #888; font-size: 15px; line-height: 1; user-select: none; z-index: 3;"><i class="fa fa-eye"></i></span>
+                                        </span>
 
                                         @if ($errors->has('password_confirmation'))
                                         <span class="help-block text-danger">
@@ -337,6 +343,36 @@
 
     </div>
 
+    <script nonce="{{ $cspNonce }}">
+        (function () {
+            function toggle(btn) {
+                var wrap = btn.parentElement;
+                var input = wrap ? wrap.querySelector('input') : null;
+                var icon = btn.querySelector('i');
+                if (!input || !icon) return;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            }
+            function init() {
+                document.addEventListener('click', function (e) {
+                    var btn = e.target.closest ? e.target.closest('.password-toggle-btn') : null;
+                    if (btn) { e.preventDefault(); toggle(btn); }
+                });
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
     <script nonce="{{ $cspNonce }}">
         window.onload = function() {
             var url = window.location.href;

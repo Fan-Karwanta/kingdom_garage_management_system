@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\CleanAndInstallNewDemoDatabase::class,
         \App\Console\Commands\ServiceReminder::class,
+        \App\Console\Commands\PsgcImport::class,
     ];
 
     /**
