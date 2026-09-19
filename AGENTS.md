@@ -7,7 +7,7 @@
 - **Docroot**: `~/domains/drivebyautocare.com/public_html` (contains symlinks into the app's `public/`)
 - **Repo**: `github.com/Fan-Karwanta/kingdom_garage_management_system`, branch `main`
 
-## Deploying — use `./deploy.sh` only
+## Deploying — use `./scripts/deploy` only
 
 Deploys are **rsync-based**, not `git pull`-based. The server copy is a git
 repo, but production holds untracked data (`.env`, user uploads in `public/`,
@@ -16,8 +16,11 @@ repo, but production holds untracked data (`.env`, user uploads in `public/`,
 From this directory on the local machine:
 
 ```bash
-./deploy.sh
+./scripts/deploy
 ```
+
+(Note: `.gitignore` ignores any file named `deploy.sh`, which is why the
+script is named `scripts/deploy`.)
 
 It requires a clean committed tree, pushes to GitHub, rsyncs the code
 (excluding `.env`, `storage/`, `vendor/`, `.git`), runs `composer install`

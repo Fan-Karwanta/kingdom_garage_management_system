@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+#
+# deploy.sh — push to GitHub and deploy to Hostinger production (drivebyautocare.com)
+#
+# Usage (from this directory, on the local Mac):
+#   ./deploy.sh
+#
+# What it does:
+#   1. Requires all changes committed (refuses to deploy a dirty tree)
+#   2. Pushes to GitHub (origin/main)
+#   3. Rsyncs the codebase to the server (excludes .env, storage, vendor, .git)
+#   4. Runs `composer install` only if composer.json/lock changed since the
+#      server's last deployed commit
+#   5. Runs `php artisan migrate` (safe: old create_* migrations are guarded,
+#      and prod's migrations table records all past migrations)
+#   6. Rebuilds Laravel caches
+#   7. Fast-forwards the server repo's HEAD to origin/main WITHOUT touching
+#      working files, so `git status` on the server stays a truthful
+#      drift detector
+#
+# NEVER run `git pull`, `git reset --hard`, or `git checkout .` on the server —
+# production holds untracked data (uploads, .env) that git would clobber.
+# Deploys are rsync-based; this script is the only deploy path.
+
+set -euo pipefail
+
+SSH_HOST="u753303520@145.79.25.238"
+SSH_PORT="65002"
+REMOTE_DIR="/home/u753303520/garage_app/garage"
+SSH_CMD="ssh -p $SSH_PORT -o BatchMode=yes $SSH_HOST"
+
+cd "$(dirname "$0")"
+
+# --- 1. Clean tree required -------------------------------------------------
+if [ -n "$(git status --porcelain)" ]; then
+    echo "ERROR: uncommitted changes. Commit (or stash) first:" >&2
+    git status --short >&2
+    exit 1
+fi
+
+# --- 2. Record what the server currently runs, then push --------------------
+DEPLOYED=$($SSH_CMD "cd $REMOTE_DIR && git rev-parse HEAD 2>/dev/null || echo ''")
+git push origin main
+
+# --- 3. Sync code ------------------------------------------------------------
+# No --delete: production contains untracked uploads that must not be removed.
+rsync -az \
+    -e "ssh -p $SSH_PORT -o BatchMode=yes" \
+    --exclude='.git/' \
+    --exclude='.env' \
+    --exclude='.env.*' \
+    --exclude='installed.txt' \
+    --exclude='storage/' \
+    --exclude='vendor/' \
+    --exclude='node_modules/' \
+    ./ "$SSH_HOST:$REMOTE_DIR/"
+
+# --- 4. Composer install only if dependencies changed -----------------------
+if [ -n "$DEPLOYED" ] && git diff --name-only "$DEPLOYED"..HEAD | grep -qE '^composer\.(json|lock)$'; then
+    echo "=== composer.json/lock changed — running composer install ==="
+    $SSH_CMD "cd $REMOTE_DIR && composer install --no-dev --optimize-autoloader --no-interaction"
+fi
+
+# --- 5. Migrations -----------------------------------------------------------
+$SSH_CMD "cd $REMOTE_DIR && php artisan migrate --force"
+
+# --- 6. Rebuild caches -------------------------------------------------------
+$SSH_CMD "cd $REMOTE_DIR && php artisan view:clear && php artisan view:cache && php artisan config:cache && php artisan route:cache"
+
+# --- 7. Sync server HEAD with origin/main (files untouched) ------------------
+$SSH_CMD "cd $REMOTE_DIR && git fetch origin && git reset -q origin/main && echo 'Server HEAD now:' && git log --oneline -1 && echo 'Remaining drift (should be noise only):' && git status --porcelain | grep -v '^??' | wc -l"
+
+echo "=== DEPLOY COMPLETE ==="
