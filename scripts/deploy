@@ -29,7 +29,7 @@ SSH_PORT="65002"
 REMOTE_DIR="/home/u753303520/garage_app/garage"
 SSH_CMD="ssh -p $SSH_PORT -o BatchMode=yes $SSH_HOST"
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 
 # --- 1. Clean tree required -------------------------------------------------
 if [ -n "$(git status --porcelain)" ]; then
