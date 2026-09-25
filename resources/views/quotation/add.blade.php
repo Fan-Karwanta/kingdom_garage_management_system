@@ -825,7 +825,7 @@
                                     <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="Password">{{ trans('message.Password') }} <label class="color-danger">*</label></label>
                                     <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
                                         <div class="password-input-wrap">
-                                        <input type="password" id="password" name="password" placeholder="{{ trans('message.Enter Password') }}" class="form-control col-md-7 col-xs-12" maxlength="20" required>
+                                        <input type="password" id="password" name="password" placeholder="{{ trans('message.Enter Password') }}" value="{{ old('password', 'Kingdom@2026') }}" class="form-control col-md-7 col-xs-12" maxlength="20" required>
                                         <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
                                         </div>
                                         <span class="color-danger" id="errorlpassword"></span>
@@ -838,7 +838,7 @@
                                         <label class="color-danger">*</label></label>
                                     <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
                                         <div class="password-input-wrap">
-                                        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="{{ trans('message.Enter Confirm Password') }}" class="form-control col-md-7 col-xs-12" maxlength="20" required>
+                                        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="{{ trans('message.Enter Confirm Password') }}" value="{{ old('password_confirmation', 'Kingdom@2026') }}" class="form-control col-md-7 col-xs-12" maxlength="20" required>
                                         <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
                                         </div>
                                         <span class="color-danger" id="errorlpassword_confirmation"></span>

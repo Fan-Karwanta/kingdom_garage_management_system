@@ -78,7 +78,7 @@
                 <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="password">{{ trans('message.Password') }} <label class="color-danger">*</label> </label>
                 <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
                   <div class="password-input-wrap">
-                  <input type="password" name="password" placeholder="{{ trans('message.Enter Password') }}" class="form-control col-md-7 col-xs-12" maxlength="20">
+                  <input type="password" name="password" placeholder="{{ trans('message.Enter Password') }}" value="{{ old('password', 'Kingdom@2026') }}" class="form-control col-md-7 col-xs-12" maxlength="20">
                   <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
                   </div>
 
@@ -94,7 +94,7 @@
                 <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4 currency" style="" for="password_confirmation">{{ trans('message.Confirm Password') }} <label class="color-danger">*</label></label>
                 <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
                   <div class="password-input-wrap">
-                  <input type="password" name="password_confirmation" placeholder="{{ trans('message.Enter Confirm Password') }}" class="form-control col-md-7 col-xs-12" maxlength="20">
+                  <input type="password" name="password_confirmation" placeholder="{{ trans('message.Enter Confirm Password') }}" value="{{ old('password_confirmation', 'Kingdom@2026') }}" class="form-control col-md-7 col-xs-12" maxlength="20">
                   <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
                   </div>
 

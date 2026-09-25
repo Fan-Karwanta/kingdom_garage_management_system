@@ -43,7 +43,7 @@
 
                             <div class="col-md-6">
                                 <div class="password-input-wrap">
-                                <input id="password" type="password" class="form-control" name="password">
+                                <input id="password" type="password" class="form-control" name="password" value="{{ old('password', 'Kingdom@2026') }}">
                                 <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
                                 </div>
 
@@ -60,7 +60,7 @@
 
                             <div class="col-md-6">
                                 <div class="password-input-wrap">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation', 'Kingdom@2026') }}">
                                 <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
                                 </div>
 

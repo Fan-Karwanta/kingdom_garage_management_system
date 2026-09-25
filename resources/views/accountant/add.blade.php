@@ -85,7 +85,7 @@
 
                 <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
                   <div class="password-input-wrap">
-                  <input type="password" name="password" placeholder="{{ trans('message.Enter Password') }}" maxlength="20" class="form-control">
+                  <input type="password" name="password" placeholder="{{ trans('message.Enter Password') }}" value="{{ old('password', 'Kingdom@2026') }}" maxlength="20" class="form-control">
                   <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
                   </div>
 
@@ -102,7 +102,7 @@
 
                 <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
                   <div class="password-input-wrap">
-                  <input type="password" name="password_confirmation" placeholder="{{ trans('message.Enter Confirm Password') }}" maxlength="20" class="form-control">
+                  <input type="password" name="password_confirmation" placeholder="{{ trans('message.Enter Confirm Password') }}" value="{{ old('password_confirmation', 'Kingdom@2026') }}" maxlength="20" class="form-control">
                   <span class="password-toggle-btn"><i class="fa fa-eye"></i></span>
                   </div>
 

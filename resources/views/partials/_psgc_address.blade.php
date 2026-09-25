@@ -14,9 +14,10 @@
 
     The partial outputs:
       - A single textarea (the address field) with PSGC autocomplete dropdown.
-        The user can type a street address ("123 Rizal St") and then search for
-        a barangay/city/province via the dropdown. Selecting from the dropdown
-        appends the PSGC text to whatever the user typed.
+        The user types a fragment ("digos") to search barangays/cities/provinces.
+        Selecting from the dropdown replaces the field with the selected PSGC
+        address. To keep a street prefix, type it before a comma first
+        ("123 Rizal St, digos" → "123 Rizal St, <selected address>").
       - Hidden inputs for psgc_code and full_address (the PSGC reference).
 
     Data model:
@@ -88,11 +89,13 @@
     //
     // Single-field design:
     //   The textarea holds the full address (street + PSGC). When the user
-    //   selects from the dropdown, the PSGC text is appended to whatever they
-    //   already typed. The hidden psgc_code + full_address inputs are updated
-    //   to the selected PSGC reference. If the user later selects a different
-    //   PSGC entry, the old PSGC text in the textarea is replaced (preserving
-    //   any street address the user typed).
+    //   selects from the dropdown, the selected PSGC text replaces whatever
+    //   they typed — except text before the last comma, which is kept as a
+    //   street prefix ("123 Rizal St, digos" → "123 Rizal St, <PSGC>").
+    //   The hidden psgc_code + full_address inputs are updated to the
+    //   selected PSGC reference. If the user later selects a different
+    //   PSGC entry, the old PSGC text in the textarea is replaced
+    //   (preserving any street address the user typed).
     var PSGC_SEARCH_URL = '{{ route("psgc.search") }}';
     var MIN_QUERY = {{ (int) config('services.psgc.min_query_length', 2) }};
 
@@ -160,42 +163,39 @@
                                     $codeInput.val(item.psgc_code);
                                     $fullInput.val(item.full_address);
 
-                                    // Update the textarea:
-                                    //  1. If empty → set to PSGC text.
-                                    //  2. Contains old PSGC → replace old with new
-                                    //     (preserves street address the user typed).
-                                    //  3. Already contains the new PSGC text → skip.
-                                    //  4. Has text with a comma → text before the last
-                                    //     comma is the street address; the text after is
-                                    //     the partial search fragment — replace it with
-                                    //     the full PSGC text.
-                                    //  5. Has text with no comma → treat all text as
-                                    //     street address and append the PSGC text.
+                                    // Update the textarea. Default: the selected
+                                    // address REPLACES whatever was typed (the typed
+                                    // text was just a search fragment).
+                                    //  1. Empty → set to PSGC text.
+                                    //  2. Already contains this PSGC text → skip.
+                                    //  3. Contains a previously selected PSGC → swap
+                                    //     old for new, keeping any street prefix.
+                                    //  4. Text before the last comma is treated as a
+                                    //     street prefix the user wants to keep (e.g.
+                                    //     "123 Rizal St, digos") — unless it's already
+                                    //     part of the selected address, in which case
+                                    //     it would be redundant and is dropped.
+                                    //  5. No comma → replace the whole field.
                                     var currentText = ($input.val() || '').trim();
 
                                     if (currentText === '') {
                                         $input.val(item.full_address);
+                                    } else if (currentText.indexOf(item.full_address) !== -1) {
+                                        // Already contains this PSGC text — skip.
                                     } else if (oldFullAddress && currentText.indexOf(oldFullAddress) !== -1) {
                                         // Replace old PSGC with new, keep street.
                                         var streetOnly = currentText.replace(oldFullAddress, '').replace(/,\s*$/, '').replace(/^\s*,\s*/, '').trim();
                                         $input.val(streetOnly ? streetOnly + ', ' + item.full_address : item.full_address);
-                                    } else if (currentText.indexOf(item.full_address) !== -1) {
-                                        // Already contains this PSGC text — skip.
                                     } else {
-                                        // No old PSGC to replace. Figure out the street
-                                        // part: if there's a comma, the text after the
-                                        // last comma is the partial search fragment (e.g.
-                                        // "digos" in "123 Rizal St, digos") — discard it.
-                                        // If there's no comma, the entire text is the
-                                        // street address — keep it and append PSGC.
                                         var lastComma = currentText.lastIndexOf(',');
-                                        var streetPart;
-                                        if (lastComma >= 0) {
-                                            streetPart = currentText.substring(0, lastComma).replace(/,\s*$/, '').trim();
+                                        var streetPart = lastComma >= 0
+                                            ? currentText.substring(0, lastComma).replace(/,\s*$/, '').trim()
+                                            : '';
+                                        if (streetPart && item.full_address.toLowerCase().indexOf(streetPart.toLowerCase()) === -1) {
+                                            $input.val(streetPart + ', ' + item.full_address);
                                         } else {
-                                            streetPart = currentText;
+                                            $input.val(item.full_address);
                                         }
-                                        $input.val(streetPart ? streetPart + ', ' + item.full_address : item.full_address);
                                     }
 
                                     $dropdown.hide().empty();
