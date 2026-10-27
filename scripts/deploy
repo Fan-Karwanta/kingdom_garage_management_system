@@ -52,6 +52,7 @@ rsync -az \
     --exclude='installed.txt' \
     --exclude='storage/' \
     --exclude='vendor/' \
+    --exclude='bootstrap/cache/' \
     --exclude='node_modules/' \
     ./ "$SSH_HOST:$REMOTE_DIR/"
 
