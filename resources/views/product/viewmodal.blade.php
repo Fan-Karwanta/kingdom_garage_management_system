@@ -23,7 +23,7 @@
         <span class="txt_color fw-bold">{{ $product->product_no; }}</span>
       </div>
       <div class="mb-1">{{ trans('message.Product Name') }}:
-        <span class="txt_color fw-bold">{{ $product->name; }}</span>
+        <span class="txt_color fw-bold" style="overflow-wrap:anywhere; word-break:break-word;">{{ $product->name; }}</span>
       </div>
     </div>
   </div>

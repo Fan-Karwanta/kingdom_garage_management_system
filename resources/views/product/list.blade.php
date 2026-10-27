@@ -10,6 +10,24 @@
       margin-left: -10px;
     }
   }
+
+  /* Long unbroken text (e.g. product names) scrolls sideways inside its own cell */
+  .cell-scroll {
+    display: block;
+    max-width: 220px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: thin;
+  }
+
+  .cell-scroll::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  .cell-scroll::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+  }
 </style>
 <!-- page content -->
 <div class="right_col" role="main">
@@ -96,12 +114,12 @@
                   </a>
                 </td>
                 </td>
-                <td>{{ getProductName($products->product_type_id) }}&nbsp;
+                <td><div class="cell-scroll" title="{{ getProductName($products->product_type_id) }}">{{ getProductName($products->product_type_id) }}</div>&nbsp;
                   <!-- <a data-toggle="tooltip" data-placement="bottom" title="Manufacturer Name" class="text-primary">
                     <i class="fa fa-info-circle" style="color:#D9D9D9"></i>
                   </a> -->
                 </td>
-                <td>{{ $products->name }}&nbsp;
+                <td><div class="cell-scroll" title="{{ $products->name }}">{{ $products->name }}</div>&nbsp;
                   <!-- <a data-toggle="tooltip" data-placement="bottom" title="Product Name" class="text-primary">
                     <i class="fa fa-info-circle" style="color:#D9D9D9"></i>
                   </a> -->
@@ -116,12 +134,12 @@
                     <i class="fa fa-info-circle" style="color:#D9D9D9"></i>
                   </a> -->
                 </td>
-                <td>{{ getSupplierFullName($products->supplier_id) }}&nbsp;
+                <td><div class="cell-scroll" title="{{ getSupplierFullName($products->supplier_id) }}">{{ getSupplierFullName($products->supplier_id) }}</div>&nbsp;
                   <!-- <a data-toggle="tooltip" data-placement="bottom" title="Supplier Name" class="text-primary">
                     <i class="fa fa-info-circle" style="color:#D9D9D9"></i>
                   </a> -->
                 </td>
-                <td>{{ getCompanyNames($products->supplier_id) }}&nbsp;
+                <td><div class="cell-scroll" title="{{ getCompanyNames($products->supplier_id) }}">{{ getCompanyNames($products->supplier_id) }}</div>&nbsp;
                   <!-- <a data-toggle="tooltip" data-placement="bottom" title="Company Name" class="text-primary">
                     <i class="fa fa-info-circle" style="color:#D9D9D9"></i>
                   </a> -->

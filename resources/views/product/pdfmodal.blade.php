@@ -148,7 +148,7 @@
           <td style="width: 45%; vertical-align:top;">
             <span style="float:right; font-size: 14px;" class="system_addr">
               {{ trans('message.Product Number') }}:<b>{{ $product->product_no; }}</b><br>
-              {{ trans('message.Product Name') }}:<b>{{ $product->name; }}</b>
+              {{ trans('message.Product Name') }}:<b style="word-wrap:break-word;">{{ $product->name; }}</b>
             </span>
 
           </td>
@@ -173,7 +173,7 @@
 
         <tr>
           <td class="padding-8">{{ trans('message.Product Name') }}:</td>
-          <td class="padding-8"><b>{{ $product->name ?? 'Not Added' }}</b></td>
+          <td class="padding-8"><b style="word-wrap:break-word;">{{ $product->name ?? 'Not Added' }}</b></td>
         </tr>
 
         <tr>

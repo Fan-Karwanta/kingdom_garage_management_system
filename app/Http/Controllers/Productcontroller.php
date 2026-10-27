@@ -186,7 +186,10 @@ class Productcontroller extends Controller
         $sellingPrice = $request->sellingprice; // Get selling price
         $discount = $request->Discount; // Get discount
         $taxIds = $request->Tax; // Get selected tax IDs
-        $margin = $request->margin; // Get margin
+        $margin = $this->calculateMargin($price, $sellingPrice, $taxIds, $discount); // Derive markup margin % from selling price
+        if ($margin === null) {
+            $margin = $request->margin;
+        }
         if (getDateFormat() == 'm-d-Y') {
             $dates = date('Y-m-d', strtotime(str_replace('-', '/', $p_date)));
         } else {
@@ -328,8 +331,11 @@ class Productcontroller extends Controller
         $sup_id = $request->sup_id;
         $warranty = $request->warranty;
         $unit = $request->unit;
-        $margin = $request->margin;
-        $discount = $request->discount;
+        $discount = $request->Discount;
+        $margin = $this->calculateMargin($price, $request->sellingprice, $request->Tax, $discount); // Derive markup margin % from selling price
+        if ($margin === null) {
+            $margin = $request->margin;
+        }
 
         if (getDateFormat() == 'm-d-Y') {
             $dates = date('Y-m-d', strtotime(str_replace('-', '/', $p_date)));
@@ -363,6 +369,8 @@ class Productcontroller extends Controller
 
         if (!empty($request->Tax) && is_array($request->Tax)) {
             $product->tax_id = json_encode($request->Tax);
+        } else {
+            $product->tax_id = null;
         }
 
         $custom = $request->custom;
@@ -480,5 +488,33 @@ class Productcontroller extends Controller
         } else {
             return response()->download($filePath, $filename);
         }
+    }
+
+    // Derive markup margin (%) from selling price, product cost, tax and discount.
+    // Inverts: selling = price * (1 + margin%) * (1 + tax%) * (1 - discount%)
+    private function calculateMargin($price, $sellingPrice, $taxIds, $discountPercent)
+    {
+        $price = (float) $price;
+        $sellingPrice = (float) $sellingPrice;
+
+        if ($price <= 0 || $sellingPrice <= 0) {
+            return null;
+        }
+
+        $taxPercent = 0;
+        if (! empty($taxIds) && is_array($taxIds)) {
+            $taxPercent = (float) DB::table('tbl_account_tax_rates')->whereIn('id', $taxIds)->sum('tax');
+        }
+
+        $discountPercent = min(max((float) $discountPercent, 0), 100);
+        $divisor = (1 + $taxPercent / 100) * (1 - $discountPercent / 100);
+
+        if ($divisor <= 0) {
+            return null;
+        }
+
+        $priceWithMargin = $sellingPrice / $divisor;
+
+        return round((($priceWithMargin / $price) - 1) * 100, 2);
     }
 }

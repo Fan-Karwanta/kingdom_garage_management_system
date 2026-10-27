@@ -40,7 +40,7 @@
               <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6">
                 <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="last-name">{{ trans('message.Name') }} <label class="color-danger">*</label></label>
                 <div class="col-md-6 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
-                  <input type="text" id="name" name="name" class="form-control" maxlength="30" value="{{ $product->name }}" placeholder="{{ trans('message.Enter Product Name') }}" required>
+                  <input type="text" id="name" name="name" class="form-control" maxlength="255" value="{{ $product->name }}" placeholder="{{ trans('message.Enter Product Name') }}" required>
                 </div>
               </div>
 
@@ -164,13 +164,13 @@
                   <input type="text" maxlength="3" name="Discount" value="{{ $product->discount }}" class="form-control discount" id="disc">
                 </div>
               </div>
-              <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6">
-                <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="cus_name">{{ trans('message.Markup Margin') }} (%)</label>
+              <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6 {{ $errors->has('sellingprice') ? ' has-error' : '' }}">
+                <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="cus_name">{{ trans('message.Selling Price') }} (<?php echo getCurrencySymbols(); ?>) <label class="color-danger">*</label></label>
                 <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
-                <input type="text" id="margin" name="margin" class="form-control" placeholder="{{ trans('message.Enter Product Margin') }} (ex: 10.5%)" value="{{ $product->margin }}" maxlength="10">
-                  @if ($errors->has('margin'))
+                <input type="text" id="sellingprice" name="sellingprice" class="form-control" placeholder="{{ trans('message.Enter Selling Price') }}" value="{{ $product->selling_price }}" maxlength="10" required>
+                  @if ($errors->has('sellingprice'))
                   <span class="help-block">
-                    <strong>{{ $errors->first('margin') }}</strong>
+                    <strong>{{ $errors->first('sellingprice') }}</strong>
                   </span>
                   @endif
                 </div>
@@ -207,12 +207,12 @@
                 </div>
               </div>
                <div class="row col-md-6 col-lg-6 col-xl-6 col-xxl-6 col-sm-6 col-xs-6">
-                <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="cus_name">{{ trans('message.Selling Price') }}</label>
+                <label class="control-label col-md-4 col-lg-4 col-xl-4 col-xxl-4 col-sm-4 col-xs-4" for="cus_name">{{ trans('message.Markup Margin') }} (%)</label>
                 <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8 col-sm-8 col-xs-8">
-                <input type="text" id="sellingprice" name="sellingprice" class="form-control" value="{{ $product->selling_price }}" maxlength="10" required>
-                  @if ($errors->has('price'))
+                <input type="text" id="margin" name="margin" class="form-control" placeholder="{{ trans('message.Auto calculated') }}" value="{{ $product->margin }}" maxlength="10" readonly>
+                  @if ($errors->has('margin'))
                   <span class="help-block">
-                    <strong>{{ $errors->first('price') }}</strong>
+                    <strong>{{ $errors->first('margin') }}</strong>
                   </span>
                   @endif
                 </div>
@@ -1567,18 +1567,16 @@
 $(document).ready(function() {
   var msg35 = "{{ trans('message.OK') }}";
 
-  // 🔹 Function to calculate selling price based on price, margin, tax, and discount
-  function calculateSellingPrice() {
+  // 🔹 Function to calculate markup margin (%) from selling price, cost, tax, and discount.
+  // Inverts the previous formula: selling = price * (1 + margin%) * (1 + tax%) * (1 - discount%)
+  function calculateMargin() {
     var basePrice = parseFloat($('#price').val()) || 0;
-    if (basePrice <= 0) return;
+    var sellingPrice = parseFloat($('#sellingprice').val()) || 0;
 
-    // --- Margin ---
-    var marginPercent = parseFloat($('#margin').val()) || 0;
-    if (marginPercent < 0) marginPercent = 0;
-
-    // Calculate margin amount and add to base price
-    var marginAmount = (basePrice * marginPercent) / 100;
-    var priceWithMargin = basePrice + marginAmount;
+    if (basePrice <= 0 || sellingPrice <= 0) {
+      $('#margin').val('');
+      return;
+    }
 
     // --- Tax ---
     var totalTaxPercent = 0;
@@ -1586,26 +1584,29 @@ $(document).ready(function() {
       var taxRate = parseFloat($(this).attr('taxrate')) || 0;
       totalTaxPercent += taxRate;
     });
-    var taxAmount = (priceWithMargin * totalTaxPercent) / 100;
-    var priceWithTax = priceWithMargin + taxAmount;
 
     // --- Discount ---
     var discountPercent = parseFloat($('#disc').val()) || 0;
     if (discountPercent > 100) discountPercent = 100;
     if (discountPercent < 0) discountPercent = 0;
 
-    var discountAmount = (priceWithTax * discountPercent) / 100;
-    var sellingPrice = priceWithTax - discountAmount;
+    // Strip tax and discount from the selling price to get the marked-up cost
+    var divisor = (1 + totalTaxPercent / 100) * (1 - discountPercent / 100);
+    if (divisor <= 0) {
+      $('#margin').val('');
+      return;
+    }
+    var priceWithMargin = sellingPrice / divisor;
 
-    // --- Final selling price ---
-    $('#sellingprice').val(sellingPrice.toFixed(2));
+    // --- Margin % relative to product cost ---
+    var marginPercent = ((priceWithMargin / basePrice) - 1) * 100;
+    if (Math.abs(marginPercent) < 0.005) marginPercent = 0;
+    $('#margin').val(marginPercent.toFixed(2));
   }
 
-  // 🔹 Event handlers for recalculation
-  $('#price, #margin, #disc').on('keyup change', function() {
-    var basePrice = parseFloat($('#price').val()) || 0;
-    if (basePrice > 0) calculateSellingPrice();
-    else $('#sellingprice').val('');
+  // 🔹 Event handlers for recalculation (selling price stays fixed, margin is derived)
+  $('#price, #sellingprice, #disc').on('keyup change', function() {
+    calculateMargin();
   });
 
   $('.check_tax').on('change', function() {
@@ -1622,11 +1623,28 @@ $(document).ready(function() {
       });
       return false;
     }
-    calculateSellingPrice();
+    calculateMargin();
   });
 
-  // 🔹 Validation for numeric input with decimals (price & margin)
-  $('#price, #margin, #sellingprice').on('keypress', function(e) {
+  // 🔹 Warn when a selling price is entered before the product cost
+  $('#sellingprice').on('change', function() {
+    var basePrice = parseFloat($('#price').val()) || 0;
+    var sellingPrice = parseFloat($(this).val()) || 0;
+    if (sellingPrice > 0 && basePrice <= 0) {
+      swal({
+        title: "{{ trans('message.Price Required') }}",
+        text: "{{ trans('message.Please enter product price first before adding selling price') }}",
+        icon: 'warning',
+        cancelButtonColor: '#C1C1C1',
+        buttons: { cancel: msg35 },
+        dangerMode: true,
+      });
+      $('#price').focus();
+    }
+  });
+
+  // 🔹 Validation for numeric input with decimals (price & selling price)
+  $('#price, #sellingprice').on('keypress', function(e) {
     // Allow: backspace, delete, tab, escape, enter, and dot (.)
     if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
         (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
@@ -1635,17 +1653,6 @@ $(document).ready(function() {
     // Block non-numeric input
     if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) &&
         (e.keyCode < 96 || e.keyCode > 105)) e.preventDefault();
-  });
-
-  // 🔹 Limit margin to 2 decimal digits
-  $('#margin').on('input', function() {
-    var val = $(this).val();
-    if (val.includes('.')) {
-      var parts = val.split('.');
-      if (parts[1].length > 2) {
-        $(this).val(parts[0] + '.' + parts[1].substring(0, 2));
-      }
-    }
   });
 
   // 🔹 Discount numeric restriction
@@ -1710,16 +1717,16 @@ $(document).ready(function() {
     }
   });
 
-  // 🔹 Clear fields when price is cleared
+  // 🔹 Margin cannot be derived without a product cost
   $('#price').on('blur', function() {
     var priceValue = parseFloat($(this).val()) || 0;
     if (priceValue <= 0) {
-      $('#sellingprice').val('');
-      $('.check_tax').prop('checked', false);
-      $('#disc').val('');
       $('#margin').val('');
     }
   });
+
+  // 🔹 Recalculate on load (also fills margin for legacy products that have none stored)
+  calculateMargin();
 });
 </script>
 

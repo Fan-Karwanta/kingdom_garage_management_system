@@ -25,11 +25,12 @@ class ProductAddEditFormRequest extends FormRequest
     {
         return [
             'p_date' => 'required',
-            'name' => 'required|max:100',
+            'name' => 'required|max:255',
             'image' => 'nullable|mimes:jpg,png,jpeg',
             'unit' => 'required',
             'p_type' => 'required',
             'price' => 'required|numeric|regex:/^\d+(\.\d{1,5})?$/',
+            'sellingprice' => 'required|numeric',
             'sup_id' => 'required',
             'branch' => 'required',
         ];
@@ -42,7 +43,7 @@ class ProductAddEditFormRequest extends FormRequest
 
             'name.required' => trans('message.Name is required.'),
             'name.regex' => trans('message.Name is only alphanumeric and space.'),
-            'name.max' => trans('message.Name should not more than 100 character.'),
+            'name.max' => trans('message.Name should not more than 255 character.'),
 
             // 'image.image' => trans('message.The type of the uploaded file should be an image.'),
             'image.mimes' => trans('message.Image must be a file of type: Jpg, Jpeg and Png.'),
@@ -53,6 +54,9 @@ class ProductAddEditFormRequest extends FormRequest
             'price.required' => trans('message.Price is required.'),
             'price.numeric' => trans('message.Price is only numeric data allowed.'),
             'price.regex' => trans('message.Price is only numeric data allowed.'),
+
+            'sellingprice.required' => trans('message.Selling price is required.'),
+            'sellingprice.numeric' => trans('message.Selling price is only numeric data allowed.'),
             // 'price.max' => trans('message.Price field maximum eight digit allowed.'),
 
             'sup_id.required' => trans('message.Supplier is required.'),
